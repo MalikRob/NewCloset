@@ -33,4 +33,16 @@ class ClothingViewModel(application: Application): AndroidViewModel(application)
         }
     }
 
+    fun deleteClothing(clothing: Clothing){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.deleteClothing(clothing)
+        }
+    }
+
+    fun deleteAllClothing(){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.deleteALLClothing()
+        }
+    }
+
 }
