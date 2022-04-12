@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.allin.R
 import com.example.allin.viewmodel.ClothingViewModel
@@ -33,7 +34,8 @@ class ListFragment : Fragment() {
         val adapter = ListAdapter()
         val recyclerView = view.recyclerview
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        //recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         //ClothingViewModel
         mClothingViewModel = ViewModelProvider(this).get(ClothingViewModel::class.java)
