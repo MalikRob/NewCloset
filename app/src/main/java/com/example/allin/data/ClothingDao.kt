@@ -14,6 +14,12 @@ interface ClothingDao {
     @Update
     suspend fun updateClothing(clothing: Clothing)
 
+    @Delete
+    suspend fun deleteClothing(clothing: Clothing)
+
+    @Query("DELETE FROM clothing_table")
+    suspend fun deleteAllClothing()
+
     @Query("SELECT * FROM clothing_table ORDER BY id ASC")
     fun readAllData(): LiveData<List<Clothing>>
 }
