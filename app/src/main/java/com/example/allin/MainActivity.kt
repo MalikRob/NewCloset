@@ -13,5 +13,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //setupActionBarWithNavController(findNavController(R.id.fragment))
+        //Test commit to check for Contributor access.
     }
 }
