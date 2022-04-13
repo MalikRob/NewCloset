@@ -48,6 +48,11 @@ class ListFragment : Fragment() {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
         }
 
+        //Outfit Button takes the User to the altListFragment/Outfit List page
+        view.floatingActionButton3.setOnClickListener {
+            findNavController().navigate(R.id.action_listFragment_to_altListFragment)
+        }
+
         //Add menu
         setHasOptionsMenu(true)
 

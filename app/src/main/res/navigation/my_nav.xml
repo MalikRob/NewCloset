@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_listFragment_to_updateFragment"
             app:destination="@id/updateFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_altListFragment"
+            app:destination="@id/altListFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -40,12 +43,23 @@
     </fragment>
     <fragment
         android:id="@+id/altListFragment"
-        android:name="com.example.allin.altListFragment"
+        android:name="com.example.allin.fragments.list.altListFragment"
         android:label="fragment_alt_list"
-        tools:layout="@layout/fragment_alt_list" />
+        tools:layout="@layout/fragment_alt_list" >
+        <action
+            android:id="@+id/action_altListFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/action_altListFragment_to_add0utfitFragment"
+            app:destination="@id/add0utfitFragment" />
+    </fragment>
     <fragment
         android:id="@+id/add0utfitFragment"
-        android:name="com.example.allin.add0utfitFragment"
+        android:name="com.example.allin.fragments.add.add0utfitFragment"
         android:label="fragment_add0utfit"
-        tools:layout="@layout/fragment_add0utfit" />
+        tools:layout="@layout/fragment_add0utfit" >
+        <action
+            android:id="@+id/action_add0utfitFragment_to_altListFragment"
+            app:destination="@id/altListFragment" />
+    </fragment>
 </navigation>
