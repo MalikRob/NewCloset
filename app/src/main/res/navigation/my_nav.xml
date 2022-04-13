@@ -38,4 +38,14 @@
             android:name="currentClothing"
             app:argType="com.example.allin.model.Clothing" />
     </fragment>
+    <fragment
+        android:id="@+id/altListFragment"
+        android:name="com.example.allin.altListFragment"
+        android:label="fragment_alt_list"
+        tools:layout="@layout/fragment_alt_list" />
+    <fragment
+        android:id="@+id/add0utfitFragment"
+        android:name="com.example.allin.add0utfitFragment"
+        android:label="fragment_add0utfit"
+        tools:layout="@layout/fragment_add0utfit" />
 </navigation>
