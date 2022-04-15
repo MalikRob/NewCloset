@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.allin.R
@@ -44,8 +43,8 @@ class AddFragment : Fragment() {
             insertDataToDatabase()
         }
 
-        //DatePicker Fragment
-        view.DateAddedButton.setOnClickListener {
+        //DatePicker Fragment called from the button labeled on the XML file.
+        view.dateAddedButton.setOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
             val month = calendar.get(Calendar.MONTH)
@@ -59,13 +58,19 @@ class AddFragment : Fragment() {
                     //Toast.makeText(requireContext(), "$dateReturned", Toast.LENGTH_SHORT).show()
 
                     fun toSimpleString(date: Date?) = with(date ?: Date()){
+                        /**
+                         * This format can be changed. Use the link below to see the docs.
+                         * Scroll down to "Date and Time Pattern" Table
+                         * https://developer.android.com/reference/kotlin/java/text/SimpleDateFormat
+                         */
                         SimpleDateFormat("EEE, MMM d, yyyy").format(this)
                     }
-                    DateAddedButton.text = toSimpleString(dateReturned)
+                    dateAddedButton.text = toSimpleString(dateReturned)
 
 
             }, year, month, day
             )
+            //This is necessary to display the calendar fragment on the current view.
             datePicker.show()
         }
 
@@ -176,7 +181,7 @@ class AddFragment : Fragment() {
         val color = Spinner3.selectedItem.toString()
         val style = Spinner2.selectedItem.toString()
         val description = addDescrip.text.toString()
-        val dateAdded = DateAddedButton.text.toString()
+        val dateAdded = dateAddedButton.text.toString()
 
 
         //Checks that the fields aren't empty
