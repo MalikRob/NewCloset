@@ -39,6 +39,7 @@ class UpdateFragment : Fragment() {
 
         view.updateType.setText(args.currentClothing.type)
         view.updateColor.setText(args.currentClothing.color)
+        view.updateStyle.setText(args.currentClothing.style)
         view.updateDescrip.setText(args.currentClothing.description)
 
         view.upButton.setOnClickListener() {
@@ -54,11 +55,12 @@ class UpdateFragment : Fragment() {
     private fun updateItem() {
         val type = updateType.text.toString()
         val color = updateColor.text.toString()
+        val style = updateStyle.text.toString()
         val descrip = updateDescrip.text.toString()
 
-        if (inputCheck(type, color, descrip)) {
+        if (inputCheck(type, color, style, descrip)) {
             //Create Clothing Object
-            val updatedClothing = Clothing(args.currentClothing.id, type, color, descrip)
+            val updatedClothing = Clothing(args.currentClothing.id, type, color,style, descrip)
             //Update Current Clothing Object
             mClothingViewModel.updateClothing(updatedClothing)
             Toast.makeText(requireContext(), "Updated Successfully!", Toast.LENGTH_SHORT).show()
@@ -69,7 +71,7 @@ class UpdateFragment : Fragment() {
         }
     }
 
-    private fun inputCheck (type: String, color: String, description: String): Boolean {
+    private fun inputCheck (type: String, color: String, style: String, description: String): Boolean {
         return !(TextUtils.isEmpty(type) && TextUtils.isEmpty(color) && TextUtils.isEmpty(description))
     }
 
