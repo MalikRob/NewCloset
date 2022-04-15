@@ -1,15 +1,14 @@
 package com.example.allin.fragments.add
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.allin.R
@@ -17,7 +16,8 @@ import com.example.allin.model.Clothing
 import com.example.allin.viewmodel.ClothingViewModel
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_add.view.*
-
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -39,8 +39,34 @@ class AddFragment : Fragment() {
         //Takes the entered data
         mClothingViewModel = ViewModelProvider(this).get(ClothingViewModel::class.java)
 
-        view.button.setOnClickListener{
+        //Add Button on Clothing Edit Screen
+        view.addButton.setOnClickListener{
             insertDataToDatabase()
+        }
+
+        //DatePicker Fragment
+        view.DateAddedButton.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val datePicker = DatePickerDialog(
+                requireActivity(), DatePickerDialog.OnDateSetListener {
+                    _: DatePicker, year: Int, month: Int, day: Int ->
+
+                    val dateReturned: Date = GregorianCalendar(year, month, day).time
+                    //Toast.makeText(requireContext(), "$dateReturned", Toast.LENGTH_SHORT).show()
+
+                    fun toSimpleString(date: Date?) = with(date ?: Date()){
+                        SimpleDateFormat("EEE, MMM d, yyyy").format(this)
+                    }
+                    DateAddedButton.text = toSimpleString(dateReturned)
+
+
+            }, year, month, day
+            )
+            datePicker.show()
         }
 
         val spinner: Spinner = view.findViewById(R.id.Spinner1)
@@ -142,16 +168,19 @@ class AddFragment : Fragment() {
 
     }
 
+
+
     //Puts entered data into a variable
     private fun insertDataToDatabase() {
         val type = Spinner1.selectedItem.toString()
         val color = Spinner3.selectedItem.toString()
         val style = Spinner2.selectedItem.toString()
         val description = addDescrip.text.toString()
+        val dateAdded = DateAddedButton.text.toString()
 
 
         //Checks that the fields aren't empty
-        if(inputCheck(type, color, style,description)){
+        if(inputCheck(type, color, style,description, dateAdded)){
             //Create Clothing Object
             val clothing = Clothing(0, type, color, style,description)
 
@@ -165,9 +194,10 @@ class AddFragment : Fragment() {
         }
     }
 
-    private fun inputCheck (type: String, color: String, style: String, description: String): Boolean {
-        return !(TextUtils.isEmpty(type) && TextUtils.isEmpty(color) && TextUtils.isEmpty(description))
+    private fun inputCheck (type: String, color: String, style: String, description: String, dateAdded: String): Boolean {
+        return !(TextUtils.isEmpty(type) && TextUtils.isEmpty(color) && TextUtils.isEmpty(description) && TextUtils.isEmpty(dateAdded))
     }
+
 
 }
 

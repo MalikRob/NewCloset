@@ -4,10 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.allin.model.Clothing
 
 //This class serves as the main conection between our data and the app.
 @Database(entities = [Clothing::class], version = 1, exportSchema = false)
+@TypeConverters(DBTypeConverters::class)
 abstract class ClothingDatabase: RoomDatabase() {
 
     abstract fun clothingDao(): ClothingDao
