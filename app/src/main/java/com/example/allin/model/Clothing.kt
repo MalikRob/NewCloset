@@ -14,5 +14,6 @@ data class Clothing (
     val id: Int,
     val type: String,
     val color: String,
+    val style: String,
     val description: String
     ): Parcelable
