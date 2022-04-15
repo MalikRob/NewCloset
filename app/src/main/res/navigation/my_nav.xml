@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/altListFragment"
-        android:name="com.example.allin.fragments.list.altListFragment"
+        android:name="com.example.allin.fragments.list.AltListFragment"
         android:label="fragment_alt_list"
         tools:layout="@layout/fragment_alt_list" >
         <action
