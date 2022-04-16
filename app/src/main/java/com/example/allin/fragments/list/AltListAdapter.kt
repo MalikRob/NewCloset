@@ -19,18 +19,18 @@ class AltListAdapter: RecyclerView.Adapter<AltListAdapter.MyViewHolder>(){
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AltListAdapter.MyViewHolder {
-        return AltListAdapter.MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.outfit_custom_row, parent, false)
+        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.outfit_custom_row, parent, false)
         )
     }
 
-    override fun onBindViewHolder(holder: AltListAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = altclothingList[position]
         holder.itemView.clothing_type_one.text = currentItem.type
 
-        holder.itemView.rowLayout.setOnClickListener() {
-            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
-            holder.itemView.findNavController().navigate(action)
-        }
+//        holder.itemView.rowLayout.setOnClickListener() {
+//            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
+//            holder.itemView.findNavController().navigate(action)
+//        }
 
     }
 

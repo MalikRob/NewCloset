@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.allin.R
 import com.example.allin.viewmodel.ClothingViewModel
 import kotlinx.android.synthetic.main.fragment_alt_list.view.*
@@ -25,11 +26,11 @@ class AltListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_alt_list, container, false)
 
         //RecyclerView
-        val adapter = ListAdapter()
+        val adapter = AltListAdapter()
         val recyclerView = view.recyclerviewO
         recyclerView.adapter = adapter
         //recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         //ClothingViewModel
         mClothingViewModel = ViewModelProvider(this).get(ClothingViewModel::class.java)
