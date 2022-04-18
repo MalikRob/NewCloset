@@ -28,6 +28,12 @@ class AddFragment : Fragment() {
 
     private lateinit var mClothingViewModel: ClothingViewModel
 
+    val calendar = Calendar.getInstance()
+    val year = calendar.get(Calendar.YEAR)
+    val month = calendar.get(Calendar.MONTH)
+    val day = calendar.get(Calendar.DAY_OF_MONTH)
+    private var dateReturned = GregorianCalendar(year, month, day).time
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,29 +48,16 @@ class AddFragment : Fragment() {
         view.addButton.setOnClickListener{
             insertDataToDatabase()
         }
-
         //DatePicker Fragment called from the button labeled on the XML file.
         view.dateAddedButton.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            val year = calendar.get(Calendar.YEAR)
-            val month = calendar.get(Calendar.MONTH)
-            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
 
             val datePicker = DatePickerDialog(
                 requireActivity(), DatePickerDialog.OnDateSetListener {
                     _: DatePicker, year: Int, month: Int, day: Int ->
 
-                    val dateReturned: Date = GregorianCalendar(year, month, day).time
+                    dateReturned = GregorianCalendar(year, month, day).time
                     //Toast.makeText(requireContext(), "$dateReturned", Toast.LENGTH_SHORT).show()
-
-                    fun toSimpleString(date: Date?) = with(date ?: Date()){
-                        /**
-                         * This format can be changed. Use the link below to see the docs.
-                         * Scroll down to "Date and Time Pattern" Table
-                         * https://developer.android.com/reference/kotlin/java/text/SimpleDateFormat
-                         */
-                        SimpleDateFormat("EEE, MMM d, yyyy").format(this)
-                    }
                     dateAddedButton.text = toSimpleString(dateReturned)
 
 
@@ -181,13 +174,12 @@ class AddFragment : Fragment() {
         val color = Spinner3.selectedItem.toString()
         val style = Spinner2.selectedItem.toString()
         val description = addDescrip.text.toString()
-        val dateAdded = dateAddedButton.text.toString()
 
 
         //Checks that the fields aren't empty
-        if(inputCheck(type, color, style,description, dateAdded)){
+        if(inputCheck(type, color, style,description)){
             //Create Clothing Object
-            val clothing = Clothing(0, type, color, style,description)
+            val clothing = Clothing(0, type, color, style,description, dateReturned)
 
             //Add data to database
             mClothingViewModel.addClothing(clothing)
@@ -199,10 +191,19 @@ class AddFragment : Fragment() {
         }
     }
 
-    private fun inputCheck (type: String, color: String, style: String, description: String, dateAdded: String): Boolean {
-        return !(TextUtils.isEmpty(type) && TextUtils.isEmpty(color) && TextUtils.isEmpty(description) && TextUtils.isEmpty(dateAdded))
+    private fun inputCheck (type: String, color: String, style: String, description: String): Boolean {
+        return !(TextUtils.isEmpty(type) && TextUtils.isEmpty(color) && TextUtils.isEmpty(description))
     }
 
+    // Only used to print the format of Date into a String for users to read.
+    fun toSimpleString(date: Date?) = with(date ?: Date()){
+        /**
+         * This format can be changed. Use the link below to see the docs.
+         * Scroll down to "Date and Time Pattern" Table
+         * https://developer.android.com/reference/kotlin/java/text/SimpleDateFormat
+         */
+        SimpleDateFormat("EEE, MMM d, yyyy").format(this)
+    }
 
 }
 
