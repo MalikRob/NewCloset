@@ -3,6 +3,8 @@ package com.example.allin.fragments.list
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import android.view.Menu
+import androidx.appcompat.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -18,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_list.view.*
  * Use the [ListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private lateinit var mClothingViewModel: ClothingViewModel
 
@@ -43,7 +45,7 @@ class ListFragment : Fragment() {
         })
 
         //Button now takes the user to the Edit Clothing Page
-        view.floatingActionButton.setOnClickListener{
+        view.floatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
         }
 
@@ -63,7 +65,7 @@ class ListFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.menu_delete){
+        if (item.itemId == R.id.menu_delete) {
             deleteAllUsers()
         }
         return super.onOptionsItemSelected(item)
@@ -76,11 +78,42 @@ class ListFragment : Fragment() {
             Toast.makeText(
                 requireContext(),
                 "Successfully removed everything.",
-                Toast.LENGTH_SHORT).show()
+                Toast.LENGTH_SHORT
+            ).show()
         }
-        builder.setNegativeButton("No") { _, _ ->}
+        builder.setNegativeButton("No") { _, _ -> }
         builder.setTitle("Delete everything?")
         builder.setMessage("Are you sure you want to delete everything?")
         builder.create().show()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?)
+    {
+        menuInflator.inflate(R.menu.search_menu, menu)
+        val search = menu?.findItem(R.id.menu_search)
+        val searchView = search?.actionView as? SearchView
+        searchView?.isSubmitButtonEnabled = true
+        searchView?.setOnQueryTextListener(this)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        if (query != null) {
+            searchDatabase(query)
+        }
+
+         fun searchDatabase(query: String) {
+            val searchQuery = "%$query%"
+
+            ClothingViewModel.searchDatabase(searchQuery).observe(this) { list ->
+                list.let {
+                    ListAdapter.setData(it)
+                }
+            }
+        }
+    }
 }
+
