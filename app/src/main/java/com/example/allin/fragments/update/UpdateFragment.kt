@@ -57,6 +57,7 @@ class UpdateFragment : Fragment() {
         view.updateDescrip.setText(args.currentClothing.description)
         view.update_dateAddedButton.text=(toSimpleString(displayDate))
         print("$dateReturned")
+
         view.update_dateAddedButton.setOnClickListener {
             val datePicker = DatePickerDialog(
                 requireActivity(), DatePickerDialog.OnDateSetListener {
@@ -64,7 +65,7 @@ class UpdateFragment : Fragment() {
 
                     dateReturned = GregorianCalendar(year, month, day).time
                     //Toast.makeText(requireContext(), "$dateReturned", Toast.LENGTH_SHORT).show()
-                    dateAddedButton.text = toSimpleString(dateReturned)
+                    update_dateAddedButton.text = toSimpleString(dateReturned)
 
                 }, year, month, day
             )
