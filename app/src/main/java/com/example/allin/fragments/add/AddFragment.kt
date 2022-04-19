@@ -45,26 +45,11 @@ class AddFragment : Fragment() {
         mClothingViewModel = ViewModelProvider(this).get(ClothingViewModel::class.java)
 
         //Add Button on Clothing Edit Screen
-        view.addButton.setOnClickListener{
+        view.add_button.setOnClickListener{
             insertDataToDatabase()
         }
-        //DatePicker Fragment called from the button labeled on the XML file.
-        view.dateAddedButton.setOnClickListener {
-            val datePicker = DatePickerDialog(
-                requireActivity(), DatePickerDialog.OnDateSetListener {
-                    _: DatePicker, year: Int, month: Int, day: Int ->
 
-                    dateReturned = GregorianCalendar(year, month, day).time
-                    //Toast.makeText(requireContext(), "$dateReturned", Toast.LENGTH_SHORT).show()
-                    dateAddedButton.text = toSimpleString(dateReturned)
-
-            }, year, month, day
-            )
-            //This is necessary to display the calendar fragment on the current view.
-            datePicker.show()
-        }
-
-        val spinner: Spinner = view.findViewById(R.id.Spinner1)
+        val spinner: Spinner = view.findViewById(R.id.clothingType_spinner)
         val clothingType = resources.getStringArray(R.array.Clothing_type)
         val clothingType_adapter = ArrayAdapter.createFromResource(
             requireContext(),
@@ -72,7 +57,7 @@ class AddFragment : Fragment() {
             android.R.layout.simple_spinner_item
         )
         spinner.adapter = clothingType_adapter
-        val spinner2: Spinner = view.Spinner2
+        val spinner2: Spinner = view.clothingStyle_spinner
         val topstyle = resources.getStringArray(R.array.top_style)
         var styleChild_adapter = ArrayAdapter.createFromResource(
             requireContext(),
@@ -80,7 +65,7 @@ class AddFragment : Fragment() {
             android.R.layout.simple_spinner_item
         )
         spinner2.adapter = styleChild_adapter
-        val spinner3: Spinner = view.Spinner3
+        val spinner3: Spinner = view.clothingColor_Spinner
         val color = resources.getStringArray(R.array.colors)
         val color_adapter = ArrayAdapter.createFromResource(
             requireContext(),
@@ -154,26 +139,88 @@ class AddFragment : Fragment() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                // write code to perform some action
+                //No action determined yet for no selection.
             }
         }
 
-        return view
+        /**
+         * Spinner for Brand options
+         */
+        val brandSpinner: Spinner = view.clothingBrand_spinner
+        val brand = resources.getStringArray(R.array.brands)
+        val brandAdapter = ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.brands,
+            android.R.layout.simple_spinner_item
+        )
+        brandSpinner.adapter = brandAdapter
 
+        brandSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val brandEntry = parent.getItemAtPosition(position).toString()
+                Toast.makeText(requireContext(), brand[position], Toast.LENGTH_SHORT).show()
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                //No action determined yet for no selection.
+            }
+        }
+
+        /**
+         * Spinner for Theme options
+         */
+        val themeSpinner: Spinner = view.clothingTheme_spinner
+        val themes = resources.getStringArray(R.array.themes)
+        val themeAdapter = ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.themes,
+            android.R.layout.simple_spinner_item
+        )
+        themeSpinner.adapter = themeAdapter
+
+        themeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val themeEntry = parent.getItemAtPosition(position).toString()
+                Toast.makeText(requireContext(), themes[position], Toast.LENGTH_SHORT).show()
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+        }
+
+        /**
+         * Choose Date Added Button
+         */
+        //DatePicker Fragment called from the button labeled on the XML file.
+        view.dateAdded_button.setOnClickListener {
+            val datePicker = DatePickerDialog(
+                requireActivity(), DatePickerDialog.OnDateSetListener {
+                        _: DatePicker, year: Int, month: Int, day: Int ->
+
+                    dateReturned = GregorianCalendar(year, month, day).time
+                    //Toast.makeText(requireContext(), "$dateReturned", Toast.LENGTH_SHORT).show()
+                    dateAdded_button.text = toSimpleString(dateReturned)
+
+                }, year, month, day
+            )
+            //This is necessary to display the calendar fragment on the current view.
+            datePicker.show()
+        }
+        return view
     }
 
     //Puts entered data into a variable
     private fun insertDataToDatabase() {
-        val type = Spinner1.selectedItem.toString()
-        val color = Spinner3.selectedItem.toString()
-        val style = Spinner2.selectedItem.toString()
-        val description = addDescrip.text.toString()
+        val type = clothingType_spinner.selectedItem.toString()
+        val color = clothingColor_Spinner.selectedItem.toString()
+        val style = clothingStyle_spinner.selectedItem.toString()
+        val brand = clothingBrand_spinner.selectedItem.toString()
+        val theme = clothingTheme_spinner.selectedItem.toString()
+        val description = addDescrip_edittext.text.toString()
 
 
         //Checks that the fields aren't empty
-        if(inputCheck(type, color, style,description)){
+        if(inputCheck(type, color)){
             //Create Clothing Object
-            val clothing = Clothing(0, type, color, style, description, dateReturned)
+            val clothing = Clothing(0, type, color, style, description, dateReturned, brand, theme)
 
             //Add data to database
             mClothingViewModel.addClothing(clothing)
@@ -185,8 +232,8 @@ class AddFragment : Fragment() {
         }
     }
 
-    private fun inputCheck (type: String, color: String, style: String, description: String): Boolean {
-        return !(TextUtils.isEmpty(type) && TextUtils.isEmpty(color) && TextUtils.isEmpty(description))
+    private fun inputCheck (type: String, color: String): Boolean {
+        return !(TextUtils.isEmpty(type) && TextUtils.isEmpty(color))
     }
 
     // Only used to print the format of Date into a String for users to read.

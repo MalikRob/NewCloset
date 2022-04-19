@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/addType" />
 
     <EditText
-        android:id="@+id/addDescrip"
+        android:id="@+id/addDescrip_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -56,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/addColor" />
 
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/add_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="-400dp"
@@ -65,5 +65,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addDescrip" />
+        app:layout_constraintTop_toBottomOf="@+id/addDescrip_edittext" />
 </androidx.constraintlayout.widget.ConstraintLayout>

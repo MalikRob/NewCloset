@@ -7,36 +7,31 @@
     tools:context=".fragments.update.UpdateFragment">
 
     <EditText
-        android:id="@+id/updateType"
+        android:id="@+id/updateType_editText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-500dp"
+        android:layout_height="50dp"
         android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:text="Type"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Clothing Type"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <EditText
         android:id="@+id/updateColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:text="Color"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/updateType" />
-
+        app:layout_constraintTop_toBottomOf="@+id/updateType_editText"
+        tools:layout_editor_absoluteX="32dp" />
 
     <EditText
         android:id="@+id/updateStyle"
@@ -58,39 +53,66 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:text="Description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/update_dateAddedButton" />
+
+    <EditText
+        android:id="@+id/updateBrand_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:text="Brand"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/updateStyle" />
+
+    <EditText
+        android:id="@+id/updateTheme_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:text="Theme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updateBrand_editText" />
 
     <TextView
         android:id="@+id/update_DateAddedTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:text="Date Added To Closet"
         android:textAlignment="viewStart"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/updateDescrip" />
+        app:layout_constraintTop_toBottomOf="@+id/updateTheme_editText" />
 
     <Button
         android:id="@+id/update_dateAddedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginHorizontal="32dp"
-        android:text="Jan 1, 2022"
-        android:textSize="20sp"
+        android:layout_marginTop="8dp"
+        android:text="Mon, Jan 1, 2022"
         android:textAlignment="center"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/update_DateAddedTitle" />
 
@@ -100,12 +122,13 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="12dp"
+        android:layout_marginBottom="32dp"
         android:text="Update"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/update_dateAddedButton"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/updateDescrip"
+        app:layout_constraintVertical_bias="0.056" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

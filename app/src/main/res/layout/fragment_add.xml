@@ -5,124 +5,182 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.add.AddFragment">
-
-
     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="120dp"
-        android:layout_height="25dp"
-        android:layout_marginBottom="668dp"
-        android:text="Clothing Type"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/addDescrip"
-        app:layout_constraintVertical_bias="0.018" />
-
-    <Spinner
-        android:id="@+id/Spinner1"
-        android:layout_width="162dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView1"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/textView1"
-        app:layout_constraintTop_toBottomOf="@+id/textView1" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="120dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="236dp"
-        android:text="Style"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView1"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Spinner
-        android:id="@+id/Spinner2"
-        android:layout_width="165dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="120dp"
-        android:layout_height="25dp"
-        android:layout_marginBottom="592dp"
-        android:text="Color"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/Spinner1"
-        app:layout_constraintVertical_bias="0.136" />
-
-    <Spinner
-        android:id="@+id/Spinner3"
-        android:layout_width="157dp"
-        android:layout_height="35dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView3"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/Spinner1"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/DateAddedTitle"
+        android:id="@+id/clothingType_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="32dp"
+        android:text="Clothing Type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/clothingType_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clothingType_textview" />
+
+    <TextView
+        android:id="@+id/clothingStyle_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="Style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clothingType_spinner" />
+
+    <Spinner
+        android:id="@+id/clothingStyle_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clothingStyle_textview" />
+
+    <TextView
+        android:id="@+id/clothingColor_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="32dp"
+        android:text="Color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clothingStyle_spinner" />
+
+    <Spinner
+        android:id="@+id/clothingColor_Spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clothingColor_textview" />
+
+    <TextView
+        android:id="@+id/clothingBrand_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="32dp"
+        android:text="Brand"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clothingColor_Spinner" />
+
+    <Spinner
+        android:id="@+id/clothingBrand_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clothingBrand_textview" />
+
+    <TextView
+        android:id="@+id/clothingTheme_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="32dp"
+        android:text="Theme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clothingBrand_spinner" />
+
+    <Spinner
+        android:id="@+id/clothingTheme_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clothingTheme_textview" />
+
+    <TextView
+        android:id="@+id/dateAdded_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="32dp"
         android:text="Date Added To Closet"
         android:textAlignment="viewStart"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Spinner3" />
+        app:layout_constraintTop_toBottomOf="@+id/clothingTheme_spinner" />
 
     <Button
-        android:id="@+id/dateAddedButton"
+        android:id="@+id/dateAdded_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="8dp"
         android:text="Jan 1, 2022"
-        android:textSize="20sp"
         android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DateAddedTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/dateAdded_textview" />
 
     <EditText
-        android:id="@+id/addDescrip"
+        android:id="@+id/addDescrip_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="32dp"
         android:ems="10"
         android:hint="Description"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textColorHint="@color/black"
-
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateAddedButton" />
+        app:layout_constraintTop_toBottomOf="@+id/dateAdded_button" />
 
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/add_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="32dp"
-        android:layout_marginBottom="284dp"
         android:text="Add"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addDescrip"
-        app:layout_constraintVertical_bias="0.0" />
-
+        app:layout_constraintTop_toBottomOf="@+id/addDescrip_edittext" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

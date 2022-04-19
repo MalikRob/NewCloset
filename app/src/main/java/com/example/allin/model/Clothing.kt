@@ -11,11 +11,12 @@ import java.util.*
 @Entity(tableName = "clothing_table")
 data class Clothing (
     //Sets all attributes and primary key
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int,
     val type: String,
     val color: String,
     val style: String,
     val description: String,
-    val dateAdded: Date = Date()
+    val dateAdded: Date = Date(),
+    val brand: String,
+    val theme: String
     ): Parcelable
