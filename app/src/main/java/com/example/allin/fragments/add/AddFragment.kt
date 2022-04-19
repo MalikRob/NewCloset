@@ -50,8 +50,6 @@ class AddFragment : Fragment() {
         }
         //DatePicker Fragment called from the button labeled on the XML file.
         view.dateAddedButton.setOnClickListener {
-
-
             val datePicker = DatePickerDialog(
                 requireActivity(), DatePickerDialog.OnDateSetListener {
                     _: DatePicker, year: Int, month: Int, day: Int ->
@@ -59,7 +57,6 @@ class AddFragment : Fragment() {
                     dateReturned = GregorianCalendar(year, month, day).time
                     //Toast.makeText(requireContext(), "$dateReturned", Toast.LENGTH_SHORT).show()
                     dateAddedButton.text = toSimpleString(dateReturned)
-
 
             }, year, month, day
             )
@@ -138,7 +135,6 @@ class AddFragment : Fragment() {
                 }
             }
 
-
             override fun onNothingSelected(parent: AdapterView<*>) {
                 // write code to perform some action
             }
@@ -166,8 +162,6 @@ class AddFragment : Fragment() {
 
     }
 
-
-
     //Puts entered data into a variable
     private fun insertDataToDatabase() {
         val type = Spinner1.selectedItem.toString()
@@ -179,7 +173,7 @@ class AddFragment : Fragment() {
         //Checks that the fields aren't empty
         if(inputCheck(type, color, style,description)){
             //Create Clothing Object
-            val clothing = Clothing(0, type, color, style,description, dateReturned)
+            val clothing = Clothing(0, type, color, style, description, dateReturned)
 
             //Add data to database
             mClothingViewModel.addClothing(clothing)

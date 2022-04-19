@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.allin.R
 import com.example.allin.viewmodel.ClothingViewModel
 import kotlinx.android.synthetic.main.fragment_list.view.*
@@ -32,7 +31,7 @@ class ListFragment : Fragment() {
 
         //RecyclerView
         val adapter = ListAdapter()
-        val recyclerView = view.recyclerview
+        val recyclerView = view.clothing_recyclerview
         recyclerView.adapter = adapter
         //recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)

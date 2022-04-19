@@ -51,15 +51,15 @@
             app:destination="@id/listFragment" />
         <action
             android:id="@+id/action_altListFragment_to_add0utfitFragment"
-            app:destination="@id/add0utfitFragment" />
+            app:destination="@id/addOutfitFragment" />
     </fragment>
     <fragment
-        android:id="@+id/add0utfitFragment"
+        android:id="@+id/addOutfitFragment"
         android:name="com.example.allin.fragments.add.add0utfitFragment"
         android:label="fragment_add0utfit"
         tools:layout="@layout/fragment_add0utfit" >
         <action
-            android:id="@+id/action_add0utfitFragment_to_altListFragment"
+            android:id="@+id/action_addOutfitFragment_to_altListFragment"
             app:destination="@id/altListFragment" />
     </fragment>
 </navigation>
