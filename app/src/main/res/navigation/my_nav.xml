@@ -5,38 +5,47 @@
     android:id="@+id/my_nav"
     app:startDestination="@id/listFragment">
 
+    <!-- Closet List Fragment = Home Menu -->
     <fragment
         android:id="@+id/listFragment"
         android:name="com.example.allin.fragments.list.ListFragment"
         android:label="List"
         tools:layout="@layout/fragment_list" >
+        <!-- Action ADD New Clothing Item Button -->
         <action
             android:id="@+id/action_listFragment_to_addFragment"
             app:destination="@id/addFragment" />
+        <!-- Action UPDATE New Clothing Item Button -->
         <action
             android:id="@+id/action_listFragment_to_updateFragment"
             app:destination="@id/updateFragment" />
+        <!-- Closet List TO Outfit List Fragment -->
         <action
             android:id="@+id/action_listFragment_to_altListFragment"
             app:destination="@id/altListFragment" />
     </fragment>
+    <!-- Add New Clothing Item Fragment -->
     <fragment
         android:id="@+id/addFragment"
         android:name="com.example.allin.fragments.add.AddFragment"
         android:label="Add"
         tools:layout="@layout/fragment_add" >
+        <!-- Adds New Item to Clothing List AND returns to Clothing List Fragment -->
         <action
             android:id="@+id/action_addFragment_to_listFragment"
             app:destination="@id/listFragment" />
     </fragment>
+    <!-- From Selecting Specific Clothing Item, Goes to Update Clothing Item Page-->
     <fragment
         android:id="@+id/updateFragment"
         android:name="com.example.allin.fragments.update.UpdateFragment"
         android:label="Update"
         tools:layout="@layout/fragment_update" >
+        <!-- Updates Clothing Item of new values THEN Returns to Clothing List Fragment -->
         <action
             android:id="@+id/action_updateFragment_to_listFragment"
             app:destination="@id/listFragment" />
+        <!-- Binds Current Clothing Item values using Navigation Arguments -->
         <argument
             android:name="currentClothing"
             app:argType="com.example.allin.model.Clothing" />

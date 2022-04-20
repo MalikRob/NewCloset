@@ -9,10 +9,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.onNavDestinationSelected
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.allin.R
 import com.example.allin.viewmodel.ClothingViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_list.view.*
 
 /**
@@ -77,6 +80,11 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener{
         return super.onOptionsItemSelected(item)
     }
 
+    private fun setupBottomNavMenu(navController: NavController) {
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
+        bottomNav?.setupWithNavController(navController)
+    }
+
     private fun deleteAllUsers() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes") { _, _ ->
@@ -118,4 +126,6 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener{
     }
 
 }
+
+
 
