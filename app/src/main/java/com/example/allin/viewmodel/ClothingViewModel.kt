@@ -45,4 +45,8 @@ class ClothingViewModel(application: Application): AndroidViewModel(application)
         }
     }
 
+    fun searchDatabase(searchQuery: String): LiveData<List<Clothing>> {
+        return repository.searchDatabase(searchQuery)
+    }
+
 }

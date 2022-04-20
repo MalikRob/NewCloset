@@ -17,6 +17,13 @@
         <entry key="..\:/Users/malik/AndroidStudioProjects/AllIn/app/src/main/res/layout/fragment_add.xml" value="0.1" />
         <entry key="..\:/Users/malik/AndroidStudioProjects/AllIn/app/src/main/res/layout/fragment_list.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/malik/AndroidStudioProjects/AllIn/app/src/main/res/layout/fragment_update.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1575" />
+        <entry key="app/src/main/res/layout/fragment_add.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_update.xml" value="0.165" />
+        <entry key="app/src/main/res/menu/delete_menu.xml" value="0.2703125" />
+        <entry key="app/src/main/res/menu/search_menu.xml" value="0.2703125" />
+
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_update.xml" value="0.2703125" />
       </map>
