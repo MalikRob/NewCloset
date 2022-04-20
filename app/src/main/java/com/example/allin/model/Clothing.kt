@@ -6,9 +6,15 @@ import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
-//Sets the table name
+/**
+ * Class member values. These values will also represent the Table "Clothing"
+ * and its columns by value types
+ * Parcelize allow the data to be bound to navigation arguments and transferred between
+ * fragments and activities on navigation calls
+ *
+ */
 @Parcelize
-@Entity(tableName = "clothing_table")
+@Entity
 data class Clothing (
     //Sets all attributes and primary key
     @PrimaryKey(autoGenerate = true) val id: Int,

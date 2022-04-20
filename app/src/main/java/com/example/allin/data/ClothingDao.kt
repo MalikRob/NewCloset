@@ -17,12 +17,14 @@ interface ClothingDao {
     @Delete
     suspend fun deleteClothing(clothing: Clothing)
 
-    @Query("DELETE FROM clothing_table")
+    @Query("DELETE FROM Clothing")
     suspend fun deleteAllClothing()
 
-    @Query("SELECT * FROM clothing_table ORDER BY id ASC")
+    @Query("SELECT * FROM Clothing ORDER BY id ASC")
     fun readAllData(): LiveData<List<Clothing>>
 
-    @Query("SELECT * FROM clothing_table WHERE type LIKE :searchQuery OR color   LIKE :searchQuery")
+    @Query("SELECT * FROM Clothing WHERE type LIKE :searchQuery OR color LIKE :searchQuery")
     fun searchDatabase(searchQuery: String): LiveData<List<Clothing>>
+
 }
+
