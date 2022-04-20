@@ -23,6 +23,9 @@
         <entry key="app/src/main/res/layout/fragment_update.xml" value="0.165" />
         <entry key="app/src/main/res/menu/delete_menu.xml" value="0.2703125" />
         <entry key="app/src/main/res/menu/search_menu.xml" value="0.2703125" />
+
+        <entry key="app/src/main/res/layout/fragment_add.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_update.xml" value="0.2703125" />
       </map>
     </option>
   </component>

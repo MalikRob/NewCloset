@@ -3,7 +3,6 @@ package com.example.allin.fragments.update
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.text.Editable
 import android.text.TextUtils
 import android.view.*
 import android.widget.DatePicker
@@ -51,12 +50,15 @@ class UpdateFragment : Fragment() {
         val displayDate: Date = args.currentClothing.dateAdded
         toSimpleString(displayDate)
 
-        view.updateType.setText(args.currentClothing.type)
+        view.updateType_editText.setText(args.currentClothing.type)
         view.updateColor.setText(args.currentClothing.color)
         view.updateStyle.setText(args.currentClothing.style)
         view.updateDescrip.setText(args.currentClothing.description)
+        view.updateBrand_editText.setText(args.currentClothing.brand)
+        view.updateTheme_editText.setText(args.currentClothing.theme)
+
         view.update_dateAddedButton.text=(toSimpleString(displayDate))
-        print("$dateReturned")
+
 
         view.update_dateAddedButton.setOnClickListener {
             val datePicker = DatePickerDialog(
@@ -84,20 +86,19 @@ class UpdateFragment : Fragment() {
     }
 
     private fun updateItem() {
-        val type = updateType.text.toString()
+        val type = updateType_editText.text.toString()
         val color = updateColor.text.toString()
         val style = updateStyle.text.toString()
         val descrip = updateDescrip.text.toString()
-        val updatedClothing: Clothing?
+        val brand = updateBrand_editText.text.toString()
+        val theme = updateTheme_editText.text.toString()
 
 
-        if (inputCheck(type, color, style, descrip)) {
+
+        if (inputCheck(type, color)) {
             //Create Clothing Object
-                if (dateReturned != null){
-                    updatedClothing = Clothing(args.currentClothing.id, type, color,style, descrip, dateReturned)
-                } else {
-                    updatedClothing = Clothing(args.currentClothing.id, type, color, style,descrip)
-                }
+            val updatedClothing = Clothing(args.currentClothing.id, type, color,style, descrip, dateReturned, brand, theme)
+
             //Update Current Clothing Object
             mClothingViewModel.updateClothing(updatedClothing)
             Toast.makeText(requireContext(), "Updated Successfully!", Toast.LENGTH_SHORT).show()
@@ -108,8 +109,8 @@ class UpdateFragment : Fragment() {
         }
     }
 
-    private fun inputCheck (type: String, color: String, style: String, description: String): Boolean {
-        return !(TextUtils.isEmpty(type) && TextUtils.isEmpty(color) && TextUtils.isEmpty(description))
+    private fun inputCheck (type: String, color: String): Boolean {
+        return !(TextUtils.isEmpty(type) && TextUtils.isEmpty(color))
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -148,6 +149,4 @@ class UpdateFragment : Fragment() {
          */
         SimpleDateFormat("EEE, MMM d, yyyy").format(this)
     }
-
-
 }
