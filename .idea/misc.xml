@@ -3,23 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.3315" />
+        <entry key="../../android-sdks/platforms/android-32/data/res/layout/simple_spinner_item.xml" value="0.2703125" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/activity_main.xml" value="0.3734375" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/custom_row.xml" value="0.13518518518518519" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_add.xml" value="0.2509057971014493" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_add0utfit.xml" value="0.379981884057971" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_list.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_login.xml" value="0.3875" />
-        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_settings.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_update.xml" value="0.1884498480243161" />
-        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/grid_clothing_item.xml" value="0.22" />
-        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/menu/bottom_nav_bar.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/menu/delete_menu.xml" value="0.3875" />
         <entry key="..\:/Users/malik/AndroidStudioProjects/AllIn/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/malik/AndroidStudioProjects/AllIn/app/src/main/res/layout/custom_row.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/malik/AndroidStudioProjects/AllIn/app/src/main/res/layout/fragment_add.xml" value="0.1" />
         <entry key="..\:/Users/malik/AndroidStudioProjects/AllIn/app/src/main/res/layout/fragment_list.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/malik/AndroidStudioProjects/AllIn/app/src/main/res/layout/fragment_update.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1575" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_add.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_clothing_list.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/fragment_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_outfit_list.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/fragment_update.xml" value="0.2703125" />
+        <entry key="app/src/main/res/menu/bottom_nav_bar.xml" value="0.2703125" />
+        <entry key="app/src/main/res/menu/delete_menu.xml" value="0.2703125" />
+        <entry key="app/src/main/res/menu/search_menu.xml" value="0.2703125" />
       </map>
     </option>
   </component>
