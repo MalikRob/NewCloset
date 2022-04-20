@@ -23,4 +23,8 @@ class ClothingRepository(private val clothingDao: ClothingDao) {
     suspend fun deleteALLClothing() {
         clothingDao.deleteAllClothing()
     }
+
+    fun searchDatabase(searchQuery: String): LiveData<List<Clothing>>{
+        return clothingDao.searchDatabase(searchQuery)
+    }
 }

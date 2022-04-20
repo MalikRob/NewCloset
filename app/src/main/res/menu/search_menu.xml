@@ -4,11 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/menu_search"
-        android:title="@string/search"
-
+        android:title="search"
         android:iconTint="@color/white"
+        android:icon="@drawable/ic_baseline_search_24"
         app:showAsAction="ifRoom"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         tools:targetApi="o" />
+
+    <item android:id="@+id/menu_delete"
+        android:title="Delete"
+        android:icon="@drawable/ic_baseline_delete_24"
+        android:iconTint="@android:color/white"
+        app:showAsAction="ifRoom"/>
 
 </menu>

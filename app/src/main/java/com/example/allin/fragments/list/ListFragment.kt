@@ -20,9 +20,10 @@ import kotlinx.android.synthetic.main.fragment_list.view.*
  * Use the [ListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ListFragment : Fragment(), SearchView.OnQueryTextListener {
+class ListFragment : Fragment(), SearchView.OnQueryTextListener{
 
     private lateinit var mClothingViewModel: ClothingViewModel
+    var adapter = ListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +33,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         val view = inflater.inflate(R.layout.fragment_list, container, false)
 
         //RecyclerView
-        val adapter = ListAdapter()
+        //val adapter = ListAdapter()
         val recyclerView = view.clothing_recyclerview
         recyclerView.adapter = adapter
         //recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -61,7 +62,12 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.delete_menu, menu)
+        inflater.inflate(R.menu.search_menu, menu)
+        val search = menu.findItem(R.id.menu_search)
+        val searchView = search?.actionView as? SearchView
+        searchView?.isSubmitButtonEnabled = true
+        searchView?.setOnQueryTextListener(this)
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -87,33 +93,29 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         builder.create().show()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?)
-    {
-        menuInflator.inflate(R.menu.search_menu, menu)
-        val search = menu?.findItem(R.id.menu_search)
-        val searchView = search?.actionView as? SearchView
-        searchView?.isSubmitButtonEnabled = true
-        searchView?.setOnQueryTextListener(this)
-    }
-
     override fun onQueryTextSubmit(query: String?): Boolean {
+        if(query != null){
+            searchDatabase(query)
+        }
         return true
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        if (query != null) {
-            searchDatabase(query)
+        if(newText != null){
+            searchDatabase(newText)
         }
+        return true
+    }
+    private fun searchDatabase(query: String){
+        val searchQuery = "%$query%"
 
-         fun searchDatabase(query: String) {
-            val searchQuery = "%$query%"
-
-            ClothingViewModel.searchDatabase(searchQuery).observe(this) { list ->
-                list.let {
-                    ListAdapter.setData(it)
-                }
+        mClothingViewModel.searchDatabase(searchQuery).observe(this
+        ) { list ->
+            list.let {
+                adapter.setData(it)
             }
         }
     }
+
 }
 
