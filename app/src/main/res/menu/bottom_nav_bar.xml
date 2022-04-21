@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/listFragment"
+        android:id="@+id/clothingListFragment"
         android:title="Closet"
         android:icon="@drawable/ic_closet_home"/>
     <item
-        android:id="@+id/outfits_fragment"
+        android:id="@+id/outfitListFragment"
         android:title="Outfits"
         android:icon="@drawable/ic_outfit_page"/>
 

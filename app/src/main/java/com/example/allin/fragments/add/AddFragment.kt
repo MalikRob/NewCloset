@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.allin.R
 import com.example.allin.model.Clothing
 import com.example.allin.viewmodel.ClothingViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_add.view.*
 import java.text.SimpleDateFormat
@@ -40,6 +41,7 @@ class AddFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_add, container, false)
+
 
         //Takes the entered data
         mClothingViewModel = ViewModelProvider(this).get(ClothingViewModel::class.java)
@@ -226,7 +228,7 @@ class AddFragment : Fragment() {
             mClothingViewModel.addClothing(clothing)
             Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
             //Navigate Back
-            findNavController().navigate(R.id.action_addFragment_to_listFragment)
+            findNavController().navigate(R.id.action_addClothingFragment_to_clothingListFragment)
         } else {
             Toast.makeText(requireContext(), "Please Fill Out All Fields.", Toast.LENGTH_LONG).show()
         }

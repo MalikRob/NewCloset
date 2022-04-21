@@ -13,7 +13,7 @@ import com.example.allin.R
 import com.example.allin.viewmodel.ClothingViewModel
 import kotlinx.android.synthetic.main.fragment_outfit_list.view.*
 
-class AltListFragment : Fragment() {
+class OutfitListFragment : Fragment() {
 
     private lateinit var mClothingViewModel: ClothingViewModel
 
@@ -39,7 +39,7 @@ class AltListFragment : Fragment() {
 
         //Arrow Button now takes the user back to the Home screen
         view.homeButton.setOnClickListener{
-            findNavController().navigate(R.id.action_altListFragment_to_listFragment)
+            //findNavController().navigate(R.id.action_altListFragment_to_listFragment)
         }
 
         //Add menu

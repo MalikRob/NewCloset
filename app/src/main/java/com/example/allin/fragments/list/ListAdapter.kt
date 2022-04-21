@@ -28,7 +28,7 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         holder.itemView.gl_clothing_style.text = currentItem.style
         holder.itemView.gl_clothing_brand.text = currentItem.brand
         holder.itemView.rowLayout.setOnClickListener() {
-            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
+            val action = ListFragmentDirections.actionClothingListFragmentToUpdateClothingFragment(currentItem)
             holder.itemView.findNavController().navigate(action)
         }
 

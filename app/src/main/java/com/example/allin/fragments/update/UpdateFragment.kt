@@ -28,6 +28,8 @@ import java.util.*
  */
 class UpdateFragment : Fragment() {
 
+    // Each Argument is labeled by their KotlinClass name not the name provided in the nav_graph.xml
+    // To find the name in nav_graph.xml, go to Fragment on graph > Attributes Window > Name
     private val args by navArgs<UpdateFragmentArgs>()
 
     private lateinit var mClothingViewModel: ClothingViewModel
@@ -102,8 +104,8 @@ class UpdateFragment : Fragment() {
             //Update Current Clothing Object
             mClothingViewModel.updateClothing(updatedClothing)
             Toast.makeText(requireContext(), "Updated Successfully!", Toast.LENGTH_SHORT).show()
-            //Navigate Back
-            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+            //Navigate Back to Clothing List screen
+            findNavController().navigate(R.id.action_updateClothingFragment_to_clothingListFragment)
         } else {
             Toast.makeText(requireContext(), "Please fill out all fields.", Toast.LENGTH_SHORT).show()
         }
@@ -132,7 +134,8 @@ class UpdateFragment : Fragment() {
                 requireContext(),
                 "Successfully removed: ${args.currentClothing.type}",
                 Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+            // On Delete return back to Clothing List screen
+            findNavController().navigate(R.id.action_updateClothingFragment_to_clothingListFragment)
         }
         builder.setNegativeButton("No") { _, _ ->}
         builder.setTitle("Delete ${args.currentClothing.type}?")

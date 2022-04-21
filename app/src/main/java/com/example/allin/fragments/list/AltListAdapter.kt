@@ -31,7 +31,6 @@ class AltListAdapter: RecyclerView.Adapter<AltListAdapter.MyViewHolder>(){
 //            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
 //            holder.itemView.findNavController().navigate(action)
 //        }
-
     }
 
     override fun getItemCount(): Int {
