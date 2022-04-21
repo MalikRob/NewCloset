@@ -7,7 +7,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.allin.R
 import com.example.allin.model.Clothing
-import kotlinx.android.synthetic.main.custom_row.view.*
+
 import kotlinx.android.synthetic.main.outfit_custom_row.view.*
 
 class AltListAdapter: RecyclerView.Adapter<AltListAdapter.MyViewHolder>(){
@@ -31,7 +31,6 @@ class AltListAdapter: RecyclerView.Adapter<AltListAdapter.MyViewHolder>(){
 //            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
 //            holder.itemView.findNavController().navigate(action)
 //        }
-
     }
 
     override fun getItemCount(): Int {

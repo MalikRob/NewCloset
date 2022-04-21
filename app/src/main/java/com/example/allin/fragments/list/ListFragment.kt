@@ -1,6 +1,7 @@
 package com.example.allin.fragments.list
 
 import android.app.AlertDialog
+import android.content.ClipData
 import android.os.Bundle
 import android.view.*
 import android.view.Menu
@@ -13,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.allin.R
 import com.example.allin.viewmodel.ClothingViewModel
-import kotlinx.android.synthetic.main.fragment_list.view.*
+import kotlinx.android.synthetic.main.fragment_clothing_list.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -30,7 +31,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener{
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_clothing_list, container, false)
 
         //RecyclerView
         //val adapter = ListAdapter()
@@ -47,12 +48,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener{
 
         //Button now takes the user to the Edit Clothing Page
         view.floatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.action_listFragment_to_addFragment)
-        }
-
-        //Outfit Button takes the User to the altListFragment/Outfit List page
-        view.floatingActionButton3.setOnClickListener {
-            findNavController().navigate(R.id.action_listFragment_to_altListFragment)
+            //<!-- Action goes from Clothing List to $AddFragment.kt
+            findNavController().navigate(R.id.action_clothingListFragment_to_addClothingFragment)
         }
 
         //Add menu
@@ -118,4 +115,6 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener{
     }
 
 }
+
+
 

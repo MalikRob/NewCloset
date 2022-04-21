@@ -8,13 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.allin.R
 import com.example.allin.viewmodel.ClothingViewModel
-import kotlinx.android.synthetic.main.fragment_alt_list.view.*
+import kotlinx.android.synthetic.main.fragment_outfit_list.view.*
 
-class AltListFragment : Fragment() {
+class OutfitListFragment : Fragment() {
 
     private lateinit var mClothingViewModel: ClothingViewModel
 
@@ -23,11 +22,11 @@ class AltListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_alt_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_outfit_list, container, false)
 
         //RecyclerView
         val adapter = AltListAdapter()
-        val recyclerView = view.recyclerviewO
+        val recyclerView = view.outfit_recyclerview
         recyclerView.adapter = adapter
         //recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -40,7 +39,7 @@ class AltListFragment : Fragment() {
 
         //Arrow Button now takes the user back to the Home screen
         view.homeButton.setOnClickListener{
-            findNavController().navigate(R.id.action_altListFragment_to_listFragment)
+            //findNavController().navigate(R.id.action_altListFragment_to_listFragment)
         }
 
         //Add menu

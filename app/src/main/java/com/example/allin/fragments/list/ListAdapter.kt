@@ -7,7 +7,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.allin.R
 import com.example.allin.model.Clothing
-import kotlinx.android.synthetic.main.custom_row.view.*
+import kotlinx.android.synthetic.main.grid_clothing_item.view.*
 
 class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
@@ -18,19 +18,18 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.custom_row, parent, false))
+        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.grid_clothing_item, parent, false))
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = clothingList[position]
-        holder.itemView.clothing_type.text = currentItem.type
-        holder.itemView.clothing_color.text = currentItem.color
-        holder.itemView.clothing_style.text = currentItem.style
+        holder.itemView.gl_clothing_type.text = currentItem.type
+        holder.itemView.gl_clothing_color.text = currentItem.color
+        holder.itemView.gl_clothing_style.text = currentItem.style
+        holder.itemView.gl_clothing_brand.text = currentItem.brand
         holder.itemView.rowLayout.setOnClickListener() {
-            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
+            val action = ListFragmentDirections.actionClothingListFragmentToUpdateClothingFragment(currentItem)
             holder.itemView.findNavController().navigate(action)
-
-
         }
 
     }

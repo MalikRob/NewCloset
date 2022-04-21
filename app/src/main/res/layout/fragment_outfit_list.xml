@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.list.AltListFragment">
+    tools:context=".fragments.list.OutfitListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerviewO"
+        android:id="@+id/outfit_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
