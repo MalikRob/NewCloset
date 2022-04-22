@@ -1,12 +1,22 @@
 package com.example.allin.fragments.add
 
+import android.Manifest.permission.CAMERA
+import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -16,6 +26,8 @@ import com.example.allin.viewmodel.ClothingViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_add.view.*
+import java.io.File
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,6 +40,15 @@ import java.util.*
 class AddFragment : Fragment() {
 
     private lateinit var mClothingViewModel: ClothingViewModel
+    lateinit var currentPhotoPath: String
+    private val REQUEST_IMAGE_CAPTURE = 1
+    private val PICK_IMAGE = 2
+    private val REQUEST_PERMISSION = 100
+    private lateinit var photoView: ImageView
+    private lateinit var imageGallery: ImageButton
+    private lateinit var captureImage: ImageButton
+    var uri: Uri? = null
+
 
     val calendar = Calendar.getInstance()
     val year = calendar.get(Calendar.YEAR)
@@ -35,12 +56,29 @@ class AddFragment : Fragment() {
     val day = calendar.get(Calendar.DAY_OF_MONTH)
     private var dateReturned = GregorianCalendar(year, month, day).time
 
+    // this is the permissions
+    override fun onResume() {
+        super.onResume()
+        checkCameraPermission()
+    }
+
+    private fun checkCameraPermission() {
+        if (ContextCompat.checkSelfPermission(requireContext(), CAMERA) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(CAMERA), REQUEST_PERMISSION)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_add, container, false)
+        photoView = view.findViewById(R.id.clothing_item_photo) as ImageView
+        imageGallery = view.findViewById(R.id.image_gallery_button) as ImageButton
+        captureImage = view.findViewById(R.id.camera_button) as ImageButton
+
 
 
         //Takes the entered data
@@ -50,6 +88,44 @@ class AddFragment : Fragment() {
         view.add_button.setOnClickListener{
             insertDataToDatabase()
         }
+  //these are the camera action buttons when on clicked what they are doing starts to run
+        captureImage.apply {
+            val packageManager: PackageManager = requireActivity().packageManager
+
+            setOnClickListener {
+                Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { intent ->
+                    intent.resolveActivity(packageManager)?.also {
+                        val photoFile: File? = try {
+                            createCapturedPhoto()
+                        } catch (ex: IOException) {
+                            // If there is error while creating the File, it will be null
+                            null
+                        }
+                        photoFile?.also {
+                            val photoURI = FileProvider.getUriForFile(requireActivity(), "com.example.allin.provider", it )
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                            startActivityForResult(intent, REQUEST_IMAGE_CAPTURE)
+                        }
+
+                    }
+                }
+            }
+        }
+        imageGallery.apply {
+            val packageManager: PackageManager = requireActivity().packageManager
+
+            //New Addition
+            setOnClickListener {
+                Intent(Intent.ACTION_OPEN_DOCUMENT ).also { intent ->
+                    intent.type = "image/*"
+                    intent.resolveActivity(packageManager)?.also {
+                        startActivityForResult(intent, PICK_IMAGE)
+                    }
+
+
+                }
+            } }
+
 
         val spinner: Spinner = view.findViewById(R.id.clothingType_spinner)
         val clothingType = resources.getStringArray(R.array.Clothing_type)
@@ -208,6 +284,20 @@ class AddFragment : Fragment() {
         }
         return view
     }
+    // this is the activity for running the camera or gallery action to set the photo inside imageView
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_IMAGE_CAPTURE) {
+                uri = Uri.parse(currentPhotoPath)
+                clothing_item_photo.setImageURI(uri)
+            }
+            else if (requestCode == PICK_IMAGE) {
+                uri = data?.getData()
+                clothing_item_photo.setImageURI(uri)
+
+            }
+        }
+    }
 
     //Puts entered data into a variable
     private fun insertDataToDatabase() {
@@ -216,13 +306,15 @@ class AddFragment : Fragment() {
         val style = clothingStyle_spinner.selectedItem.toString()
         val brand = clothingBrand_spinner.selectedItem.toString()
         val theme = clothingTheme_spinner.selectedItem.toString()
+        // the value to store the image uri as a string into the database
+        val imageString = uri.toString()
         val description = addDescrip_edittext.text.toString()
 
 
         //Checks that the fields aren't empty
         if(inputCheck(type, color)){
             //Create Clothing Object
-            val clothing = Clothing(0, type, color, style, description, dateReturned, brand, theme)
+            val clothing = Clothing(0, type, color, style, description, dateReturned, brand, theme, imageString)
 
             //Add data to database
             mClothingViewModel.addClothing(clothing)
@@ -247,6 +339,17 @@ class AddFragment : Fragment() {
          */
         SimpleDateFormat("EEE, MMM d, yyyy").format(this)
     }
+
+    // this is the function to create the path file for the image that gets called in camera
+    @Throws(IOException::class)
+    private fun createCapturedPhoto(): File {
+        val timestamp: String = SimpleDateFormat("yyyyMMdd-HHmmss", Locale.US).format(Date())
+        val storageDir = activity?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile("PHOTO_${timestamp}",".jpg", storageDir).apply {
+            currentPhotoPath = absolutePath
+        }
+    }
+
 
 }
 

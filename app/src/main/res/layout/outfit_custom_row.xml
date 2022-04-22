@@ -17,7 +17,12 @@
         android:layout_height="match_parent"
         android:padding="25dp"
         android:orientation="vertical">
-
+        <!-- Image View Meant to Contain The Clothing Image -->
+        <ImageView
+            android:id="@+id/clothing_item_photo"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="fitXY" />
         <TextView
             android:id="@+id/clothing_type_one"
             android:layout_width="match_parent"

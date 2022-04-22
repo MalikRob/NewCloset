@@ -1,5 +1,6 @@
 package com.example.allin.fragments.list
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.allin.R
 import com.example.allin.model.Clothing
 import kotlinx.android.synthetic.main.grid_clothing_item.view.*
+import kotlinx.android.synthetic.main.outfit_custom_row.view.*
 
 class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
@@ -27,10 +29,15 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         holder.itemView.gl_clothing_color.text = currentItem.color
         holder.itemView.gl_clothing_style.text = currentItem.style
         holder.itemView.gl_clothing_brand.text = currentItem.brand
+
         holder.itemView.rowLayout.setOnClickListener() {
             val action = ListFragmentDirections.actionClothingListFragmentToUpdateClothingFragment(currentItem)
             holder.itemView.findNavController().navigate(action)
         }
+
+        holder.itemView.gl_clothing_item_photo.setImageURI( Uri.parse(currentItem.image))
+
+
 
     }
 

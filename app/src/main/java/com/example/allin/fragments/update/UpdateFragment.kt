@@ -58,6 +58,7 @@ class UpdateFragment : Fragment() {
         view.updateDescrip.setText(args.currentClothing.description)
         view.updateBrand_editText.setText(args.currentClothing.brand)
         view.updateTheme_editText.setText(args.currentClothing.theme)
+        view.updateType_editText2.setText((args.currentClothing.image))
 
         view.update_dateAddedButton.text=(toSimpleString(displayDate))
 
@@ -94,12 +95,13 @@ class UpdateFragment : Fragment() {
         val descrip = updateDescrip.text.toString()
         val brand = updateBrand_editText.text.toString()
         val theme = updateTheme_editText.text.toString()
+        val image2 = updateType_editText2.text.toString()
 
 
 
         if (inputCheck(type, color)) {
             //Create Clothing Object
-            val updatedClothing = Clothing(args.currentClothing.id, type, color,style, descrip, dateReturned, brand, theme)
+            val updatedClothing = Clothing(args.currentClothing.id, type, color,style, descrip, dateReturned, brand, theme,image2)
 
             //Update Current Clothing Object
             mClothingViewModel.updateClothing(updatedClothing)

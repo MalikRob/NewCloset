@@ -19,8 +19,13 @@
         android:padding="25dp">
 
         <!-- Image View Meant to Contain The Clothing Image -->
+        <!-- Image View Meant to Contain The Clothing Image -->
+        <ImageView
+            android:id="@+id/gl_clothing_item_photo"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="fitXY" />
 
-        <!-- Text Review That Retains Entered Clothing Type -->
         <!-- gl = GridLayout -->
         <TextView
             android:id="@+id/gl_clothing_type"

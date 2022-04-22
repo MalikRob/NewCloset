@@ -24,5 +24,6 @@ data class Clothing (
     val description: String,
     val dateAdded: Date = Date(),
     val brand: String,
-    val theme: String
+    val theme: String,
+    val image: String,
     ): Parcelable
