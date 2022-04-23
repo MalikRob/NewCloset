@@ -116,7 +116,7 @@ class AddFragment : Fragment() {
 
             //New Addition
             setOnClickListener {
-                Intent(Intent.ACTION_OPEN_DOCUMENT ).also { intent ->
+                Intent(Intent.ACTION_OPEN_DOCUMENT).also { intent ->
                     intent.type = "image/*"
                     intent.resolveActivity(packageManager)?.also {
                         startActivityForResult(intent, PICK_IMAGE)
@@ -124,7 +124,8 @@ class AddFragment : Fragment() {
 
 
                 }
-            } }
+            }
+        }
 
 
         val spinner: Spinner = view.findViewById(R.id.clothingType_spinner)
@@ -160,7 +161,7 @@ class AddFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                Toast.makeText(requireContext(), clothingType[position], Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), clothingType[position], Toast.LENGTH_SHORT).show()
                 when (position) {
                     0 -> {
                         styleChild_adapter = ArrayAdapter.createFromResource(
@@ -213,7 +214,7 @@ class AddFragment : Fragment() {
             ) {
 
                val colorEntry = parent.getItemAtPosition(position).toString()
-                Toast.makeText(requireContext(), color[position], Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), color[position], Toast.LENGTH_SHORT).show()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -236,7 +237,7 @@ class AddFragment : Fragment() {
         brandSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val brandEntry = parent.getItemAtPosition(position).toString()
-                Toast.makeText(requireContext(), brand[position], Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), brand[position], Toast.LENGTH_SHORT).show()
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 //No action determined yet for no selection.
@@ -258,7 +259,7 @@ class AddFragment : Fragment() {
         themeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val themeEntry = parent.getItemAtPosition(position).toString()
-                Toast.makeText(requireContext(), themes[position], Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), themes[position], Toast.LENGTH_SHORT).show()
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
