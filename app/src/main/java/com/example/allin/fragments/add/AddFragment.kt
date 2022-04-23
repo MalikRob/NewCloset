@@ -5,6 +5,7 @@ import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -114,16 +115,20 @@ class AddFragment : Fragment() {
         imageGallery.apply {
             val packageManager: PackageManager = requireActivity().packageManager
 
+            val pickImage = Intent (Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+
+            val resolvedActivity: ResolveInfo? = packageManager.resolveActivity(pickImage,PackageManager.MATCH_DEFAULT_ONLY)
+
+            if (resolvedActivity == null){
+                isEnabled = false
+            }
             //New Addition
             setOnClickListener {
                 Intent(Intent.ACTION_OPEN_DOCUMENT).also { intent ->
                     intent.type = "image/*"
-                    intent.resolveActivity(packageManager)?.also {
-                        startActivityForResult(intent, PICK_IMAGE)
-                    }
-
-
                 }
+
+                startActivityForResult(pickImage, PICK_IMAGE)
             }
         }
 
