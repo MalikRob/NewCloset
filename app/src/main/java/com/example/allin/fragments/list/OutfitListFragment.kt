@@ -38,7 +38,7 @@ class OutfitListFragment : Fragment() {
         })
 
         //Arrow Button now takes the user back to the Home screen
-        view.homeButton.setOnClickListener{
+        view.addOutButton.setOnClickListener{
             //findNavController().navigate(R.id.action_altListFragment_to_listFragment)
         }
 
