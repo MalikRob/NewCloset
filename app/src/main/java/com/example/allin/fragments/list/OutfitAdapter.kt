@@ -15,11 +15,9 @@ class OutfitAdapter: RecyclerView.Adapter<OutfitAdapter.MyViewHolder>(){
      */
     private var outfitList = emptyList<Outfit>()
 
-
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
     }
-
     //Inflates view where the objects will be stored. XML that displays items in the row inside the RecyclerView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
@@ -33,11 +31,6 @@ class OutfitAdapter: RecyclerView.Adapter<OutfitAdapter.MyViewHolder>(){
         val currentItem = outfitList[position]
         holder.itemView.outfit_name.text = currentItem.outfitName
 
-
-//        holder.itemView.rowLayout.setOnClickListener() {
-//            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
-//            holder.itemView.findNavController().navigate(action)
-//        }
     }
 
     override fun getItemCount(): Int {

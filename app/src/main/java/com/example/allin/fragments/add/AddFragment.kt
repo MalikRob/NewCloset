@@ -314,7 +314,7 @@ class AddFragment : Fragment() {
         val theme = clothingTheme_spinner.selectedItem.toString()
         // the value to store the image uri as a string into the database
         val imageString = uri.toString()
-        val description = outfit_name_edittext.text.toString()
+        val description = description.text.toString()
 
 
         //Checks that the fields aren't empty

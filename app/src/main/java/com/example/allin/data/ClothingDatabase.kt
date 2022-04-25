@@ -6,9 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.allin.model.Clothing
+import com.example.allin.model.Outfit
 
 //This class serves as the main conection between our data and the app.
-@Database(entities = [Clothing::class], version = 1, exportSchema = false)
+@Database(entities = [Clothing::class, Outfit::class], version = 1, exportSchema = false)
 @TypeConverters(DBTypeConverters::class)
 abstract class ClothingDatabase: RoomDatabase() {
 

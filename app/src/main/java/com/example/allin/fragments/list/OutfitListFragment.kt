@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.allin.R
 import com.example.allin.viewmodel.OutfitViewModel
@@ -39,7 +40,7 @@ class OutfitListFragment : Fragment() {
 
         //Add button adds new Outfit Item.
         view.add_outfit_btn.setOnClickListener{
-
+            findNavController().navigate(R.id.action_outfitListFragment_to_addOutfitFragment)
         }
 
         //Add menu

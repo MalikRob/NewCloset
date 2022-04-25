@@ -5,9 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.allin.R
 import com.example.allin.fragments.add.horizontal_lists.ClothingItem1Adapter
 import com.example.allin.viewmodel.ClothingViewModel
+import kotlinx.android.synthetic.main.fragment_add_outfit.*
+import kotlinx.android.synthetic.main.fragment_add_outfit.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -24,15 +30,34 @@ class AddOutfitFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_outfit, container, false)
+        val view = inflater.inflate(R.layout.fragment_add_outfit, container, false)
 
         //Let the user add an OutfitName to the Edit Text
 
         //Inflate the RecyclerView 1 for ClothingTops
-        val recyclerView = view.clothing_item_one_recyclerview
-        topsRecyclerView.adapter = adapter
+        val topRecyclerView = view.clothing_item_one_recyclerview
+        topRecyclerView.adapter = topsAdapter
+        topRecyclerView.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
 
+        mClothingViewModel = ViewModelProvider(this).get(ClothingViewModel::class.java)
+
+        // sets Tops data from Clothing in the first RecyclerView
+        mClothingViewModel.selectClothingTops().observe(viewLifecycleOwner)
+        { topsList ->
+            topsList.let {
+                topsAdapter.setTopData(it)
+            }
+        }
+
+        // Add selected Items to list.
+        view.add_button.setOnClickListener {
+            insertNewOutfit()
+        }
         return view
+    }
+
+    private fun insertNewOutfit() {
+        val outfitName = outfit_name_et.text.toString()
     }
 
 }

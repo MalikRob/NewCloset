@@ -55,6 +55,19 @@
         android:id="@+id/outfitListFragment"
         android:name="com.example.allin.fragments.list.OutfitListFragment"
         android:label="Outfits"
-        tools:layout="@layout/fragment_outfit_list"/>
+        tools:layout="@layout/fragment_outfit_list">
+        <action
+            android:id="@+id/action_outfitListFragment_to_addOutfitFragment"
+            app:destination="@id/addOutfitFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addOutfitFragment"
+        android:name="com.example.allin.fragments.add.AddOutfitFragment"
+        android:label="Add New Outfit"
+        tools:layout="@layout/fragment_add_outfit">
+        <action
+            android:id="@+id/action_addOutfitFragment_to_outfitListFragment"
+            app:destination="@id/outfitListFragment" />
+    </fragment>
 
 </navigation>

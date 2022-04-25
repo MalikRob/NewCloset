@@ -242,7 +242,7 @@
             app:layout_constraintTop_toBottomOf="@+id/dateAdded_textview" />
 
         <EditText
-            android:id="@+id/outfit_name_edittext"
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="32dp"
@@ -273,7 +273,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.25"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/outfit_name_edittext"
+            app:layout_constraintTop_toBottomOf="@+id/description"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout >

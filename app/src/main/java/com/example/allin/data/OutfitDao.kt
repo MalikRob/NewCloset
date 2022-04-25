@@ -12,9 +12,13 @@ interface OutfitDao {
 
     // Grabs data from Outfit Table, necessary for each other Query to read
     // from in the Outfit Repository class
-    @Query("SELECT * FROM Outfit ORDER BY id ASC")
-    fun readAllData(): LiveData<List<Outfit>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addOutfit(outfit: Outfit)
+
+
+    @Query("SELECT * FROM Outfit ORDER BY id ASC")
+    fun readAllData(): LiveData<List<Outfit>>
+
+
 }

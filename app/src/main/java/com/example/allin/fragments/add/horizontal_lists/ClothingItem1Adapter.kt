@@ -16,9 +16,8 @@ class ClothingItem1Adapter: RecyclerView.Adapter<ClothingItem1Adapter.MyViewHold
 
     private var clothingTopsList = emptyList<Clothing>()
 
-    class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
-    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.outfit__add_clothing_item_1, parent, false)
@@ -28,9 +27,19 @@ class ClothingItem1Adapter: RecyclerView.Adapter<ClothingItem1Adapter.MyViewHold
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = clothingTopsList[position]
         holder.itemView.clothing_item_one_tops.text = currentItem.type
+
+        //When item is clicked it should select the item to be added to clothing.
+        holder.itemView.clothing_item_one_cardview.setOnClickListener {
+            holder.itemView.clothing_item_one_checkbox.isChecked = holder.itemView.clothing_item_one_checkbox.isChecked == false
+        }
+        // We can later add a Check box to confirm.
     }
 
     override fun getItemCount(): Int {
         return clothingTopsList.size
+    }
+
+    fun setTopData(clothing: List<Clothing>){
+        this.clothingTopsList = clothing
     }
 }

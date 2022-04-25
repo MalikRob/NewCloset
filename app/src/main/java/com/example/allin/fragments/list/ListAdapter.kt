@@ -31,13 +31,12 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         holder.itemView.gl_clothing_color.text = currentItem.color
         holder.itemView.gl_clothing_style.text = currentItem.style
         holder.itemView.gl_clothing_brand.text = currentItem.brand
+        holder.itemView.gl_clothing_item_photo.setImageURI( Uri.parse(currentItem.image))
 
         holder.itemView.rowLayout.setOnClickListener {
             val action = ListFragmentDirections.actionClothingListFragmentToUpdateClothingFragment(currentItem)
             holder.itemView.findNavController().navigate(action)
         }
-
-        holder.itemView.gl_clothing_item_photo.setImageURI( Uri.parse(currentItem.image))
 
     }
 

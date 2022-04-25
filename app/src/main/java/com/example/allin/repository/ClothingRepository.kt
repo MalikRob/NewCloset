@@ -7,6 +7,7 @@ import com.example.allin.model.Clothing
 class ClothingRepository(private val clothingDao: ClothingDao) {
 
     val readAllData: LiveData<List<Clothing>> = clothingDao.readAllData()
+    val readTopData: LiveData<List<Clothing>> = clothingDao.selectClothingTops()
 
     suspend fun addClothing(clothing: Clothing){
         clothingDao.addClothing(clothing)
