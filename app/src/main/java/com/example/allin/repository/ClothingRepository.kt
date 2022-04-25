@@ -27,4 +27,8 @@ class ClothingRepository(private val clothingDao: ClothingDao) {
     fun searchDatabase(searchQuery: String): LiveData<List<Clothing>>{
         return clothingDao.searchDatabase(searchQuery)
     }
+
+    fun selectAllTops(): LiveData<List<Clothing>>{
+        return clothingDao.selectClothingTops()
+    }
 }

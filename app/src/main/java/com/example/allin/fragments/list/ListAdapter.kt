@@ -19,8 +19,10 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
     }
 
+    //Inflates view where the objects will be stored. XML that displays items in the row inside the RecyclerView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.grid_clothing_item, parent, false))
+        return MyViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.grid_clothing_item, parent, false))
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -30,14 +32,12 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         holder.itemView.gl_clothing_style.text = currentItem.style
         holder.itemView.gl_clothing_brand.text = currentItem.brand
 
-        holder.itemView.rowLayout.setOnClickListener() {
+        holder.itemView.rowLayout.setOnClickListener {
             val action = ListFragmentDirections.actionClothingListFragmentToUpdateClothingFragment(currentItem)
             holder.itemView.findNavController().navigate(action)
         }
 
         holder.itemView.gl_clothing_item_photo.setImageURI( Uri.parse(currentItem.image))
-
-
 
     }
 

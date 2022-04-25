@@ -7,15 +7,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.allin.R
-import com.example.allin.viewmodel.ClothingViewModel
+import com.example.allin.viewmodel.OutfitViewModel
 import kotlinx.android.synthetic.main.fragment_outfit_list.view.*
 
 class OutfitListFragment : Fragment() {
 
-    private lateinit var mClothingViewModel: ClothingViewModel
+    private lateinit var mClothingViewModel: OutfitViewModel
+    private var adapter = OutfitAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,22 +24,22 @@ class OutfitListFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_outfit_list, container, false)
 
-        //RecyclerView
-        val adapter = AltListAdapter()
+        //RecyclerView standard Layout for now.
+        val adapter = OutfitAdapter()
         val recyclerView = view.outfit_recyclerview
         recyclerView.adapter = adapter
         //recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        //ClothingViewModel
-        mClothingViewModel = ViewModelProvider(this).get(ClothingViewModel::class.java)
+        //OutfitViewModel
+        mClothingViewModel = ViewModelProvider(this).get(OutfitViewModel::class.java)
         mClothingViewModel.readAllData.observe(viewLifecycleOwner, Observer { clothing ->
             adapter.setData(clothing)
         })
 
-        //Arrow Button now takes the user back to the Home screen
-        view.addOutButton.setOnClickListener{
-            //findNavController().navigate(R.id.action_altListFragment_to_listFragment)
+        //Add button adds new Outfit Item.
+        view.add_outfit_btn.setOnClickListener{
+
         }
 
         //Add menu
@@ -54,7 +54,7 @@ class OutfitListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.menu_delete){
-            deleteAllUsers()
+            //deleteAllUsers()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -62,7 +62,7 @@ class OutfitListFragment : Fragment() {
     private fun deleteAllUsers() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes") { _, _ ->
-            mClothingViewModel.deleteAllClothing()
+            //mClothingViewModel.deleteAllClothing()
             Toast.makeText(
                 requireContext(),
                 "Successfully removed everything.",

@@ -23,6 +23,9 @@ interface ClothingDao {
     @Query("SELECT * FROM Clothing ORDER BY id ASC")
     fun readAllData(): LiveData<List<Clothing>>
 
+    @Query("SELECT * FROM Clothing WHERE type='Top' ORDER BY id ASC")
+    fun selectClothingTops(): LiveData<List<Clothing>>
+
     @Query("SELECT * FROM Clothing WHERE type LIKE :searchQuery OR color LIKE :searchQuery")
     fun searchDatabase(searchQuery: String): LiveData<List<Clothing>>
 

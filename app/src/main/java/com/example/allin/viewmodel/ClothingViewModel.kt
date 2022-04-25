@@ -49,4 +49,8 @@ class ClothingViewModel(application: Application): AndroidViewModel(application)
         return repository.searchDatabase(searchQuery)
     }
 
+    fun selectClothingTops():LiveData<List<Clothing>>{
+        return repository.selectAllTops()
+    }
+
 }
