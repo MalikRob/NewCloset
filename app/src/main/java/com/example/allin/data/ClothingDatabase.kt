@@ -13,6 +13,7 @@ import com.example.allin.model.Clothing
 abstract class ClothingDatabase: RoomDatabase() {
 
     abstract fun clothingDao(): ClothingDao
+    abstract fun outfitDao(): OutfitDao
 
     //Everything within this object will be visible to other classes
     companion object{
