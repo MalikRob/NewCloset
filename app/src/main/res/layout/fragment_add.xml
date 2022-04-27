@@ -12,39 +12,25 @@
         tools:context=".fragments.add.AddFragment">
 
         <!-- Section that contains the image view meant to be change -->
-        <TextView
-            android:id="@+id/clothingUploadTitle"
-            android:layout_width="366dp"
-            android:layout_height="59dp"
-            android:layout_marginTop="48dp"
-            android:gravity="center"
-            android:text="Clothing Upload"
-            android:textColor="#1DA1F2"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.488"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="134dp"
-            android:layout_height="112dp"
+            android:layout_width="246dp"
+            android:layout_height="223dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="48dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginTop="32dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/clothingUploadTitle">
+            app:layout_constraintTop_toTopOf="parent">
 
             <!-- Blank Image view meant to be changed upon picture taken or gallery image selected-->
             <ImageView
                 android:id="@+id/clothing_item_photo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/darker_gray"
+                android:background="#D1D1D1"
                 android:cropToPadding="true"
                 android:scaleType="centerInside" />
 
@@ -247,34 +233,22 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="32dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
             android:ems="10"
-            android:hint="Description"
-            android:minHeight="48dp"
             android:gravity="start|top"
+            android:hint="Description"
             android:inputType="textMultiLine"
             android:maxLines="5"
+            android:minHeight="48dp"
             android:textColorHint="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dateAdded_button" />
 
-        <Button
-            android:id="@+id/add_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="32dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginBottom="32dp"
-            android:text="Add"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.25"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description"
-            />
 
     </androidx.constraintlayout.widget.ConstraintLayout >
 </ScrollView>

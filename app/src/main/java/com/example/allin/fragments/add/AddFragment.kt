@@ -11,9 +11,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.text.TextUtils
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -24,7 +22,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.allin.R
 import com.example.allin.model.Clothing
 import com.example.allin.viewmodel.ClothingViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_add.view.*
 import java.io.File
@@ -35,10 +32,14 @@ import java.util.*
 
 /**
  * A simple [Fragment] subclass.
- * Use the [AddFragment.newInstance] factory method to
+ * Use the [AddFragment] factory method to
  * create an instance of this fragment.
  */
 class AddFragment : Fragment() {
+
+    /**
+     ******* Declare Variables, Buttons, etc. that are used throughout this file. *********
+     */
 
     private lateinit var mClothingViewModel: ClothingViewModel
     lateinit var currentPhotoPath: String
@@ -63,12 +64,12 @@ class AddFragment : Fragment() {
         checkCameraPermission()
     }
 
-    private fun checkCameraPermission() {
-        if (ContextCompat.checkSelfPermission(requireContext(), CAMERA) != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(CAMERA), REQUEST_PERMISSION)
-        }
-    }
+    /**
+     *  ADD FRAGMENT view using add_fragment.xml layout --
+     *
+     *  ONLY BUTTONS AND MENUS DEFINED HERE. Any Functions should be displayed outside of the view code block
+     */
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,16 +81,13 @@ class AddFragment : Fragment() {
         imageGallery = view.findViewById(R.id.image_gallery_button) as ImageButton
         captureImage = view.findViewById(R.id.camera_button) as ImageButton
 
-
+        // Options Menu is True for the page to use Menu Bar to Add Clothing
+        setHasOptionsMenu(true)
 
         //Takes the entered data
         mClothingViewModel = ViewModelProvider(this).get(ClothingViewModel::class.java)
 
-        //Add Button on Clothing Edit Screen
-        view.add_button.setOnClickListener{
-            insertDataToDatabase()
-        }
-  //these are the camera action buttons when on clicked what they are doing starts to run
+        //these are the camera action buttons when on clicked what they are doing starts to run
         captureImage.apply {
             val packageManager: PackageManager = requireActivity().packageManager
 
@@ -112,7 +110,13 @@ class AddFragment : Fragment() {
                 }
             }
         }
+        /**
+         * Does not work with Permission settings at the moment. When user selects photo from gallery and closes app. App will not reopen
+         */
+        /*
         imageGallery.apply {
+
+
             val packageManager: PackageManager = requireActivity().packageManager
 
             val pickImage = Intent (Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -131,34 +135,49 @@ class AddFragment : Fragment() {
                 startActivityForResult(pickImage, PICK_IMAGE)
             }
         }
+        */
+        */
 
 
-        val spinner: Spinner = view.findViewById(R.id.clothingType_spinner)
+
+        /**
+         * **************** CLOTHING TYPE Spinner AND Adapter *********************
+         */
+        val clothingTypeSpinner: Spinner = view.findViewById(R.id.clothingType_spinner)
         val clothingType = resources.getStringArray(R.array.Clothing_type)
         val clothingType_adapter = ArrayAdapter.createFromResource(
             requireContext(),
             R.array.Clothing_type,
             android.R.layout.simple_spinner_item
-        )
-        spinner.adapter = clothingType_adapter
-        val spinner2: Spinner = view.clothingStyle_spinner
+        ).also { adapter ->
+            //Allows the Spinners to modify their appearance and size using the
+            // "layout/spinner_text_settings.xml" file.
+            adapter.setDropDownViewResource(R.layout.spinner_text_settings)
+        }
+        clothingTypeSpinner.adapter = clothingType_adapter
+
+        /**
+         * **************** CLOTHING STYLE Spinner AND Adapter *********************
+         */
+        val clothingStyleSpinner: Spinner = view.clothingStyle_spinner
         val topstyle = resources.getStringArray(R.array.top_style)
         var styleChild_adapter = ArrayAdapter.createFromResource(
             requireContext(),
             R.array.top_style,
             android.R.layout.simple_spinner_item
-        )
-        spinner2.adapter = styleChild_adapter
-        val spinner3: Spinner = view.clothingColor_Spinner
-        val color = resources.getStringArray(R.array.colors)
-        val color_adapter = ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.colors,
-            android.R.layout.simple_spinner_item
-        )
-        spinner3.adapter = color_adapter
+        ).also { adapter ->
+            //Allows the Spinners to modify their appearance and size using the
+            // "layout/spinner_text_settings.xml" file.
+            adapter.setDropDownViewResource(R.layout.spinner_text_settings)
+        }
+        clothingStyleSpinner.adapter = styleChild_adapter
 
-        spinner.onItemSelectedListener = object :
+        /**
+         * Clothing Type AND Clothing Style Item Selection Logic
+         * Style Options change with Clothing Type Selections
+         */
+
+        clothingTypeSpinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
@@ -173,43 +192,76 @@ class AddFragment : Fragment() {
                             requireContext(),
                             R.array.top_style,
                             android.R.layout.simple_spinner_item
-                        )
-                        spinner2.adapter = styleChild_adapter
+                        ).also { adapter ->
+                            //Allows the Spinners to modify their appearance and size using the
+                            // "layout/spinner_text_settings.xml" file.
+                            adapter.setDropDownViewResource(R.layout.spinner_text_settings)
+                        }
+                        clothingStyleSpinner.adapter = styleChild_adapter
                     }
                     1 -> {
                         styleChild_adapter = ArrayAdapter.createFromResource(
                             requireContext(),
                             R.array.bottom_style,
                             android.R.layout.simple_spinner_item
-                        )
-                        spinner2.adapter = styleChild_adapter
+                        ).also { adapter ->
+                                //Allows the Spinners to modify their appearance and size using the
+                                // "layout/spinner_text_settings.xml" file.
+                                adapter.setDropDownViewResource(R.layout.spinner_text_settings)
+                            }
+                        clothingStyleSpinner.adapter = styleChild_adapter
                     }
                     2 -> {
                         styleChild_adapter = ArrayAdapter.createFromResource(
                             requireContext(),
                             R.array.shoes_style,
                             android.R.layout.simple_spinner_item
-                        )
-                        spinner2.adapter = styleChild_adapter
+                        ).also { adapter ->
+                            //Allows the Spinners to modify their appearance and size using the
+                            // "layout/spinner_text_settings.xml" file.
+                            adapter.setDropDownViewResource(R.layout.spinner_text_settings)
+                        }
+                        clothingStyleSpinner.adapter = styleChild_adapter
                     }
                     3 -> {
                         styleChild_adapter = ArrayAdapter.createFromResource(
                             requireContext(),
                             R.array.outerwear_style,
                             android.R.layout.simple_spinner_item
-                        )
-                        spinner2.adapter = styleChild_adapter
+                        ).also { adapter ->
+                            //Allows the Spinners to modify their appearance and size using the
+                            // "layout/spinner_text_settings.xml" file.
+                            adapter.setDropDownViewResource(R.layout.spinner_text_settings)
+                        }
+                        clothingStyleSpinner.adapter = styleChild_adapter
                     }
-
                 }
             }
-
             override fun onNothingSelected(parent: AdapterView<*>) {
                 // write code to perform some action
             }
         }
 
-        spinner3.onItemSelectedListener = object :
+        /**
+         * **************** CLOTHING COLOR Spinner and Adapter *********************
+         */
+        val clothingColorSpinner: Spinner = view.clothingColor_Spinner
+        val color = resources.getStringArray(R.array.colors)
+        val color_adapter = ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.colors,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            //Allows the Spinners to modify their appearance and size using the
+            // "layout/spinner_text_settings.xml" file.
+            adapter.setDropDownViewResource(R.layout.spinner_text_settings)
+        }
+        clothingColorSpinner.adapter = color_adapter
+
+        /**
+         * **************** CLOTHING COLOR Selection Logic *********************
+         */
+        clothingColorSpinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
@@ -228,7 +280,7 @@ class AddFragment : Fragment() {
         }
 
         /**
-         * Spinner for Brand options
+         * **************** CLOTHING BRAND Spinner and Adapter *********************
          */
         val brandSpinner: Spinner = view.clothingBrand_spinner
         val brand = resources.getStringArray(R.array.brands)
@@ -236,7 +288,11 @@ class AddFragment : Fragment() {
             requireContext(),
             R.array.brands,
             android.R.layout.simple_spinner_item
-        )
+        ).also { adapter ->
+            //Allows the Spinners to modify their appearance and size using the
+            // "layout/spinner_text_settings.xml" file.
+            adapter.setDropDownViewResource(R.layout.spinner_text_settings)
+        }
         brandSpinner.adapter = brandAdapter
 
         brandSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -250,7 +306,7 @@ class AddFragment : Fragment() {
         }
 
         /**
-         * Spinner for Theme options
+         * **************** CLOTHING THEME Spinner and Adapter *********************
          */
         val themeSpinner: Spinner = view.clothingTheme_spinner
         val themes = resources.getStringArray(R.array.themes)
@@ -258,7 +314,11 @@ class AddFragment : Fragment() {
             requireContext(),
             R.array.themes,
             android.R.layout.simple_spinner_item
-        )
+        ).also { adapter ->
+            //Allows the Spinners to modify their appearance and size using the
+            // "layout/spinner_text_settings.xml" file.
+            adapter.setDropDownViewResource(R.layout.spinner_text_settings)
+        }
         themeSpinner.adapter = themeAdapter
 
         themeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -271,7 +331,7 @@ class AddFragment : Fragment() {
         }
 
         /**
-         * Choose Date Added Button
+         * **************** DATE ADDED Selection Dialog *********************
          */
         //DatePicker Fragment called from the button labeled on the XML file.
         view.dateAdded_button.setOnClickListener {
@@ -288,7 +348,27 @@ class AddFragment : Fragment() {
             //This is necessary to display the calendar fragment on the current view.
             datePicker.show()
         }
+
+
+
         return view
+    }
+
+    /**
+     * ************ END OF VIEW  -- Further Down are functions used from buttons and listeners. *******
+     */
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        //Call the menu you want to use
+        inflater.inflate(R.menu.add_clothing_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // If item (Add button) is selected call InsertToDatabase()
+        if (item.itemId == R.id.add_clothing_button) {
+            insertDataToDatabase()
+        }
+        return super.onOptionsItemSelected(item)
     }
     // this is the activity for running the camera or gallery action to set the photo inside imageView
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -337,13 +417,20 @@ class AddFragment : Fragment() {
     }
 
     // Only used to print the format of Date into a String for users to read.
-    fun toSimpleString(date: Date?) = with(date ?: Date()){
+    private fun toSimpleString(date: Date?) = with(date ?: Date()){
         /**
          * This format can be changed. Use the link below to see the docs.
          * Scroll down to "Date and Time Pattern" Table
          * https://developer.android.com/reference/kotlin/java/text/SimpleDateFormat
          */
         SimpleDateFormat("EEE, MMM d, yyyy").format(this)
+    }
+
+    private fun checkCameraPermission() {
+        if (ContextCompat.checkSelfPermission(requireContext(), CAMERA) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(CAMERA), REQUEST_PERMISSION)
+        }
     }
 
     // this is the function to create the path file for the image that gets called in camera

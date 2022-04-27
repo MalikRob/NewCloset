@@ -26,6 +26,7 @@ interface ClothingDao {
     @Query("SELECT * FROM Clothing WHERE type='Top' ORDER BY id ASC")
     fun selectClothingTops(): LiveData<List<Clothing>>
 
+    //Called in ListFragment Searchbar. Queries Clothing Type or Clothing Color.
     @Query("SELECT * FROM Clothing WHERE type LIKE :searchQuery OR color LIKE :searchQuery")
     fun searchDatabase(searchQuery: String): LiveData<List<Clothing>>
 

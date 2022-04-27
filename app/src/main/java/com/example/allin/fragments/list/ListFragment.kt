@@ -26,6 +26,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener{
     private lateinit var mClothingViewModel: ClothingViewModel
     var adapter = ListAdapter()
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,21 +53,31 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener{
             findNavController().navigate(R.id.action_clothingListFragment_to_addClothingFragment)
         }
 
-        //Add menu
+        //Add menu, See Apps Top Bar Menu Functions for details.
         setHasOptionsMenu(true)
 
         return view
     }
 
+    /**
+     * Apps Top Bar Menu is handled below.
+     */
+
+    // Creates the View for the Menu. Two buttons Search and Delete currently.
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.search_menu, menu)
         val search = menu.findItem(R.id.menu_search)
         val searchView = search?.actionView as? SearchView
+        // Modifies Keyboard Menu Options.
+        searchView?.imeOptions
+        // Creates a Submit Button on Search Menu NOT THE KEYBOARD ONE
         searchView?.isSubmitButtonEnabled = true
-        searchView?.setOnQueryTextListener(this)
 
+        //This allows user to search Query from Database
+        searchView?.setOnQueryTextListener(this)
     }
 
+    // When User selects the Delete Button it makes a call to the DB DELETE Query
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_delete) {
             deleteAllUsers()
@@ -74,6 +85,34 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener{
         return super.onOptionsItemSelected(item)
     }
 
+    //When Query Submit button is pressed. Changes are confirmed
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if(query != null){
+            searchDatabase(query)
+        }
+        return false
+    }
+    // Search Menu also changes live while searching DB.
+    override fun onQueryTextChange(newText: String?): Boolean {
+        if(newText != null){
+            searchDatabase(newText)
+        }
+        return true
+    }
+
+    // User Input is passed in as parameter to search DB.
+    private fun searchDatabase(query: String){
+        val searchQuery = "%$query%"
+        // See ClothingDao for SQLite Query "fun searchDatabase(searchQuery: String)"
+        mClothingViewModel.searchDatabase(searchQuery).observe(this
+        ) { list ->
+            list.let {
+                adapter.setData(it)
+            }
+        }
+    }
+
+    // Deletes Everything From the list. Prompts the user to make changes to Delete.
     private fun deleteAllUsers() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes") { _, _ ->
@@ -89,32 +128,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener{
         builder.setMessage("Are you sure you want to delete everything?")
         builder.create().show()
     }
-
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        if(query != null){
-            searchDatabase(query)
-        }
-        return true
-    }
-
-    override fun onQueryTextChange(newText: String?): Boolean {
-        if(newText != null){
-            searchDatabase(newText)
-        }
-        return true
-    }
-    private fun searchDatabase(query: String){
-        val searchQuery = "%$query%"
-
-        mClothingViewModel.searchDatabase(searchQuery).observe(this
-        ) { list ->
-            list.let {
-                adapter.setData(it)
-            }
-        }
-    }
-
 }
+
 
 
 

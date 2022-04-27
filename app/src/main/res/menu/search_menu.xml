@@ -7,7 +7,7 @@
         android:title="search"
         android:iconTint="@color/white"
         android:icon="@drawable/ic_baseline_search_24"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         tools:targetApi="o" />
 
