@@ -98,6 +98,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="image path"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"
