@@ -1,11 +1,11 @@
 package com.example.allin.fragments.add
 
 import android.Manifest.permission.CAMERA
+import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -13,6 +13,10 @@ import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.*
 import android.widget.*
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.contract.ActivityResultContracts.GetContent
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -49,7 +53,7 @@ class AddFragment : Fragment() {
     private lateinit var photoView: ImageView
     private lateinit var imageGallery: ImageButton
     private lateinit var captureImage: ImageButton
-    var uri: Uri? = null
+    var imageuri: Uri? = null
 
 
     val calendar = Calendar.getInstance()
@@ -110,6 +114,7 @@ class AddFragment : Fragment() {
                 }
             }
         }
+<<<<<<< Updated upstream
         /**
          * Does not work with Permission settings at the moment. When user selects photo from gallery and closes app. App will not reopen
          */
@@ -118,26 +123,41 @@ class AddFragment : Fragment() {
 
 
             val packageManager: PackageManager = requireActivity().packageManager
+=======
+>>>>>>> Stashed changes
 
-            val pickImage = Intent (Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
 
-            val resolvedActivity: ResolveInfo? = packageManager.resolveActivity(pickImage,PackageManager.MATCH_DEFAULT_ONLY)
 
-            if (resolvedActivity == null){
-                isEnabled = false
-            }
-            //New Addition
-            setOnClickListener {
-                Intent(Intent.ACTION_OPEN_DOCUMENT).also { intent ->
-                    intent.type = "image/*"
-                }
+                imageGallery.apply {
 
+
+                    val selectImageFromGalleryResult = registerForActivityResult(
+                        ActivityResultContracts.OpenDocument()
+                    ) { Uri ->
+
+
+                            imageuri= Uri
+                        photoView.setImageURI(imageuri)
+
+                    }
+
+                    fun selectImageFromGallery() = selectImageFromGalleryResult.launch(arrayOf("image/*"))
+
+                            //New Addition
+                            setOnClickListener {
+                                    selectImageFromGallery()
+                            }
+                        }
+
+<<<<<<< Updated upstream
                 startActivityForResult(pickImage, PICK_IMAGE)
             }
         }
         */
         */
 
+=======
+>>>>>>> Stashed changes
 
 
         /**
@@ -374,14 +394,10 @@ class AddFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
-                uri = Uri.parse(currentPhotoPath)
-                clothing_item_photo.setImageURI(uri)
+                imageuri = Uri.parse(currentPhotoPath)
+                clothing_item_photo.setImageURI(imageuri)
             }
-            else if (requestCode == PICK_IMAGE) {
-                uri = data?.getData()
-                clothing_item_photo.setImageURI(uri)
 
-            }
         }
     }
 
@@ -393,7 +409,8 @@ class AddFragment : Fragment() {
         val brand = clothingBrand_spinner.selectedItem.toString()
         val theme = clothingTheme_spinner.selectedItem.toString()
         // the value to store the image uri as a string into the database
-        val imageString = uri.toString()
+        val imageString = imageuri.toString()
+
         val description = description.text.toString()
 
 
@@ -445,4 +462,8 @@ class AddFragment : Fragment() {
 
 
 }
+
+
+
+
 
