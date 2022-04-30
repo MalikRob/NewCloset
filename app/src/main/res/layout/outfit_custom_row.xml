@@ -15,6 +15,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginHorizontal="50dp"
         android:padding="25dp"
         android:orientation="vertical">
         <!-- Image View Meant to Contain The Clothing Image -->
@@ -25,9 +26,11 @@
             android:scaleType="fitXY" />
 
         <TextView
-            android:id="@+id/outfit_name"
+            android:id="@+id/outfit_name_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="16sp"
             android:text="OutfitName" />
 
     </LinearLayout>

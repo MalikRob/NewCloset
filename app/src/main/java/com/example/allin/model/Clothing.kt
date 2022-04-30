@@ -1,7 +1,9 @@
 package com.example.allin.model
 
 import android.os.Parcelable
+import androidx.annotation.Nullable
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 import java.util.*
@@ -14,7 +16,13 @@ import java.util.*
  *
  */
 @Parcelize
-@Entity
+@Entity(foreignKeys = [
+    ForeignKey(entity = Outfit::class,
+        parentColumns = ["id"],
+        childColumns = ["outfitRefFK"]
+        )
+    ]
+)
 data class Clothing (
     //Sets all attributes and primary key
     @PrimaryKey(autoGenerate = true) val id: Int,
@@ -26,4 +34,5 @@ data class Clothing (
     val brand: String,
     val theme: String,
     val image: String,
+    @Nullable val outfitRefFK: Int
     ): Parcelable

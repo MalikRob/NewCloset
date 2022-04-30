@@ -68,6 +68,21 @@
         <action
             android:id="@+id/action_addOutfitFragment_to_outfitListFragment"
             app:destination="@id/outfitListFragment" />
+        <action
+            android:id="@+id/action_addOutfitFragment_to_clothingTopsList"
+            app:destination="@id/clothingTopsList" />
+        <argument
+            android:name="ClothingTop"
+            app:argType="com.example.allin.model.Clothing" />
+    </fragment>
+    <fragment
+        android:id="@+id/clothingTopsList"
+        android:name="com.example.allin.ClothingTopsList"
+        android:label="fragment_clothing_tops_list"
+        tools:layout="@layout/fragment_clothing_tops_list" >
+        <action
+            android:id="@+id/action_clothingTopsList_to_addOutfitFragment"
+            app:destination="@id/addOutfitFragment" />
     </fragment>
 
 </navigation>
