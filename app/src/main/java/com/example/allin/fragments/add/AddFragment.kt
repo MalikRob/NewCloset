@@ -1,6 +1,7 @@
 package com.example.allin.fragments.add
 
-import android.Manifest.permission.CAMERA
+import android.Manifest.permission.*
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
@@ -15,6 +16,7 @@ import android.view.*
 import android.widget.*
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.GetContent
 import androidx.core.app.ActivityCompat
@@ -32,6 +34,7 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 
 /**
@@ -54,26 +57,20 @@ class AddFragment : Fragment() {
     private lateinit var imageGallery: ImageButton
     private lateinit var captureImage: ImageButton
     var imageuri: Uri? = null
-
-
+    private lateinit var requestPermissionLauncher: ActivityResultLauncher<Intent>
+    private lateinit var captureImageLauncher: ActivityResultLauncher<Array<String>>
     val calendar = Calendar.getInstance()
     val year = calendar.get(Calendar.YEAR)
     val month = calendar.get(Calendar.MONTH)
     val day = calendar.get(Calendar.DAY_OF_MONTH)
     private var dateReturned = GregorianCalendar(year, month, day).time
 
-    // this is the permissions
-    override fun onResume() {
-        super.onResume()
-        checkCameraPermission()
-    }
-
-
     /**
      *  ADD FRAGMENT view using add_fragment.xml layout --
      *
      *  ONLY BUTTONS AND MENUS DEFINED HERE. Any Functions should be displayed outside of the view code block
      */
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,72 +89,98 @@ class AddFragment : Fragment() {
         mClothingViewModel = ViewModelProvider(this).get(ClothingViewModel::class.java)
 
         //these are the camera action buttons when on clicked what they are doing starts to run
+
+
         captureImage.apply {
             val packageManager: PackageManager = requireActivity().packageManager
 
-            setOnClickListener {
-                Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { intent ->
-                    intent.resolveActivity(packageManager)?.also {
+            val captureImageLauncher =
+                registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                    try {
+                        imageuri = Uri.parse(currentPhotoPath)
+                        photoView.setImageURI(imageuri)
+                    } catch (ignored: Exception) {
+                    }
+                }
+
+            fun launchCameraIntent() {
+                Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+                    // Ensure that there's a camera activity to handle the intent
+                    takePictureIntent.resolveActivity(packageManager)?.also {
+                        // Create the File where the photo should go
                         val photoFile: File? = try {
                             createCapturedPhoto()
                         } catch (ex: IOException) {
-                            // If there is error while creating the File, it will be null
+
                             null
                         }
+                        // Continue only if the File was successfully created
                         photoFile?.also {
-                            val photoURI = FileProvider.getUriForFile(requireActivity(), "com.example.allin.provider", it )
-                            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                            startActivityForResult(intent, REQUEST_IMAGE_CAPTURE)
+                            val photoURI: Uri = FileProvider.getUriForFile(
+                                requireActivity(),
+                                "com.example.allin.provider",
+                                it
+                            )
+                            takePictureIntent.putExtra(
+                                MediaStore.EXTRA_OUTPUT,
+                                photoURI
+                            )
+                            captureImageLauncher.launch(takePictureIntent)
                         }
-
                     }
                 }
             }
+
+            val requestPermissionLauncher = registerForActivityResult(
+                ActivityResultContracts.RequestMultiplePermissions()
+            ) { isGranted: Map<String, Boolean> ->
+                if (isGranted.containsValue(false)) {
+                    //All Permissions are not Granted
+                    let {
+                        Toast.makeText(
+                            requireContext(),
+                            "Permissions Not Granted",
+                            Toast.LENGTH_LONG
+                        )
+                    }
+                } else {
+                    //All Permissions are Granted
+                    launchCameraIntent()
+                }
+            }
+
+
+            setOnClickListener {
+                val requestedPermissions = arrayOf(
+                    WRITE_EXTERNAL_STORAGE,
+                    CAMERA, READ_EXTERNAL_STORAGE
+                )
+                requestPermissionLauncher.launch(requestedPermissions)
+            }
         }
-<<<<<<< Updated upstream
         /**
          * Does not work with Permission settings at the moment. When user selects photo from gallery and closes app. App will not reopen
          */
-        /*
+
+
         imageGallery.apply {
 
 
-            val packageManager: PackageManager = requireActivity().packageManager
-=======
->>>>>>> Stashed changes
+            val selectImageFromGalleryResult = registerForActivityResult(
+                ActivityResultContracts.OpenDocument()
+            ) { Uri ->
+                imageuri = Uri
+                photoView.setImageURI(imageuri)
 
+            }
 
+            fun selectImageFromGallery() = selectImageFromGalleryResult.launch(arrayOf("image/*"))
 
-                imageGallery.apply {
-
-
-                    val selectImageFromGalleryResult = registerForActivityResult(
-                        ActivityResultContracts.OpenDocument()
-                    ) { Uri ->
-
-
-                            imageuri= Uri
-                        photoView.setImageURI(imageuri)
-
-                    }
-
-                    fun selectImageFromGallery() = selectImageFromGalleryResult.launch(arrayOf("image/*"))
-
-                            //New Addition
-                            setOnClickListener {
-                                    selectImageFromGallery()
-                            }
-                        }
-
-<<<<<<< Updated upstream
-                startActivityForResult(pickImage, PICK_IMAGE)
+            //New Addition
+            setOnClickListener {
+                selectImageFromGallery()
             }
         }
-        */
-        */
-
-=======
->>>>>>> Stashed changes
 
 
         /**
@@ -225,10 +248,10 @@ class AddFragment : Fragment() {
                             R.array.bottom_style,
                             android.R.layout.simple_spinner_item
                         ).also { adapter ->
-                                //Allows the Spinners to modify their appearance and size using the
-                                // "layout/spinner_text_settings.xml" file.
-                                adapter.setDropDownViewResource(R.layout.spinner_text_settings)
-                            }
+                            //Allows the Spinners to modify their appearance and size using the
+                            // "layout/spinner_text_settings.xml" file.
+                            adapter.setDropDownViewResource(R.layout.spinner_text_settings)
+                        }
                         clothingStyleSpinner.adapter = styleChild_adapter
                     }
                     2 -> {
@@ -257,6 +280,7 @@ class AddFragment : Fragment() {
                     }
                 }
             }
+
             override fun onNothingSelected(parent: AdapterView<*>) {
                 // write code to perform some action
             }
@@ -290,7 +314,7 @@ class AddFragment : Fragment() {
                 id: Long
             ) {
 
-               val colorEntry = parent.getItemAtPosition(position).toString()
+                val colorEntry = parent.getItemAtPosition(position).toString()
                 //Toast.makeText(requireContext(), color[position], Toast.LENGTH_SHORT).show()
             }
 
@@ -316,10 +340,16 @@ class AddFragment : Fragment() {
         brandSpinner.adapter = brandAdapter
 
         brandSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 val brandEntry = parent.getItemAtPosition(position).toString()
                 //Toast.makeText(requireContext(), brand[position], Toast.LENGTH_SHORT).show()
             }
+
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 //No action determined yet for no selection.
             }
@@ -342,10 +372,16 @@ class AddFragment : Fragment() {
         themeSpinner.adapter = themeAdapter
 
         themeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 val themeEntry = parent.getItemAtPosition(position).toString()
                 //Toast.makeText(requireContext(), themes[position], Toast.LENGTH_SHORT).show()
             }
+
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         }
@@ -356,14 +392,17 @@ class AddFragment : Fragment() {
         //DatePicker Fragment called from the button labeled on the XML file.
         view.dateAdded_button.setOnClickListener {
             val datePicker = DatePickerDialog(
-                requireActivity(), DatePickerDialog.OnDateSetListener {
-                        _: DatePicker, year: Int, month: Int, day: Int ->
+                requireActivity(),
+                DatePickerDialog.OnDateSetListener { _: DatePicker, year: Int, month: Int, day: Int ->
 
                     dateReturned = GregorianCalendar(year, month, day).time
                     //Toast.makeText(requireContext(), "$dateReturned", Toast.LENGTH_SHORT).show()
                     dateAdded_button.text = toSimpleString(dateReturned)
 
-                }, year, month, day
+                },
+                year,
+                month,
+                day
             )
             //This is necessary to display the calendar fragment on the current view.
             datePicker.show()
@@ -390,16 +429,7 @@ class AddFragment : Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
-    // this is the activity for running the camera or gallery action to set the photo inside imageView
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_IMAGE_CAPTURE) {
-                imageuri = Uri.parse(currentPhotoPath)
-                clothing_item_photo.setImageURI(imageuri)
-            }
 
-        }
-    }
 
     //Puts entered data into a variable
     private fun insertDataToDatabase() {
@@ -415,9 +445,19 @@ class AddFragment : Fragment() {
 
 
         //Checks that the fields aren't empty
-        if(inputCheck(type, color)){
+        if (inputCheck(type, color)) {
             //Create Clothing Object
-            val clothing = Clothing(0, type, color, style, description, dateReturned, brand, theme, imageString)
+            val clothing = Clothing(
+                0,
+                type,
+                color,
+                style,
+                description,
+                dateReturned,
+                brand,
+                theme,
+                imageString
+            )
 
             //Add data to database
             mClothingViewModel.addClothing(clothing)
@@ -425,16 +465,18 @@ class AddFragment : Fragment() {
             //Navigate Back
             findNavController().navigate(R.id.action_addClothingFragment_to_clothingListFragment)
         } else {
-            Toast.makeText(requireContext(), "Please Fill Out All Fields.", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "Please Fill Out All Fields.", Toast.LENGTH_LONG)
+                .show()
         }
     }
 
-    private fun inputCheck (type: String, color: String): Boolean {
+    private fun inputCheck(type: String, color: String): Boolean {
         return !(TextUtils.isEmpty(type) && TextUtils.isEmpty(color))
     }
 
     // Only used to print the format of Date into a String for users to read.
-    private fun toSimpleString(date: Date?) = with(date ?: Date()){
+    @SuppressLint("SimpleDateFormat")
+    private fun toSimpleString(date: Date?) = with(date ?: Date()) {
         /**
          * This format can be changed. Use the link below to see the docs.
          * Scroll down to "Date and Time Pattern" Table
@@ -443,12 +485,6 @@ class AddFragment : Fragment() {
         SimpleDateFormat("EEE, MMM d, yyyy").format(this)
     }
 
-    private fun checkCameraPermission() {
-        if (ContextCompat.checkSelfPermission(requireContext(), CAMERA) != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(CAMERA), REQUEST_PERMISSION)
-        }
-    }
 
     // this is the function to create the path file for the image that gets called in camera
     @Throws(IOException::class)
@@ -462,6 +498,7 @@ class AddFragment : Fragment() {
 
 
 }
+
 
 
 
