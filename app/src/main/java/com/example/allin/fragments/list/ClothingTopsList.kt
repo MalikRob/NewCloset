@@ -8,11 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.allin.model.Clothing
-import com.example.allin.viewmodel.ClothingViewModel
+import com.example.allin.viewmodel.ClosetViewModel
 import kotlinx.android.synthetic.main.fragment_clothing_tops_list.view.*
 import kotlinx.android.synthetic.main.grid_clothing_item.view.*
 
@@ -22,7 +21,7 @@ class ClothingTopsList : Fragment() {
     /**
      * Use this to get the query form Database of Tops
      */
-    private lateinit var mClothingViewModel: ClothingViewModel
+    private lateinit var mClosetViewModel: ClosetViewModel
     var adapter = ClothingTopsAdapter()
 
     //This class should only display Clothing Tops in a RecyclerView
@@ -40,8 +39,8 @@ class ClothingTopsList : Fragment() {
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         //Assign the correct data of Tops to the adapter of the RecyclerView
-        mClothingViewModel = ViewModelProvider(this).get(ClothingViewModel::class.java)
-        mClothingViewModel.selectClothingTops().observe(viewLifecycleOwner, Observer { tops ->
+        mClosetViewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
+        mClosetViewModel.selectClothingTops().observe(viewLifecycleOwner, Observer { tops ->
             adapter.setData(tops)
             }
         )

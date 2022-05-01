@@ -1,7 +1,6 @@
 package com.example.allin.fragments.list
 
 import android.app.AlertDialog
-import android.content.ClipData
 import android.os.Bundle
 import android.view.*
 import android.view.Menu
@@ -13,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.allin.R
-import com.example.allin.viewmodel.ClothingViewModel
+import com.example.allin.viewmodel.ClosetViewModel
 import kotlinx.android.synthetic.main.fragment_clothing_list.view.*
 
 /**
@@ -23,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_clothing_list.view.*
  */
 class ListFragment : Fragment(), SearchView.OnQueryTextListener{
 
-    private lateinit var mClothingViewModel: ClothingViewModel
+    private lateinit var mClosetViewModel: ClosetViewModel
     var adapter = ListAdapter()
 
 
@@ -42,8 +41,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener{
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         //ClothingViewModel
-        mClothingViewModel = ViewModelProvider(this).get(ClothingViewModel::class.java)
-        mClothingViewModel.readAllData.observe(viewLifecycleOwner, Observer { clothing ->
+        mClosetViewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
+        mClosetViewModel.readAllClothingData.observe(viewLifecycleOwner, Observer { clothing ->
             adapter.setData(clothing)
         })
 
@@ -104,7 +103,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener{
     private fun searchDatabase(query: String){
         val searchQuery = "%$query%"
         // See ClothingDao for SQLite Query "fun searchDatabase(searchQuery: String)"
-        mClothingViewModel.searchDatabase(searchQuery).observe(this
+        mClosetViewModel.searchDatabase(searchQuery).observe(this
         ) { list ->
             list.let {
                 adapter.setData(it)
@@ -116,7 +115,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener{
     private fun deleteAllUsers() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes") { _, _ ->
-            mClothingViewModel.deleteAllClothing()
+            mClosetViewModel.deleteAllClothing()
             Toast.makeText(
                 requireContext(),
                 "Successfully removed everything.",

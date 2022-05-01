@@ -10,12 +10,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.allin.R
-import com.example.allin.viewmodel.OutfitViewModel
+import com.example.allin.viewmodel.ClosetViewModel
 import kotlinx.android.synthetic.main.fragment_outfit_list.view.*
 
 class OutfitListFragment : Fragment() {
 
-    private lateinit var mClothingViewModel: OutfitViewModel
+    private lateinit var mClosetViewModel: ClosetViewModel
     private var adapter = OutfitAdapter()
 
     override fun onCreateView(
@@ -33,8 +33,8 @@ class OutfitListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         //OutfitViewModel
-        mClothingViewModel = ViewModelProvider(this).get(OutfitViewModel::class.java)
-        mClothingViewModel.readAllData.observe(viewLifecycleOwner, Observer { clothing ->
+        mClosetViewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
+        mClosetViewModel.readAllOutfitData.observe(viewLifecycleOwner, Observer { clothing ->
             adapter.setData(clothing)
         })
 

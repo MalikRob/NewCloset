@@ -15,15 +15,10 @@ import java.util.*
  */
 @Parcelize
 @Entity
-data class Outfit constructor (
+data class Outfit(
 
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey
+    @ColumnInfo(name = "outfitId")val id: Long?=null,
     var outfitName: String,
 
-): Parcelable {
-    @Ignore var clothingItem: List<Clothing>? = null
-}
-
-// With the Ignore Statement, make a call to add a new outfit that only takes in the Outfitname.
-// Next, create the Outfit, then use the addOutfit(outfit: Outfit, clothing: List<Clothing>),
-// To add clothing values to that list as well.
+): Parcelable

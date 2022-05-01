@@ -5,20 +5,25 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.allin.data.ClothingDatabase
-import com.example.allin.repository.ClothingRepository
+import com.example.allin.repository.ClosetRepository
 import com.example.allin.model.Clothing
+import com.example.allin.model.Outfit
+import com.example.allin.model.OutfitClothingTable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 //Communication between the repository and the UI
-class ClothingViewModel(application: Application): AndroidViewModel(application) {
-    val readAllData: LiveData<List<Clothing>>
-    private val repository: ClothingRepository
+class ClosetViewModel(application: Application): AndroidViewModel(application) {
+    //Initialize any lists that the functions below init() can use
+    val readAllClothingData: LiveData<List<Clothing>>
+    val readAllOutfitData: LiveData<List<Outfit>>
+    private val repository: ClosetRepository
 
     init {
-        val clothingDao = ClothingDatabase.getDatabase(application).clothingDao()
-        repository = ClothingRepository(clothingDao)
-        readAllData = repository.readAllData
+        val clothingDao = ClothingDatabase.getDatabase(application).getClosetDao()
+        repository = ClosetRepository(clothingDao)
+        readAllClothingData = repository.readAllClothingData
+        readAllOutfitData = repository.readAllOutfitData
     }
 
     fun addClothing(clothing: Clothing){
@@ -51,6 +56,26 @@ class ClothingViewModel(application: Application): AndroidViewModel(application)
 
     fun selectClothingTops(): LiveData<List<Clothing>>{
         return repository.selectAllTops()
+    }
+
+    /**
+     * Outfit Calls are here
+     */
+
+    fun addOutfit(outfit: Outfit){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addOutfit(outfit)
+        }
+    }
+
+    /**
+     * Outfit With Clothing calls are here
+     */
+
+    fun addOutfitWithClothingMap(outfitWithClothingTable: OutfitClothingTable) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addOutfitWithClothingMap(outfitWithClothingTable)
+        }
     }
 
 }

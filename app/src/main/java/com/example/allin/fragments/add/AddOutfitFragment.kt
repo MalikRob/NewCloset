@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.allin.R
 import com.example.allin.model.Outfit
-import com.example.allin.viewmodel.OutfitViewModel
+import com.example.allin.viewmodel.ClosetViewModel
 import kotlinx.android.synthetic.main.fragment_add_outfit.*
 import kotlinx.android.synthetic.main.fragment_add_outfit.view.*
 
@@ -26,7 +26,7 @@ class AddOutfitFragment : Fragment() {
     private lateinit var outfitName: EditText
     private lateinit var addOutfitBtn: Button
 
-    private lateinit var mOutfitViewModel: OutfitViewModel
+    private lateinit var mClosetViewModel: ClosetViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +36,7 @@ class AddOutfitFragment : Fragment() {
 
         outfitDirections()
 
-        mOutfitViewModel = ViewModelProvider(this).get(OutfitViewModel::class.java)
+        mClosetViewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
 
         outfitName = view.findViewById(R.id.outfit_name_et)
         addOutfitBtn = view.findViewById(R.id.add_new_outfit_btn)
@@ -56,7 +56,7 @@ class AddOutfitFragment : Fragment() {
     private fun insertNewOutfit() {
         val name = outfit_name_et.text.toString()
         val outfit = Outfit(0, name)
-        mOutfitViewModel.addOutfit(outfit)
+        mClosetViewModel.addOutfit(outfit)
 
         //Once the value is added to the Outfit Table, You want to bind the outfitname for the next page.
         //action is created, now navigate

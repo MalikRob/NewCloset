@@ -4,7 +4,7 @@ import androidx.room.Embedded
 import androidx.room.Junction
 import androidx.room.Relation
 import com.example.allin.model.Clothing
-import com.example.allin.model.ClothingOutfitCrossRef
+import com.example.allin.model.OutfitClothingTable
 import com.example.allin.model.Outfit
 
 /**
@@ -20,12 +20,18 @@ import com.example.allin.model.Outfit
  * Grab this list to see each Clothing Item that is apart of it.
  */
 
-data class OutfitsWithClothing(
-    @Embedded val Outfit: Outfit,
+data class OutfitsWithClothingList(
+    @Embedded
+    val Outfit: Outfit,
     @Relation(
-        parentColumn = "outfitID",
-        entityColumn = "clothingID",
-        associateBy = Junction(ClothingOutfitCrossRef::class)
+        entity = Clothing::class,
+        parentColumn = "outfitId",
+        entityColumn = "clothingId",
+        associateBy = Junction(
+            value = OutfitClothingTable::class,
+            parentColumn = "outfitIdRef",
+            entityColumn = "clothingIdRef"
+        )
     )
-    val clothes: List<Clothing>
+    val clothingList: List<Clothing>
 )

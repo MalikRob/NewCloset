@@ -2,8 +2,6 @@ package com.example.allin.fragments.add
 
 import android.Manifest.permission.*
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -14,20 +12,15 @@ import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.*
 import android.widget.*
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.contract.ActivityResultContracts.GetContent
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.allin.R
 import com.example.allin.model.Clothing
-import com.example.allin.viewmodel.ClothingViewModel
+import com.example.allin.viewmodel.ClosetViewModel
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_add.view.*
 import java.io.File
@@ -48,7 +41,7 @@ class AddFragment : Fragment() {
      ******* Declare Variables, Buttons, etc. that are used throughout this file. *********
      */
 
-    private lateinit var mClothingViewModel: ClothingViewModel
+    private lateinit var mClosetViewModel: ClosetViewModel
     lateinit var currentPhotoPath: String
     private val REQUEST_IMAGE_CAPTURE = 1
     private val PICK_IMAGE = 2
@@ -86,7 +79,7 @@ class AddFragment : Fragment() {
         setHasOptionsMenu(true)
 
         //Takes the entered data
-        mClothingViewModel = ViewModelProvider(this).get(ClothingViewModel::class.java)
+        mClosetViewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
 
         //these are the camera action buttons when on clicked what they are doing starts to run
 
@@ -447,8 +440,7 @@ class AddFragment : Fragment() {
         //Checks that the fields aren't empty
         if (inputCheck(type, color)) {
             //Create Clothing Object
-            val clothing = Clothing(
-                0,
+            val clothing = Clothing(null,
                 type,
                 color,
                 style,
@@ -456,12 +448,11 @@ class AddFragment : Fragment() {
                 dateReturned,
                 brand,
                 theme,
-                imageString,
-                null
+                imageString
             )
 
             //Add data to database
-            mClothingViewModel.addClothing(clothing)
+            mClosetViewModel.addClothing(clothing)
             Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
             //Navigate Back
             findNavController().navigate(R.id.action_addClothingFragment_to_clothingListFragment)

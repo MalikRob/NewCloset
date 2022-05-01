@@ -4,7 +4,7 @@ import androidx.room.Embedded
 import androidx.room.Junction
 import androidx.room.Relation
 import com.example.allin.model.Clothing
-import com.example.allin.model.ClothingOutfitCrossRef
+import com.example.allin.model.OutfitClothingTable
 import com.example.allin.model.Outfit
 
 /**
@@ -19,12 +19,18 @@ import com.example.allin.model.Outfit
  * That way the user can view them.
  */
 
-data class ClothingWithOutfits(
-    @Embedded val clothing: Clothing,
+data class ClothingWithOutfitsList(
+    @Embedded
+    val clothing: Clothing,
     @Relation(
-        parentColumn = "clothingID",
-        entityColumn = "outfitID",
-        associateBy = Junction(ClothingOutfitCrossRef::class)
+        entity = Outfit::class,
+        parentColumn = "clothingId",
+        entityColumn = "outfitId",
+        associateBy = Junction(
+            value = OutfitClothingTable::class,
+            parentColumn = "clothingIdRef",
+            entityColumn = "outfitIdRef"
+        )
     )
-    val outfits: List<Outfit>
+    val outfitList: List<Outfit>
 )

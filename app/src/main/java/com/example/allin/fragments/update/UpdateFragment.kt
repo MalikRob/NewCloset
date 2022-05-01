@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.allin.R
 import com.example.allin.model.Clothing
-import com.example.allin.viewmodel.ClothingViewModel
+import com.example.allin.viewmodel.ClosetViewModel
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_add.view.*
 import kotlinx.android.synthetic.main.fragment_update.*
@@ -32,7 +32,7 @@ class UpdateFragment : Fragment() {
     // To find the name in nav_graph.xml, go to Fragment on graph > Attributes Window > Name
     private val args by navArgs<UpdateFragmentArgs>()
 
-    private lateinit var mClothingViewModel: ClothingViewModel
+    private lateinit var mClosetViewModel: ClosetViewModel
 
     val calendar = Calendar.getInstance()
     val year = calendar.get(Calendar.YEAR)
@@ -47,7 +47,7 @@ class UpdateFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_update, container, false)
 
-        mClothingViewModel = ViewModelProvider(this).get(ClothingViewModel::class.java)
+        mClosetViewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
 
         val displayDate: Date = args.currentClothing.dateAdded
         toSimpleString(displayDate)
@@ -101,10 +101,10 @@ class UpdateFragment : Fragment() {
 
         if (inputCheck(type, color)) {
             //Create Clothing Object
-            val updatedClothing = Clothing(args.currentClothing.id, type, color,style, descrip, dateReturned, brand, theme,image2)
+            val updatedClothing = Clothing(args.currentClothing.clothingId, type, color,style, descrip, dateReturned, brand, theme,image2)
 
             //Update Current Clothing Object
-            mClothingViewModel.updateClothing(updatedClothing)
+            mClosetViewModel.updateClothing(updatedClothing)
             Toast.makeText(requireContext(), "Updated Successfully!", Toast.LENGTH_SHORT).show()
             //Navigate Back to Clothing List screen
             findNavController().navigate(R.id.action_updateClothingFragment_to_clothingListFragment)
@@ -131,7 +131,7 @@ class UpdateFragment : Fragment() {
     private fun deleteUser() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes") { _, _ ->
-            mClothingViewModel.deleteClothing(args.currentClothing)
+            mClosetViewModel.deleteClothing(args.currentClothing)
             Toast.makeText(
                 requireContext(),
                 "Successfully removed: ${args.currentClothing.type}",
