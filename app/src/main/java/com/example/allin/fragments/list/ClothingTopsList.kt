@@ -8,9 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
+import androidx.navigation.navArgument
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.allin.ClothingTopsListDirections.Companion.actionClothingTopsListToAddClothingToOutfits
 import com.example.allin.model.Clothing
+import com.example.allin.model.Outfit
 import com.example.allin.viewmodel.ClosetViewModel
 import kotlinx.android.synthetic.main.fragment_clothing_tops_list.view.*
 import kotlinx.android.synthetic.main.grid_clothing_item.view.*
@@ -18,11 +23,14 @@ import kotlinx.android.synthetic.main.grid_clothing_item.view.*
 
 class ClothingTopsList : Fragment() {
 
+    private val args by navArgs<ClothingTopsListArgs>()
     /**
      * Use this to get the query form Database of Tops
      */
     private lateinit var mClosetViewModel: ClosetViewModel
-    var adapter = ClothingTopsAdapter()
+    val outfit: Outfit = args.outfit
+    var adapter = ClothingTopsAdapter(outfit)
+
 
     //This class should only display Clothing Tops in a RecyclerView
     override fun onCreateView(
@@ -53,7 +61,7 @@ class ClothingTopsList : Fragment() {
 /**
  * This page consists of all code for the RecyclerView of Clothing Tops for selection only to add to outfits.
  */
-class ClothingTopsAdapter: RecyclerView.Adapter<ClothingTopsAdapter.MyViewHolder>() {
+class ClothingTopsAdapter(var outfit: Outfit) : RecyclerView.Adapter<ClothingTopsAdapter.MyViewHolder>() {
     private var clothingTopList = emptyList<Clothing>()
 
     inner class MyViewHolder(item: View): RecyclerView.ViewHolder(item){
@@ -75,9 +83,10 @@ class ClothingTopsAdapter: RecyclerView.Adapter<ClothingTopsAdapter.MyViewHolder
         holder.itemView.gl_clothing_brand.text = currentItem.brand
         holder.itemView.gl_clothing_item_photo.setImageURI( Uri.parse(currentItem.image))
         holder.itemView.rowLayout.setOnClickListener {
-            //Bind an action that goes back to the Add Outfit Page.
-            //val action = ClothingTopsListDirections.actionClothingTopsListToAddOutfitFragment(currentItem)
-            //holder.itemView.findNavController().navigate(action)
+            //Provide the user with instruction to select an Outfit
+            val action = actionClothingTopsListToAddClothingToOutfits(outfit,currentItem)
+            holder.itemView.findNavController().navigate(action)
+
         }
     }
 
@@ -89,4 +98,5 @@ class ClothingTopsAdapter: RecyclerView.Adapter<ClothingTopsAdapter.MyViewHolder
         this.clothingTopList = clothing
         notifyDataSetChanged()
     }
+
 }

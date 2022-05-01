@@ -25,7 +25,6 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener{
     private lateinit var mClosetViewModel: ClosetViewModel
     var adapter = ListAdapter()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

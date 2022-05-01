@@ -60,7 +60,7 @@ class AddOutfitFragment : Fragment() {
 
         //Once the value is added to the Outfit Table, You want to bind the outfitname for the next page.
         //action is created, now navigate
-        findNavController().navigate(AddOutfitFragmentDirections.actionAddOutfitFragmentToAddClothingToOutfits(outfit))
+        findNavController().navigate(AddOutfitFragmentDirections.actionAddOutfitFragmentToAddClothingToOutfits(outfit, null))
     }
 
     private fun outfitDirections() {
