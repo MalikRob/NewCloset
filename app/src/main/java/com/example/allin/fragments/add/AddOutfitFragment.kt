@@ -10,7 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.allin.R
-import com.example.allin.viewmodel.ClothingViewModel
+import com.example.allin.model.Outfit
+import com.example.allin.viewmodel.OutfitViewModel
 import kotlinx.android.synthetic.main.fragment_add_outfit.*
 import kotlinx.android.synthetic.main.fragment_add_outfit.view.*
 
@@ -22,55 +23,44 @@ import kotlinx.android.synthetic.main.fragment_add_outfit.view.*
 class AddOutfitFragment : Fragment() {
 
     //Define any buttons you have here, to help keep track of them.
+    private lateinit var outfitName: EditText
+    private lateinit var addOutfitBtn: Button
 
-    private lateinit var mClothingViewModel: ClothingViewModel
-
-    private lateinit var addOutfitTop: Button
-    private lateinit var addOutfitBottom: Button
-    private lateinit var addOutfitName: EditText
+    private lateinit var mOutfitViewModel: OutfitViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Set the view, allow options menu.
         val view = inflater.inflate(R.layout.fragment_add_outfit, container, false)
-        setHasOptionsMenu(true)
-        //As a new user enters the page, the directions will prompt them how to create an outfit.
+
         outfitDirections()
-        /**
-         *************** BELOW HERE WE ADD THE BUTTONS TO THE VIEW  ******************
-         */
 
-        mClothingViewModel = ViewModelProvider(this).get(ClothingViewModel::class.java)
-        addOutfitTop = view.findViewById(R.id.outfit_add_top_btn)
-        addOutfitBottom = view.findViewById(R.id.outfit_add_bot_btn)
-        addOutfitName = view.findViewById(R.id.outfit_name_et)
+        mOutfitViewModel = ViewModelProvider(this).get(OutfitViewModel::class.java)
 
-        //Set a listener for the Add Outfit Recyclerview.
-        addOutfitTop.setOnClickListener {
-            //When user clicks the button to add a new outfit, they'll be brought to a new page.
-            findNavController().navigate(R.id.action_addOutfitFragment_to_clothingTopsList)
+        outfitName = view.findViewById(R.id.outfit_name_et)
+        addOutfitBtn = view.findViewById(R.id.add_new_outfit_btn)
+
+        addOutfitBtn.setOnClickListener {
+            val string: String = outfitName.text.toString()
+            if((string.isNotEmpty())) {
+                Toast.makeText(requireContext(), "You must enter a new Outfit Name", Toast.LENGTH_SHORT).show()
+                insertNewOutfit()
+            } else {
+                Toast.makeText(requireContext(), "Enter an Outfit Name", Toast.LENGTH_SHORT).show()
+            }
         }
-
         return view
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        //Call the menu you want to use
-        inflater.inflate(R.menu.add_outfits_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // If item (Add button) is selected call InsertToDatabase()
-        if (item.itemId == R.id.add_clothing_button) {
-            insertNewOutfit()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     private fun insertNewOutfit() {
-        val outfitName = outfit_name_et.text.toString()
+        val name = outfit_name_et.text.toString()
+        val outfit = Outfit(0, name)
+        mOutfitViewModel.addOutfit(outfit)
+
+        //Once the value is added to the Outfit Table, You want to bind the outfitname for the next page.
+        //action is created, now navigate
+        findNavController().navigate(AddOutfitFragmentDirections.actionAddOutfitFragmentToAddClothingToOutfits(outfit))
     }
 
     private fun outfitDirections() {
@@ -81,10 +71,8 @@ class AddOutfitFragment : Fragment() {
         outfitHelp.setNegativeButton("No") { _, _ -> findNavController().navigate(R.id.action_addOutfitFragment_to_outfitListFragment)}
         outfitHelp.setTitle("Create New Outfit?")
         outfitHelp.setMessage("Follow the Steps Below:\n" +
-                "1. Add new outfit name\n" +
-                "2. Choose Outfit Top\n" +
-                "3. Click + button in upper Right corner\n")
-
+                "1. Enter A Name For Your New Outfit\n" +
+                "2. Click Submit When You Are Ready\n")
         outfitHelp.create().show()
     }
 

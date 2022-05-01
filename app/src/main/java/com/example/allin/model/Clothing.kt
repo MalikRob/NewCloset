@@ -1,9 +1,10 @@
 package com.example.allin.model
 
 import android.os.Parcelable
-import androidx.annotation.Nullable
+
 import androidx.room.Entity
 import androidx.room.ForeignKey
+
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 import java.util.*
@@ -23,16 +24,17 @@ import java.util.*
         )
     ]
 )
-data class Clothing (
+data class Clothing constructor (
     //Sets all attributes and primary key
     @PrimaryKey(autoGenerate = true) val id: Int,
-    val type: String,
-    val color: String,
-    val style: String,
-    val description: String,
-    val dateAdded: Date = Date(),
-    val brand: String,
-    val theme: String,
-    val image: String,
-    @Nullable val outfitRefFK: Int
-    ): Parcelable
+    var type: String?,
+    var color: String?,
+    var style: String?,
+    var description: String?,
+    var dateAdded: Date = Date(),
+    var brand: String?,
+    var theme: String?,
+    var image: String?,
+    var outfitRefFK: Int? = null
+
+): Parcelable

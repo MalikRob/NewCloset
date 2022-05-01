@@ -2,6 +2,7 @@ package com.example.allin.repository
 
 import androidx.lifecycle.LiveData
 import com.example.allin.data.OutfitDao
+import com.example.allin.model.Clothing
 import com.example.allin.model.Outfit
 
 class OutfitRepository(private val outfitDao: OutfitDao) {
@@ -15,5 +16,9 @@ class OutfitRepository(private val outfitDao: OutfitDao) {
 
     suspend fun addOutfit(outfit: Outfit){
         outfitDao.addOutfit(outfit)
+    }
+
+    suspend fun addOutfit(outfit: Outfit, clothing: List<Clothing>) {
+        outfitDao.addOutfit(outfit, clothing)
     }
 }

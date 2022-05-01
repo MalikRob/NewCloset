@@ -456,7 +456,8 @@ class AddFragment : Fragment() {
                 dateReturned,
                 brand,
                 theme,
-                imageString
+                imageString,
+                null
             )
 
             //Add data to database
