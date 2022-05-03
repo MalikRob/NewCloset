@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.allin.R
+import com.example.allin.fragments.update.UpdateFragment
 import com.example.allin.model.Clothing
 import com.example.allin.viewmodel.ClosetViewModel
 import kotlinx.android.synthetic.main.fragment_add.*
@@ -307,9 +308,11 @@ class AddFragment : Fragment() {
                 id: Long
             ) {
 
-                val colorEntry = parent.getItemAtPosition(position).toString()
+                val colorEntry = parent.selectedItemPosition
+
+                }
                 //Toast.makeText(requireContext(), color[position], Toast.LENGTH_SHORT).show()
-            }
+
 
             override fun onNothingSelected(parent: AdapterView<*>) {
                 //No action determined yet for no selection.
