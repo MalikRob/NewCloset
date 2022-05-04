@@ -48,7 +48,7 @@
             android:id="@+id/clothing_cb"
             android:layout_width="35dp"
             android:layout_height="36dp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

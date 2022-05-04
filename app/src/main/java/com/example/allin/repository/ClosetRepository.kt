@@ -39,6 +39,18 @@ class ClosetRepository(private val closetDao: ClosetDao) {
         return closetDao.selectClothingTops()
     }
 
+    fun selectAllBottoms(): LiveData<List<Clothing>>{
+        return closetDao.selectClothingBottoms()
+    }
+
+    fun selectAllShoes(): LiveData<List<Clothing>>{
+        return closetDao.selectClothingShoes()
+    }
+
+    fun selectAllOuterWear(): LiveData<List<Clothing>>{
+        return closetDao.selectClothingOuterWear()
+    }
+
     /**
      * Outfit Calls are here
      */

@@ -1,5 +1,4 @@
-package com.example.allin
-
+package com.example.allin.fragments.list
 
 import android.app.AlertDialog
 import android.net.Uri
@@ -14,43 +13,36 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.allin.R
 import com.example.allin.model.Clothing
 import com.example.allin.viewmodel.ClosetViewModel
-import kotlinx.android.synthetic.main.fragment_clothing_tops_list.view.*
+import kotlinx.android.synthetic.main.fragment_clothing_shoes_list.view.*
 import kotlinx.android.synthetic.main.grid_clothing_item.view.*
 
 
-class ClothingTopsList : Fragment() {
+class ClothingShoesList : Fragment() {
 
-    val args: ClothingTopsListArgs by navArgs()
-    /**
-     * Use this to get the query form Database of Tops
-     */
+    val args: ClothingShoesListArgs by navArgs()
     private lateinit var mClosetViewModel: ClosetViewModel
 
-    private var adapter = ClothingTopsAdapter(this)
+    private var adapter = ClothingShoesAdapter(this)
 
-    //This class should only display Clothing Tops in a RecyclerView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_clothing_tops_list, container, false)
-        //instantiate the recyclerView
-        val recyclerView = view.clothing_top_rv
-        //asssign the adapter
+        val view = inflater.inflate(R.layout.fragment_clothing_shoes_list, container, false)
+        setHasOptionsMenu(true)
+
+        val recyclerView = view.clothing_shoes_rv
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
-        //Assign the correct data of Tops to the adapter of the RecyclerView
         mClosetViewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
-        mClosetViewModel.selectAllTops().observe(viewLifecycleOwner, Observer { tops ->
-            adapter.setData(tops)
-            }
-        )
-        //If Item was selected. Call navController
-        setHasOptionsMenu(true)
+        mClosetViewModel.selectAllShoes().observe(viewLifecycleOwner, Observer { shoes ->
+            adapter.setData(shoes)
+        })
 
         return view
     }
@@ -64,7 +56,7 @@ class ClothingTopsList : Fragment() {
 
             val selectedDialog = AlertDialog.Builder(this.requireContext())
             selectedDialog.setPositiveButton("Yes") { _, _ ->
-                val action = ClothingTopsListDirections.actionClothingTopsListToAddClothingToOutfits(args.currentOutfit,adapter.selectedItem,args.currentBottom,args.currentShoes, args.currentOuterWear)
+                val action = ClothingShoesListDirections.actionClothingShoesListToAddClothingToOutfits(args.currentOutfit,args.currentTop,args.currentBottom, adapter.selectedItem, args.currentOuterWear)
                 findNavController().navigate(action)
             }
             selectedDialog.setNegativeButton("No") { _, _ -> }
@@ -79,13 +71,9 @@ class ClothingTopsList : Fragment() {
 
 }
 
-/**
- * This page consists of all code for the RecyclerView of Clothing Tops for selection only to add to outfits.
- */
-class ClothingTopsAdapter(private val fragment: Fragment) : RecyclerView.Adapter<ClothingTopsAdapter.MyViewHolder>() {
-    private var clothingTopList = emptyList<Clothing>()
+class ClothingShoesAdapter(private val fragment: Fragment): RecyclerView.Adapter<ClothingShoesAdapter.MyViewHolder>() {
+    private var clothingShoesList = emptyList<Clothing>()
     lateinit var selectedItem: Clothing
-
 
     inner class MyViewHolder(item: View): RecyclerView.ViewHolder(item){
         var checkBox: CheckBox = item.findViewById(R.id.clothing_cb)
@@ -94,12 +82,12 @@ class ClothingTopsAdapter(private val fragment: Fragment) : RecyclerView.Adapter
     //This inflates the EXACT SAME LAYOUT as ClothingList
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.grid_clothing_top_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.grid_clothing_bot_item, parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentItem = clothingTopList[position]
+        val currentItem = clothingShoesList[position]
 
         holder.itemView.gl_clothing_type.text = currentItem.type
         holder.itemView.gl_clothing_item_photo.setImageURI( Uri.parse(currentItem.image))
@@ -115,11 +103,11 @@ class ClothingTopsAdapter(private val fragment: Fragment) : RecyclerView.Adapter
     }
 
     override fun getItemCount(): Int {
-        return clothingTopList.size
+        return clothingShoesList.size
     }
 
     fun setData(clothing: List<Clothing>) {
-        this.clothingTopList = clothing
+        this.clothingShoesList = clothing
         notifyDataSetChanged()
     }
 

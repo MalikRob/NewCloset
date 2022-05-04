@@ -1,27 +1,30 @@
 package com.example.allin.fragments.add
 
 import android.app.AlertDialog
+import android.net.Uri
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.allin.R
-import com.example.allin.model.Outfit
+import com.example.allin.model.OutfitClothingTable
+import com.example.allin.viewmodel.ClosetViewModel
 import kotlinx.android.synthetic.main.fragment_add_clothing_to_outfits.view.*
 
 
 class AddClothingToOutfits : Fragment() {
 
-    //This argument is carrying a value of Outfit(id, outfitName)
     private val args by navArgs<AddClothingToOutfitsArgs>()
-    val outfit: Outfit = args.currentOutfit
+    //This argument is carrying a value of Outfit(id, outfitName)
     private lateinit var addTopButton: Button
+    private lateinit var addBotButton: Button
+    private lateinit var addShoesButton: Button
+    private lateinit var addOuterWearButton: Button
 
+    private lateinit var mClosetViewModel: ClosetViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,25 +33,98 @@ class AddClothingToOutfits : Fragment() {
         val view = inflater.inflate(R.layout.fragment_add_clothing_to_outfits, container, false)
         //We have the argument of Outfit, Set it as the Outfit Title Name so the user, can set those values.
         createOutfitInstructions()
-        view.outfit_title.setText(outfit.outfitName)
+        setHasOptionsMenu(true)
+
+        //Displays Image
+        view.outfit_title.setText(args.currentOutfit.outfitName)
+        //Displays Top
+        if (args.clothingTop?.image != null) {
+            view.outfit_top_img.setImageURI(Uri.parse(args.clothingTop?.image))
+        }
+        //load bottoms image
+        if (args.clothingBottom?.image != null) {
+            view.outfit_bot_img.setImageURI(Uri.parse(args.clothingBottom?.image))
+        }
+        //load shoes image
+        if(args.currentShoes?.image != null){
+            view.outfit_shoes_img.setImageURI(Uri.parse(args.currentShoes?.image))
+        }
+
+        if(args.currentOuterWear?.image != null){
+            view.outfit_outerwear_img.setImageURI(Uri.parse(args.currentOuterWear?.image))
+        }
+
+
 
         //Set the Clothing Tops Button
         addTopButton = view.outfit_add_top_btn
         addTopButton.setOnClickListener{
             //Navigate to the RecyclerView displaying only Clothing Tops
-
-            val action = AddClothingToOutfitsDirections.actionAddClothingToOutfitsToClothingTopsList(outfit)
-            findNavController().navigate(action)
+            findNavController().navigate(AddClothingToOutfitsDirections.actionAddClothingToOutfitsToClothingTopsList(args.currentOutfit,args.clothingTop,args.clothingBottom,args.currentShoes, args.currentOuterWear))
+        }
+        addBotButton = view.outfit_add_bot_btn
+        addBotButton.setOnClickListener {
+            findNavController().navigate(AddClothingToOutfitsDirections.actionAddClothingToOutfitsToClothingBotList(args.currentOutfit,args.clothingTop,args.clothingBottom,args.currentShoes, args.currentOuterWear))
         }
 
+        addShoesButton = view.outfit_add_shoes_btn
+        addShoesButton.setOnClickListener {
+            findNavController().navigate(AddClothingToOutfitsDirections.actionAddClothingToOutfitsToClothingShoesList(args.currentOutfit,args.clothingTop,args.clothingBottom,args.currentShoes, args.currentOuterWear))
+        }
+
+        addOuterWearButton = view.outfit_add_outerwear_btn
+        addOuterWearButton.setOnClickListener {
+            findNavController().navigate(AddClothingToOutfitsDirections.actionAddClothingToOutfitsToClothingOuterWearList(args.currentOutfit,args.clothingTop,args.clothingBottom,args.currentShoes, args.currentOuterWear))
+        }
         /**
          * After we Select Top we have a new Argument to pursue
          */
-        view.top_title_display_top.setText(args.clothingTop?.type)
+        //view.top_title_display_top.setText(args.clothingTop?.type)
         //Only the Image should be passed in for this selection. For now we'll pass in Outfit Type for checking.
-
-
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.add_outfits_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.add_clothing_to_outfit_button){
+
+            //Add logic before adding to Database
+            val selectedDialog = AlertDialog.Builder(this.requireContext())
+            selectedDialog.setPositiveButton("Yes") { _, _ ->
+                //Add to the DB then return to main Outfit Page
+                val outfit1 = args.currentOutfit.id
+                val clothingTop = args.clothingTop?.clothingId
+                val clothingBottom = args.clothingBottom?.clothingId
+                val clothingShoes = args.currentShoes?.clothingId
+                val clothingOuterWear = args.currentOuterWear?.clothingId
+
+                if(outfit1 != null && clothingTop != null){
+                    mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1, clothingTop))
+                }
+
+                if(outfit1 != null && clothingBottom != null){
+                    mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1, clothingBottom))
+                }
+
+                if(outfit1 != null && clothingShoes != null){
+                    mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1, clothingShoes))
+                }
+
+                if(outfit1 != null && clothingOuterWear != null){
+                    mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1, clothingOuterWear))
+                }
+
+            }
+            selectedDialog.setNegativeButton("No") { _, _ -> }
+            selectedDialog.setTitle("")
+            Toast.makeText(this.requireContext(), "Added to Outfit", Toast.LENGTH_SHORT).show()
+            selectedDialog.create().show()
+
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun createOutfitInstructions() {
@@ -59,7 +135,7 @@ class AddClothingToOutfits : Fragment() {
         outfitHelp.setNegativeButton("No") { _, _ ->
             // Once we have a delete button, well delete the Outfit from the DB if the user chooses not to create an Outfit.
             // deleteOutfit()
-            findNavController().navigate(R.id.action_addClothingToOutfits_to_outfitListFragment)
+            //findNavController().navigate(R.id.action_addClothingToOutfits_to_outfitListFragment)
         }
         outfitHelp.setTitle("Create New Outfit?")
         outfitHelp.setMessage("Follow the Steps Below:\n" +

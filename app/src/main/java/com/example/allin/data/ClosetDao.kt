@@ -29,6 +29,15 @@ interface ClosetDao {
     @Query("SELECT * FROM Clothing WHERE type='Top' ORDER BY clothingId ASC")
     fun selectClothingTops(): LiveData<List<Clothing>>
 
+    @Query("SELECT * FROM Clothing WHERE type='Bottom' ORDER BY clothingId ASC")
+    fun selectClothingBottoms(): LiveData<List<Clothing>>
+
+    @Query("SELECT * FROM Clothing WHERE type='Shoes' ORDER BY clothingId ASC")
+    fun selectClothingShoes(): LiveData<List<Clothing>>
+
+    @Query("SELECT * FROM Clothing WHERE type='OuterWear' ORDER BY clothingId ASC")
+    fun selectClothingOuterWear(): LiveData<List<Clothing>>
+
     //Called in ListFragment Searchbar. Queries Clothing Type or Clothing Color.
     @Query("SELECT * FROM Clothing WHERE type LIKE :searchQuery OR color LIKE :searchQuery")
     fun searchDatabase(searchQuery: String): LiveData<List<Clothing>>
@@ -52,9 +61,10 @@ interface ClosetDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addOutfitClothingMap(outfitClothingTable: OutfitClothingTable): Long
 
+    @Transaction
     @Query("SELECT * FROM outfit")
     fun getAllOutfitsWithClothingList(): LiveData<List<OutfitsWithClothingList>>
-
+    @Transaction
     @Query("SELECT * FROM clothing")
     fun getAllClothingWithOutfitList(): LiveData<List<ClothingWithOutfitsList>>
 

@@ -29,7 +29,7 @@ class OutfitAdapter: RecyclerView.Adapter<OutfitAdapter.MyViewHolder>(){
     // Update, Delete, Insert Queries
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = outfitList[position]
-        holder.itemView.outfit_name_tv.text = currentItem.outfitName
+        holder.itemView.OutfitName.text = currentItem.outfitName
 
     }
 

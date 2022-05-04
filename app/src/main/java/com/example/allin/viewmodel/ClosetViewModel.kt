@@ -54,8 +54,20 @@ class ClosetViewModel(application: Application): AndroidViewModel(application) {
         return repository.searchDatabase(searchQuery)
     }
 
-    fun selectClothingTops(): LiveData<List<Clothing>>{
+    fun selectAllTops(): LiveData<List<Clothing>>{
         return repository.selectAllTops()
+    }
+
+    fun selecAllBottoms(): LiveData<List<Clothing>>{
+        return repository.selectAllBottoms()
+    }
+
+    fun selectAllShoes(): LiveData<List<Clothing>>{
+        return repository.selectAllShoes()
+    }
+
+    fun selectAllOuterWear(): LiveData<List<Clothing>>{
+        return repository.selectAllOuterWear()
     }
 
     /**
@@ -72,7 +84,7 @@ class ClosetViewModel(application: Application): AndroidViewModel(application) {
      * Outfit With Clothing calls are here
      */
 
-    fun addOutfitWithClothingMap(outfitWithClothingTable: OutfitClothingTable) {
+    fun addOutfitWithClothingMap(outfitWithClothingTable: OutfitClothingTable){
         viewModelScope.launch(Dispatchers.IO) {
             repository.addOutfitWithClothingMap(outfitWithClothingTable)
         }

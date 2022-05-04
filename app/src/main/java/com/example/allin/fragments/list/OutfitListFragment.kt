@@ -26,7 +26,6 @@ class OutfitListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_outfit_list, container, false)
 
         //RecyclerView standard Layout for now.
-        val adapter = OutfitAdapter()
         val recyclerView = view.outfit_recyclerview
         recyclerView.adapter = adapter
         //recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -42,10 +41,8 @@ class OutfitListFragment : Fragment() {
         view.add_outfit_btn.setOnClickListener{
             findNavController().navigate(R.id.action_outfitListFragment_to_addOutfitFragment)
         }
-
         //Add menu
         setHasOptionsMenu(true)
-
         return view
     }
 

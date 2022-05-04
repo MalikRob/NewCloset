@@ -453,7 +453,6 @@ class AddFragment : Fragment() {
                 theme,
                 imageString
             )
-
             //Add data to database
             mClosetViewModel.addClothing(clothing)
             Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
@@ -490,8 +489,6 @@ class AddFragment : Fragment() {
             currentPhotoPath = absolutePath
         }
     }
-
-
 }
 
 

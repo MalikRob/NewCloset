@@ -22,7 +22,9 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan|stateHidden">
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
