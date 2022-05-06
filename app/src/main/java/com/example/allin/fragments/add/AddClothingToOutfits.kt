@@ -7,6 +7,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Button
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.allin.R
@@ -32,8 +33,11 @@ class AddClothingToOutfits : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_add_clothing_to_outfits, container, false)
         //We have the argument of Outfit, Set it as the Outfit Title Name so the user, can set those values.
-        createOutfitInstructions()
+        //createOutfitInstructions()
         setHasOptionsMenu(true)
+
+        //Takes the entered data
+        mClosetViewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
 
         //Displays Image
         view.outfit_title.setText(args.currentOutfit.outfitName)
@@ -53,8 +57,6 @@ class AddClothingToOutfits : Fragment() {
         if(args.currentOuterWear?.image != null){
             view.outfit_outerwear_img.setImageURI(Uri.parse(args.currentOuterWear?.image))
         }
-
-
 
         //Set the Clothing Tops Button
         addTopButton = view.outfit_add_top_btn
@@ -89,9 +91,16 @@ class AddClothingToOutfits : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.add_clothing_to_outfit_button){
+        // If item (Add button) is selected call InsertToDatabase()
+        if (item.itemId == R.id.add_clothing_to_outfit_button) {
+            insertDataToDatabase()
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
-            //Add logic before adding to Database
+    private fun insertDataToDatabase() {
+
+        //Add logic before adding to Database
             val selectedDialog = AlertDialog.Builder(this.requireContext())
             selectedDialog.setPositiveButton("Yes") { _, _ ->
                 //Add to the DB then return to main Outfit Page
@@ -117,14 +126,18 @@ class AddClothingToOutfits : Fragment() {
                     mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1, clothingOuterWear))
                 }
 
+                Toast.makeText(
+                    requireContext(),
+                    "Successfully created outfit.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                //Navigate Back
+                findNavController().navigate(R.id.action_addClothingToOutfits_to_outfitListFragment)
+
             }
             selectedDialog.setNegativeButton("No") { _, _ -> }
-            selectedDialog.setTitle("")
-            Toast.makeText(this.requireContext(), "Added to Outfit", Toast.LENGTH_SHORT).show()
+            selectedDialog.setTitle("Create Outfit?")
             selectedDialog.create().show()
-
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun createOutfitInstructions() {

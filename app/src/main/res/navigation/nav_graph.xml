@@ -108,6 +108,9 @@
             android:name="currentOuterWear"
             app:argType="com.example.allin.model.Clothing"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_addClothingToOutfits_to_outfitListFragment"
+            app:destination="@id/outfitListFragment" />
     </fragment>
     <fragment
         android:id="@+id/clothingTopsList"
