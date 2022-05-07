@@ -25,7 +25,7 @@ class ClothingBotList : Fragment() {
     val args: ClothingBotListArgs by navArgs()
     private lateinit var mClosetViewModel: ClosetViewModel
 
-    private var adapter = ClothingBotAdapter(this)
+    private var adapter = ClothingBotAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,7 +72,7 @@ class ClothingBotList : Fragment() {
 
 }
 
-class ClothingBotAdapter(private val fragment: Fragment): RecyclerView.Adapter<ClothingBotAdapter.MyViewHolder>() {
+class ClothingBotAdapter(): RecyclerView.Adapter<ClothingBotAdapter.MyViewHolder>() {
     private var clothingBotsList = emptyList<Clothing>()
     lateinit var selectedItem: Clothing
 

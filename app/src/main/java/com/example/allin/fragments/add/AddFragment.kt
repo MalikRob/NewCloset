@@ -438,8 +438,6 @@ class AddFragment : Fragment() {
         val imageString = imageuri.toString()
 
         val description = description.text.toString()
-
-
         //Checks that the fields aren't empty
         if (inputCheck(type, color)) {
             //Create Clothing Object
@@ -457,7 +455,8 @@ class AddFragment : Fragment() {
             mClosetViewModel.addClothing(clothing)
             Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
             //Navigate Back
-            findNavController().navigate(R.id.action_addClothingFragment_to_clothingListFragment)
+            //findNavController().navigate(R.id.action_addClothingFragment_to_clothingListFragment)
+            findNavController().navigateUp()
         } else {
             Toast.makeText(requireContext(), "Please Fill Out All Fields.", Toast.LENGTH_LONG)
                 .show()

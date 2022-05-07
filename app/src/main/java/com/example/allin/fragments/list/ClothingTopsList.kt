@@ -28,7 +28,7 @@ class ClothingTopsList : Fragment() {
      */
     private lateinit var mClosetViewModel: ClosetViewModel
 
-    private var adapter = ClothingTopsAdapter(this)
+    private var adapter = ClothingTopsAdapter()
 
     //This class should only display Clothing Tops in a RecyclerView
     override fun onCreateView(
@@ -82,7 +82,7 @@ class ClothingTopsList : Fragment() {
 /**
  * This page consists of all code for the RecyclerView of Clothing Tops for selection only to add to outfits.
  */
-class ClothingTopsAdapter(private val fragment: Fragment) : RecyclerView.Adapter<ClothingTopsAdapter.MyViewHolder>() {
+class ClothingTopsAdapter() : RecyclerView.Adapter<ClothingTopsAdapter.MyViewHolder>() {
     private var clothingTopList = emptyList<Clothing>()
     lateinit var selectedItem: Clothing
 

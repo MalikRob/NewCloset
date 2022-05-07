@@ -25,6 +25,7 @@ class AddClothingToOutfits : Fragment() {
     private lateinit var addShoesButton: Button
     private lateinit var addOuterWearButton: Button
 
+
     private lateinit var mClosetViewModel: ClosetViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,7 +54,7 @@ class AddClothingToOutfits : Fragment() {
         if(args.currentShoes?.image != null){
             view.outfit_shoes_img.setImageURI(Uri.parse(args.currentShoes?.image))
         }
-
+        //load outerwear image
         if(args.currentOuterWear?.image != null){
             view.outfit_outerwear_img.setImageURI(Uri.parse(args.currentOuterWear?.image))
         }
@@ -81,8 +82,6 @@ class AddClothingToOutfits : Fragment() {
         /**
          * After we Select Top we have a new Argument to pursue
          */
-        //view.top_title_display_top.setText(args.clothingTop?.type)
-        //Only the Image should be passed in for this selection. For now we'll pass in Outfit Type for checking.
         return view
     }
 
@@ -110,20 +109,20 @@ class AddClothingToOutfits : Fragment() {
                 val clothingShoes = args.currentShoes?.clothingId
                 val clothingOuterWear = args.currentOuterWear?.clothingId
 
-                if(outfit1 != null && clothingTop != null){
-                    mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1, clothingTop))
+                if(outfit1 != null){
+                    mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1, clothingTop!!))
                 }
 
-                if(outfit1 != null && clothingBottom != null){
-                    mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1, clothingBottom))
+                if(outfit1 != null){
+                    mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1, clothingBottom!!))
                 }
 
-                if(outfit1 != null && clothingShoes != null){
-                    mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1, clothingShoes))
+                if(outfit1 != null){
+                    mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1, clothingShoes!!))
                 }
 
-                if(outfit1 != null && clothingOuterWear != null){
-                    mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1, clothingOuterWear))
+                if(outfit1 != null){
+                    mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1, clothingOuterWear!!))
                 }
 
                 Toast.makeText(
@@ -156,5 +155,4 @@ class AddClothingToOutfits : Fragment() {
                 "2. Click Submit When You Are Ready\n")
         outfitHelp.create().show()
     }
-
 }

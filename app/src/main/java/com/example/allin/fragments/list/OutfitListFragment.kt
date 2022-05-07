@@ -3,15 +3,19 @@ package com.example.allin.fragments.list
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.allin.R
+import com.example.allin.model.Outfit
 import com.example.allin.viewmodel.ClosetViewModel
 import kotlinx.android.synthetic.main.fragment_outfit_list.view.*
+import kotlinx.android.synthetic.main.outfit_custom_row.view.*
 
 class OutfitListFragment : Fragment() {
 
@@ -28,13 +32,12 @@ class OutfitListFragment : Fragment() {
         //RecyclerView standard Layout for now.
         val recyclerView = view.outfit_recyclerview
         recyclerView.adapter = adapter
-        //recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         //OutfitViewModel
         mClosetViewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
-        mClosetViewModel.readAllOutfitData.observe(viewLifecycleOwner, Observer { clothing ->
-            adapter.setData(clothing)
+        mClosetViewModel.readAllOutfitData.observe(viewLifecycleOwner, Observer { outfit ->
+            adapter.setData(outfit)
         })
 
         //Add button adds new Outfit Item.
@@ -70,5 +73,40 @@ class OutfitListFragment : Fragment() {
         builder.setTitle("Delete everything?")
         builder.setMessage("Are you sure you want to delete everything?")
         builder.create().show()
+    }
+}
+
+class OutfitAdapter: RecyclerView.Adapter<OutfitAdapter.MyViewHolder>(){
+
+    /**
+     * Outfits will be stored into the Outfit Table in our DB.
+     */
+    private var outfitList = emptyList<Outfit>()
+
+    class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        val outfitName: TextView = itemView.OutfitName
+    }
+    //Inflates view where the objects will be stored. XML that displays items in the row inside the RecyclerView
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        return MyViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.outfit_custom_row, parent, false)
+        )
+    }
+
+    // For testing purposes, only the OutFit name will be displayed until we build the Standard
+    // Update, Delete, Insert Queries
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val currentItem = outfitList[position]
+        holder.outfitName.text = currentItem.outfitName
+
+    }
+
+    override fun getItemCount(): Int {
+        return outfitList.size
+    }
+
+    fun setData(outfit: List<Outfit>) {
+        this.outfitList = outfit
+        notifyDataSetChanged()
     }
 }

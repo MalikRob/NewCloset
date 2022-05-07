@@ -1,85 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Overall Design For Our Cards -->
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/outfit_row_card"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:padding="20dp"
-    app:cardBackgroundColor="@android:color/white"
-    app:cardCornerRadius="5dp"
-    app:cardElevation="8dp"
-    android:id="@+id/outfitRowLayout">
-
-    <!-- Card Layout -->
+    android:layout_height="50dp"
+    android:clickable="true"
+    app:rippleColor="@color/main_blue"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="366dp"
-        android:layout_height="464dp"
-        android:layout_marginHorizontal="10dp"
-        android:orientation="vertical"
-        android:padding="5dp">
-        <!-- Image View Meant to Contain The Clothing Image -->
-
-        <ImageView
-            android:id="@+id/clothing_type_photo4"
-            android:layout_width="166dp"
-            android:layout_height="183dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:scaleType="fitXY"
-            app:layout_constraintEnd_toStartOf="@+id/outfit_outerwear_image"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/outfit_tops_img" />
-
-        <ImageView
-            android:id="@+id/outfit_tops_img"
-            android:layout_width="169dp"
-            android:layout_height="195dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="33dp"
-            android:scaleType="fitXY"
-            app:layout_constraintEnd_toStartOf="@+id/outfit_bottoms"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/outfit_bottoms"
-            android:layout_width="169dp"
-            android:layout_height="195dp"
-            android:layout_marginTop="4dp"
-            android:scaleType="fitXY"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/outfit_outerwear_image"
-            android:layout_width="162dp"
-            android:layout_height="182dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="4dp"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/outfit_bottoms"
-            app:layout_constraintVertical_bias="0.025" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/OutfitName"
-            android:layout_width="170dp"
-            android:layout_height="32dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="10dp"
             android:text="TextView"
-            android:textAlignment="center"
+            android:textAlignment="viewStart"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
+

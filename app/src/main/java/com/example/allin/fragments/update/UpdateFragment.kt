@@ -223,7 +223,8 @@ class UpdateFragment : Fragment() {
             mClosetViewModel.updateClothing(updatedClothing)
             Toast.makeText(requireContext(), "Updated Successfully!", Toast.LENGTH_SHORT).show()
             //Navigate Back to Clothing List screen
-            findNavController().navigate(R.id.action_updateClothingFragment_to_clothingListFragment)
+            //findNavController().navigate(R.id.action_updateClothingFragment_to_clothingListFragment)
+            findNavController().navigateUp()
         } else {
             Toast.makeText(requireContext(), "Please fill out all fields.", Toast.LENGTH_SHORT).show()
         }

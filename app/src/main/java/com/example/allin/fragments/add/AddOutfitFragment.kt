@@ -42,7 +42,7 @@ class AddOutfitFragment : Fragment() {
             if((string.isNotEmpty())) {
                 Toast.makeText(requireContext(), "You must enter a new Outfit Name", Toast.LENGTH_SHORT).show()
                 val name = outfit_name_et.text.toString()
-                val outfit = Outfit(0, name)
+                val outfit = Outfit(null, name)
 
                 mClosetViewModel.addOutfit(outfit)
 
@@ -54,7 +54,6 @@ class AddOutfitFragment : Fragment() {
         }
         return view
     }
-
 
     private fun outfitDirections() {
         val outfitHelp = AlertDialog.Builder(requireContext())

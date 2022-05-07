@@ -64,6 +64,7 @@ interface ClosetDao {
     @Transaction
     @Query("SELECT * FROM outfit")
     fun getAllOutfitsWithClothingList(): LiveData<List<OutfitsWithClothingList>>
+
     @Transaction
     @Query("SELECT * FROM clothing")
     fun getAllClothingWithOutfitList(): LiveData<List<ClothingWithOutfitsList>>

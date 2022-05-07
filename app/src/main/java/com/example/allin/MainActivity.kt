@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
 
         setupBottomNavMenu(navController)
 
-
     }
 
     private fun setupBottomNavMenu(navController: NavController) {
@@ -42,7 +41,9 @@ class MainActivity : AppCompatActivity() {
         // On pages AddFragment and Update Fragment, we don't want the user to go to Outfits page.
         // This should hide the Bottom nav view on these pages.
         navController.addOnDestinationChangedListener { _, nd: NavDestination, _ ->
-            if (nd.id == R.id.addClothingFragment || nd.id == R.id.updateClothingFragment) {
+            if (nd.id == R.id.addClothingFragment || nd.id == R.id.updateClothingFragment || nd.id == R.id.addOutfitFragment
+                || nd.id == R.id.addClothingToOutfits || nd.id == R.id.clothingTopsList || nd.id == R.id.clothingBotList
+                || nd.id == R.id.clothingShoesList || nd.id == R.id.clothingOuterWearList) {
                 bottomNav.visibility = View.GONE
             } else {
                 bottomNav.visibility = View.VISIBLE

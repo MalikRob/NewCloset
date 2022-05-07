@@ -25,7 +25,7 @@ class ClothingOuterWearList : Fragment() {
     val args: ClothingOuterWearListArgs by navArgs()
     private lateinit var mClosetViewModel: ClosetViewModel
 
-    private var adapter = ClothingOuterWearAdapter(this)
+    private var adapter = ClothingOuterWearAdapter()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -70,7 +70,7 @@ class ClothingOuterWearList : Fragment() {
     }
 }
 
-class ClothingOuterWearAdapter(private val fragment: Fragment): RecyclerView.Adapter<ClothingOuterWearAdapter.MyViewHolder>(){
+class ClothingOuterWearAdapter(): RecyclerView.Adapter<ClothingOuterWearAdapter.MyViewHolder>(){
     private var clothingOuterWearList = emptyList<Clothing>()
     lateinit var selectedItem: Clothing
 
