@@ -10,4 +10,13 @@
         android:title="Outfits"
         android:icon="@drawable/ic_outfit_page"/>
 
+    <item
+        android:id="@+id/calendar_nav_graph"
+        android:title="Calendar"
+        android:icon="@drawable/calendar_menu_icon"/>
+
+    <item
+        android:id="@+id/travel_list_nav_graph"
+        android:title="Travel List"
+        android:icon="@drawable/travel_list_icon"/>
 </menu>

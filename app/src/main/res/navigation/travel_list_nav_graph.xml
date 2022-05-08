@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/travel_list_nav_graph"
+    app:startDestination="@id/travelListFragment">
+
+    <fragment
+        android:id="@+id/travelListFragment"
+        android:name="com.example.allin.TravelListFragment"
+        android:label="Travel List"
+        tools:layout="@layout/fragment_travel_list" />
+</navigation>
