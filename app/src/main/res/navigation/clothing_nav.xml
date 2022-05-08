@@ -29,7 +29,9 @@
         <!-- Return to ClothingList fragment -->
         <action
             android:id="@+id/action_addClothingFragment_to_clothingListFragment"
-            app:destination="@id/clothingListFragment" />
+            app:destination="@id/clothingListFragment"
+            app:popUpTo="@id/clothingListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <!-- Update Clothing Fragment on Selecting an item in ListAdapter -->
@@ -40,7 +42,9 @@
         tools:layout="@layout/fragment_update">
         <action
             android:id="@+id/action_updateClothingFragment_to_clothingListFragment"
-            app:destination="@id/clothingListFragment" />
+            app:destination="@id/clothingListFragment"
+            app:popUpTo="@id/clothingListFragment"
+            app:popUpToInclusive="true" />
         <!-- This value allows us to navigate between pages carrying a value set in the argument parameter -->
         <!-- Go to ListAdapter -> OnBindViewHolder -> local variable action -->
         <argument
