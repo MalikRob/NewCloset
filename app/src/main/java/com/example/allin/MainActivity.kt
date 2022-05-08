@@ -47,9 +47,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
-
     /*- FUNCTIONS REQUIRED TO INFLATE THE BOTTOM NAV MENU AND NAVIGATE WITH THE NAV GRAPH --------*/
 
     override fun onSupportNavigateUp(): Boolean {

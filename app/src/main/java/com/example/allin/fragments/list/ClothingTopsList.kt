@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.grid_clothing_item.view.*
 class ClothingTopsList : Fragment() {
 
     val args: ClothingTopsListArgs by navArgs()
+
     /**
      * Use this to get the query form Database of Tops
      */
@@ -61,17 +62,21 @@ class ClothingTopsList : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.add_clothing_to_outfit_button){
+            if(adapter.isSelected) {
+                val selectedDialog = AlertDialog.Builder(this.requireContext())
+                selectedDialog.setPositiveButton("Yes") { _, _ ->
+                    val action = ClothingTopsListDirections.actionClothingTopsListToAddClothingToOutfits(args.currentOutfit,adapter.selectedItem,args.currentBottom,args.currentShoes, args.currentOuterWear)
+                    findNavController().navigate(action)
+                }
+                selectedDialog.setNegativeButton("No") { _, _ -> }
+                val temp = adapter.selectedItem.type
+                selectedDialog.setTitle("Add $temp to the outfit?")
+                Toast.makeText(this.requireContext(), "Added to Outfit", Toast.LENGTH_SHORT).show()
+                selectedDialog.create().show()
 
-            val selectedDialog = AlertDialog.Builder(this.requireContext())
-            selectedDialog.setPositiveButton("Yes") { _, _ ->
-                val action = ClothingTopsListDirections.actionClothingTopsListToAddClothingToOutfits(args.currentOutfit,adapter.selectedItem,args.currentBottom,args.currentShoes, args.currentOuterWear)
-                findNavController().navigate(action)
+            } else {
+                Toast.makeText(this.requireContext(), "Please select an Item", Toast.LENGTH_LONG).show()
             }
-            selectedDialog.setNegativeButton("No") { _, _ -> }
-            val temp = adapter.selectedItem.type
-            selectedDialog.setTitle("Add $temp to the outfit?")
-            Toast.makeText(this.requireContext(), "Added to Outfit", Toast.LENGTH_SHORT).show()
-            selectedDialog.create().show()
 
         }
         return super.onOptionsItemSelected(item)
@@ -82,11 +87,10 @@ class ClothingTopsList : Fragment() {
 /**
  * This page consists of all code for the RecyclerView of Clothing Tops for selection only to add to outfits.
  */
-class ClothingTopsAdapter() : RecyclerView.Adapter<ClothingTopsAdapter.MyViewHolder>() {
+class ClothingTopsAdapter : RecyclerView.Adapter<ClothingTopsAdapter.MyViewHolder>() {
     private var clothingTopList = emptyList<Clothing>()
     lateinit var selectedItem: Clothing
-
-
+    var isSelected = false
     inner class MyViewHolder(item: View): RecyclerView.ViewHolder(item){
         var checkBox: CheckBox = item.findViewById(R.id.clothing_cb)
     }
@@ -108,8 +112,10 @@ class ClothingTopsAdapter() : RecyclerView.Adapter<ClothingTopsAdapter.MyViewHol
             if (!holder.itemView.clothing_cb.isChecked){
                 selectedItem = currentItem
                 holder.itemView.clothing_cb.isChecked = true
+                isSelected = true
             }else {
                 holder.itemView.clothing_cb.isChecked = false
+                isSelected = false
             }
         }
     }

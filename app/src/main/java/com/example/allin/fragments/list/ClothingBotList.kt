@@ -54,17 +54,26 @@ class ClothingBotList : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.add_clothing_to_outfit_button){
-
-            val selectedDialog = AlertDialog.Builder(this.requireContext())
-            selectedDialog.setPositiveButton("Yes") { _, _ ->
-                val action = ClothingBotListDirections.actionClothingBotListToAddClothingToOutfits(args.currentOutfit,args.currentOutfitTop, adapter.selectedItem,args.currentShoes,args.currentOuterWear)
-                findNavController().navigate(action)
+            if(adapter.isSelected) {
+                val selectedDialog = AlertDialog.Builder(this.requireContext())
+                selectedDialog.setPositiveButton("Yes") { _, _ ->
+                    val action = ClothingBotListDirections.actionClothingBotListToAddClothingToOutfits(
+                        args.currentOutfit,
+                        args.currentOutfitTop,
+                        adapter.selectedItem,
+                        args.currentShoes,
+                        args.currentOuterWear
+                    )
+                    findNavController().navigate(action)
+                }
+                selectedDialog.setNegativeButton("No") { _, _ -> }
+                val temp = adapter.selectedItem.type
+                selectedDialog.setTitle("Add $temp to the outfit?")
+                Toast.makeText(this.requireContext(), "Added to Outfit", Toast.LENGTH_SHORT).show()
+                selectedDialog.create().show()
+            }else {
+                Toast.makeText(this.requireContext(), "Please select an Item", Toast.LENGTH_LONG).show()
             }
-            selectedDialog.setNegativeButton("No") { _, _ -> }
-            val temp = adapter.selectedItem.type
-            selectedDialog.setTitle("Add $temp to the outfit?")
-            Toast.makeText(this.requireContext(), "Added to Outfit", Toast.LENGTH_SHORT).show()
-            selectedDialog.create().show()
 
         }
         return super.onOptionsItemSelected(item)
@@ -75,7 +84,7 @@ class ClothingBotList : Fragment() {
 class ClothingBotAdapter(): RecyclerView.Adapter<ClothingBotAdapter.MyViewHolder>() {
     private var clothingBotsList = emptyList<Clothing>()
     lateinit var selectedItem: Clothing
-
+    var isSelected = false
     inner class MyViewHolder(item: View): RecyclerView.ViewHolder(item){
         var checkBox: CheckBox = item.findViewById(R.id.clothing_cb)
     }
@@ -97,8 +106,10 @@ class ClothingBotAdapter(): RecyclerView.Adapter<ClothingBotAdapter.MyViewHolder
             if (!holder.itemView.clothing_cb.isChecked){
                 selectedItem = currentItem
                 holder.itemView.clothing_cb.isChecked = true
+                isSelected = true
             }else {
                 holder.itemView.clothing_cb.isChecked = false
+                isSelected = false
             }
         }
     }
