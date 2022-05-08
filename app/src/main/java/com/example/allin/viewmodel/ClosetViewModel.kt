@@ -80,6 +80,10 @@ class ClosetViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
+    fun getOutfit(name: String): Outfit{
+        return repository.getOutfit(name)
+    }
+
     /**
      * Outfit With Clothing calls are here
      */

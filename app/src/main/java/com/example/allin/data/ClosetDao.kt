@@ -53,6 +53,9 @@ interface ClosetDao {
     @Query("SELECT * FROM Outfit ORDER BY outfitId ASC")
     fun readAllOutfitData(): LiveData<List<Outfit>>
 
+    @Query("SELECT * FROM OUTFIT WHERE outfitName = :name ORDER BY outfitId DESC LIMIT 1")
+    fun getOutfit(name: String): Outfit
+
     /**
      * Insert Clothing into Outfits using New M-M relation table [OutfitClothingTable].
      */

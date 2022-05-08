@@ -18,7 +18,8 @@ import java.util.*
 data class Outfit(
 
     @PrimaryKey
-    @ColumnInfo(name = "outfitId")val id: Long?=null,
+    @ColumnInfo(name = "outfitId")val id: Long?,
     var outfitName: String,
 
 ): Parcelable
+

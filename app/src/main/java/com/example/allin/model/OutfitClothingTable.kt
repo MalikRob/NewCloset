@@ -1,5 +1,6 @@
 package com.example.allin.model
 
+import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
@@ -32,7 +33,7 @@ import androidx.room.ForeignKey
     ]
 )
 data class OutfitClothingTable(
-    val outfitIdRef: Long,
+    @NonNull val outfitIdRef: Long,
     @ColumnInfo(index = true)
-    val clothingIdRef: Long
+    @NonNull val clothingIdRef: Long
 )

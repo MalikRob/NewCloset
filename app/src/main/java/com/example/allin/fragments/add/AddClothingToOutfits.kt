@@ -172,26 +172,28 @@ class AddClothingToOutfits : Fragment() {
             val selectedDialog = AlertDialog.Builder(this.requireContext())
             selectedDialog.setPositiveButton("Yes") { _, _ ->
                 //Add to the DB then return to main Outfit Page
-                val outfit1 = args.currentOutfit.id
+                val outfit1 = mClosetViewModel.getOutfit(args.currentOutfit.outfitName)
                 val clothingTop = args.clothingTop?.clothingId
                 val clothingBottom = args.clothingBottom?.clothingId
                 val clothingShoes = args.currentShoes?.clothingId
                 val clothingOuterWear = args.currentOuterWear?.clothingId
 
-                if(outfit1 != null){
-                    mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1, clothingTop!!))
+                Toast.makeText(requireContext(), "$outfit1", Toast.LENGTH_SHORT).show()
+
+                if(outfit1.id != null && clothingTop != null){
+                    mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1.id, clothingTop))
                 }
 
-                if(outfit1 != null){
-                    mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1, clothingBottom!!))
+                if(outfit1.id != null && clothingBottom != null){
+                    mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1.id, clothingBottom))
                 }
 
-                if(outfit1 != null){
-                    mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1, clothingShoes!!))
+                if(outfit1.id != null && clothingShoes != null){
+                    mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1.id, clothingShoes))
                 }
 
-                if(outfit1 != null){
-                    mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1, clothingOuterWear!!))
+                if(outfit1.id != null && clothingOuterWear != null){
+                    mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1.id, clothingOuterWear))
                 }
 
                 Toast.makeText(

@@ -59,6 +59,10 @@ class ClosetRepository(private val closetDao: ClosetDao) {
         closetDao.addOutfit(outfit)
     }
 
+    fun getOutfit(name: String): Outfit{
+        return closetDao.getOutfit(name)
+    }
+
     /**
      * Outfit + Class Table calls here
      */

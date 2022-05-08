@@ -35,7 +35,9 @@ abstract class ClothingDatabase: RoomDatabase() {
                     context.applicationContext,
                     ClothingDatabase::class.java,
                     "clothing_database"
-                ).build()
+                )
+                .allowMainThreadQueries()
+                .build()
                 INSTANCE = instance
                 return instance
             }
