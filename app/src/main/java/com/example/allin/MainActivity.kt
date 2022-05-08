@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var navController: NavController
     private lateinit var appBarConfiguration : AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,45 +25,34 @@ class MainActivity : AppCompatActivity() {
         //Defines a Navigation Host, and creates a Bottom Nav bar.
         val host : NavHostFragment = supportFragmentManager.findFragmentById(R.id.nav_frag_host) as NavHostFragment? ?: return
 
-        val navController = host.navController
+        navController = host.navController
 
-        appBarConfiguration = AppBarConfiguration(navController.graph)
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bot_nav_view)
+        bottomNavigationView.setupWithNavController(navController)
 
-        setupActionBar(navController, appBarConfiguration)
+        //appBarConfiguration = AppBarConfiguration(navController.graph)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.clothingListFragment, R.id.outfitListFragment)
+        )
 
-        setupBottomNavMenu(navController)
+        setupActionBarWithNavController(navController, appBarConfiguration)
 
-    }
-
-    private fun setupBottomNavMenu(navController: NavController) {
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bot_nav_view)
-        bottomNav?.setupWithNavController(navController)
-
-        // On pages AddFragment and Update Fragment, we don't want the user to go to Outfits page.
-        // This should hide the Bottom nav view on these pages.
         navController.addOnDestinationChangedListener { _, nd: NavDestination, _ ->
             if (nd.id == R.id.addClothingFragment || nd.id == R.id.updateClothingFragment || nd.id == R.id.addOutfitFragment
                 || nd.id == R.id.addClothingToOutfits || nd.id == R.id.clothingTopsList || nd.id == R.id.clothingBotList
                 || nd.id == R.id.clothingShoesList || nd.id == R.id.clothingOuterWearList) {
-                bottomNav.visibility = View.GONE
+                bottomNavigationView.visibility = View.GONE
             } else {
-                bottomNav.visibility = View.VISIBLE
+                bottomNavigationView.visibility = View.VISIBLE
             }
         }
     }
 
-    /*- FUNCTIONS REQUIRED TO INFLATE THE BOTTOM NAV MENU AND NAVIGATE WITH THE NAV GRAPH --------*/
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return item.onNavDestinationSelected(findNavController(R.id.nav_frag_host))
-                || super.onOptionsItemSelected(item)
-    }
 
-    private fun setupActionBar(navController: NavController,
-                               appBarConfig : AppBarConfiguration) {
-        setupActionBarWithNavController(navController, appBarConfig)
-    }
+
+    /*- FUNCTIONS REQUIRED TO INFLATE THE BOTTOM NAV MENU AND NAVIGATE WITH THE NAV GRAPH --------*/
 
     override fun onSupportNavigateUp(): Boolean {
-        return findNavController(R.id.nav_frag_host).navigateUp(appBarConfiguration)
+        return navController.navigateUp(appBarConfiguration)
     }
 }
