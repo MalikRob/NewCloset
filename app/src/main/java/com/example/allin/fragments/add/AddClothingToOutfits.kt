@@ -1,12 +1,14 @@
 package com.example.allin.fragments.add
 
 import android.app.AlertDialog
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -14,6 +16,7 @@ import com.example.allin.R
 import com.example.allin.model.OutfitClothingTable
 import com.example.allin.viewmodel.ClosetViewModel
 import kotlinx.android.synthetic.main.fragment_add_clothing_to_outfits.view.*
+import java.lang.Exception
 
 
 class AddClothingToOutfits : Fragment() {
@@ -40,23 +43,30 @@ class AddClothingToOutfits : Fragment() {
         //Takes the entered data
         mClosetViewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
 
-        //Displays Image
+        /**
+         * Displays Outfit Title
+         */
         view.outfit_title.setText(args.currentOutfit.outfitName)
-        //Displays Top
-        if (args.clothingTop?.image != null) {
-            view.outfit_top_img.setImageURI(Uri.parse(args.clothingTop?.image))
-        }
-        //load bottoms image
-        if (args.clothingBottom?.image != null) {
-            view.outfit_bot_img.setImageURI(Uri.parse(args.clothingBottom?.image))
-        }
-        //load shoes image
-        if(args.currentShoes?.image != null){
-            view.outfit_shoes_img.setImageURI(Uri.parse(args.currentShoes?.image))
-        }
-        //load outerwear image
-        if(args.currentOuterWear?.image != null){
-            view.outfit_outerwear_img.setImageURI(Uri.parse(args.currentOuterWear?.image))
+
+        /**
+         * Displays Top Attributes when selected
+         */
+        if(args.clothingTop != null) {
+            view.top_type_chip.setText(args.clothingTop?.type)
+            view.top_style_chip.setText(args.clothingTop?.style)
+            view.top_color_chip.setText(args.clothingTop?.color)
+            view.top_theme_chip.setText(args.clothingTop?.theme)
+            if(args.clothingTop?.image != null) {
+                view.outfit_top_img.setImageURI(Uri.parse(args.clothingTop?.image))
+            } else {
+                view.outfit_top_img.isVisible = false
+            }
+        } else {
+            view.top_type_chip.isVisible = false
+            view.top_style_chip.isVisible = false
+            view.top_color_chip.isVisible = false
+            view.top_theme_chip.isVisible = false
+            view.outfit_top_img.setImageResource(R.drawable.no_image)
         }
 
         //Set the Clothing Tops Button
@@ -65,9 +75,50 @@ class AddClothingToOutfits : Fragment() {
             //Navigate to the RecyclerView displaying only Clothing Tops
             findNavController().navigate(AddClothingToOutfitsDirections.actionAddClothingToOutfitsToClothingTopsList(args.currentOutfit,args.clothingTop,args.clothingBottom,args.currentShoes, args.currentOuterWear))
         }
+
+        /**
+         * Display Clothing Bottom Attributes when selected
+         */
+        if(args.clothingBottom != null){
+            view.bottom_type_chip.setText(args.clothingBottom?.type)
+            view.bot_style_chip.setText(args.clothingBottom?.style)
+            view.bot_color_chip.setText(args.clothingBottom?.color)
+            view.bot_theme_chip.setText(args.clothingBottom?.theme)
+            if (args.clothingBottom?.image != null) {
+                view.outfit_bot_img.setImageURI(Uri.parse(args.clothingBottom?.image))
+            }
+        } else {
+            view.bottom_type_chip.isVisible = false
+            view.bot_style_chip.isVisible = false
+            view.bot_color_chip.isVisible = false
+            view.bot_theme_chip.isVisible = false
+            view.outfit_bot_img.setImageResource(R.drawable.no_image)
+        }
+
         addBotButton = view.outfit_add_bot_btn
         addBotButton.setOnClickListener {
             findNavController().navigate(AddClothingToOutfitsDirections.actionAddClothingToOutfitsToClothingBotList(args.currentOutfit,args.clothingTop,args.clothingBottom,args.currentShoes, args.currentOuterWear))
+        }
+
+        /**
+         * Display Clothing Shoes Attributes when selected
+         */
+
+
+        if (args.currentShoes != null){
+            view.shoes_type_chip.setText(args.currentShoes?.type)
+            view.shoes_style_chip.setText(args.currentShoes?.style)
+            view.shoes_color_chip.setText(args.currentShoes?.color)
+            view.shoes_theme_chip.setText(args.currentShoes?.theme)
+            if(args.currentShoes?.image != null){
+                view.outfit_shoes_img.setImageURI(Uri.parse(args.currentShoes?.image))
+            }
+        } else {
+            view.shoes_type_chip.isVisible = false
+            view.shoes_style_chip.isVisible = false
+            view.shoes_color_chip.isVisible = false
+            view.shoes_theme_chip.isVisible = false
+            view.outfit_shoes_img.setImageResource(R.drawable.no_image)
         }
 
         addShoesButton = view.outfit_add_shoes_btn
@@ -75,15 +126,33 @@ class AddClothingToOutfits : Fragment() {
             findNavController().navigate(AddClothingToOutfitsDirections.actionAddClothingToOutfitsToClothingShoesList(args.currentOutfit,args.clothingTop,args.clothingBottom,args.currentShoes, args.currentOuterWear))
         }
 
+        /**
+         * Display Clothing OuterWear Attributes when selected
+         */
+        if(args.currentOuterWear != null){
+            view.outerWear_type_chip.setText(args.currentOuterWear?.type)
+            view.outerWear_style_chip.setText(args.currentOuterWear?.style)
+            view.outerWear_color_chip.setText(args.currentOuterWear?.color)
+            view.outerWear_theme_chip.setText(args.currentOuterWear?.theme)
+            if(args.currentOuterWear?.image != null){
+                view.outfit_outerwear_img.setImageURI(Uri.parse(args.currentOuterWear?.image))
+            }
+        } else {
+            view.outerWear_type_chip.isVisible = false
+            view.outerWear_style_chip.isVisible = false
+            view.outerWear_color_chip.isVisible = false
+            view.outerWear_theme_chip.isVisible = false
+            view.outfit_outerwear_img.setImageResource(R.drawable.no_image)
+        }
+
         addOuterWearButton = view.outfit_add_outerwear_btn
         addOuterWearButton.setOnClickListener {
             findNavController().navigate(AddClothingToOutfitsDirections.actionAddClothingToOutfitsToClothingOuterWearList(args.currentOutfit,args.clothingTop,args.clothingBottom,args.currentShoes, args.currentOuterWear))
         }
-        /**
-         * After we Select Top we have a new Argument to pursue
-         */
+
         return view
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.add_outfits_menu, menu)
