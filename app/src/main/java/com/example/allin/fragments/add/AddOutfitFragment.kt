@@ -40,7 +40,7 @@ class AddOutfitFragment : Fragment() {
         addOutfitBtn.setOnClickListener {
             val string: String = outfitName.text.toString()
             if((string.isNotEmpty())) {
-                Toast.makeText(requireContext(), "You must enter a new Outfit Name", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Name Confirmed", Toast.LENGTH_SHORT).show()
                 val name = outfit_name_et.text.toString()
                 val outfit = Outfit(null, name)
 

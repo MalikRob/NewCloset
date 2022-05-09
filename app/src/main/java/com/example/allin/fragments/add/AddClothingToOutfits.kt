@@ -178,7 +178,7 @@ class AddClothingToOutfits : Fragment() {
                 val clothingShoes = args.currentShoes?.clothingId
                 val clothingOuterWear = args.currentOuterWear?.clothingId
 
-                Toast.makeText(requireContext(), "$outfit1", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "${outfit1.outfitName}", Toast.LENGTH_SHORT).show()
 
                 if(outfit1.id != null && clothingTop != null){
                     mClosetViewModel.addOutfitWithClothingMap(OutfitClothingTable(outfit1.id, clothingTop))
