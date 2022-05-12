@@ -33,6 +33,11 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
             val action = ListFragmentDirections.actionClothingListFragmentToUpdateClothingFragment(currentItem)
             holder.itemView.findNavController().navigate(action)
         }
+        holder.itemView.grid_item.setOnLongClickListener {
+            holder.itemView.grid_item.setCardBackgroundColor(808080)
+            holder.itemView.grid_item.wornStatus.text = "Worn"
+            return@setOnLongClickListener true
+        }
     }
 
     override fun getItemCount(): Int {
