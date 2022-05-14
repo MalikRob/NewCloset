@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -98,6 +99,10 @@ class OutfitAdapter: RecyclerView.Adapter<OutfitAdapter.MyViewHolder>(){
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = outfitList[position]
         holder.outfitName.text = currentItem.outfitName
+        holder.itemView.setOnClickListener{
+            val action = OutfitListFragmentDirections.actionOutfitListFragmentToOutfitEditFragment(currentItem)
+            holder.itemView.findNavController().navigate(action)
+        }
 
     }
 

@@ -81,10 +81,11 @@ class ClothingShoesList : Fragment() {
 
 }
 
-class ClothingShoesAdapter(): RecyclerView.Adapter<ClothingShoesAdapter.MyViewHolder>() {
+class ClothingShoesAdapter: RecyclerView.Adapter<ClothingShoesAdapter.MyViewHolder>() {
     private var clothingShoesList = emptyList<Clothing>()
     lateinit var selectedItem: Clothing
     var isSelected: Boolean = false
+
     inner class MyViewHolder(item: View): RecyclerView.ViewHolder(item){
         var checkBox: CheckBox = item.findViewById(R.id.clothing_cb)
     }

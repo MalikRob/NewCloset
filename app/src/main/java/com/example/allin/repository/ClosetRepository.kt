@@ -12,7 +12,7 @@ class ClosetRepository(private val closetDao: ClosetDao) {
 
     val readAllClothingData: LiveData<List<Clothing>> = closetDao.readAllClothingData()
     val readAllOutfitData: LiveData<List<Outfit>> = closetDao.readAllOutfitData()
-    val getAllOutfitWithClothingList: LiveData<List<OutfitsWithClothingList>> = closetDao.getAllOutfitsWithClothingList()
+    //val getAllOutfitWithClothingList: LiveData<List<OutfitsWithClothingList>> = closetDao.getAllOutfitsWithClothingList()
     val getAllClothingWitOutfitList: LiveData<List<ClothingWithOutfitsList>> = closetDao.getAllClothingWithOutfitList()
 
     suspend fun addClothing(clothing: Clothing){
@@ -69,5 +69,9 @@ class ClosetRepository(private val closetDao: ClosetDao) {
 
     suspend fun addOutfitWithClothingMap(outfitClothingTable: OutfitClothingTable) {
         closetDao.addOutfitClothingMap(outfitClothingTable)
+    }
+
+    fun getOutfitWithClothingList(outfitId: Long): LiveData<List<OutfitsWithClothingList>> {
+        return closetDao.getAllOutfitsWithClothingList(outfitId)
     }
 }

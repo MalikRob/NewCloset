@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.allin.data.ClothingDatabase
+import com.example.allin.data.relations.OutfitsWithClothingList
 import com.example.allin.repository.ClosetRepository
 import com.example.allin.model.Clothing
 import com.example.allin.model.Outfit
@@ -17,6 +18,7 @@ class ClosetViewModel(application: Application): AndroidViewModel(application) {
     //Initialize any lists that the functions below init() can use
     val readAllClothingData: LiveData<List<Clothing>>
     val readAllOutfitData: LiveData<List<Outfit>>
+    //val getAllOutfitWithClothingList: LiveData<List<OutfitsWithClothingList>>
     private val repository: ClosetRepository
 
     init {
@@ -24,6 +26,7 @@ class ClosetViewModel(application: Application): AndroidViewModel(application) {
         repository = ClosetRepository(clothingDao)
         readAllClothingData = repository.readAllClothingData
         readAllOutfitData = repository.readAllOutfitData
+        //getAllOutfitWithClothingList = repository.getAllOutfitWithClothingList
     }
 
     fun addClothing(clothing: Clothing){
@@ -92,6 +95,10 @@ class ClosetViewModel(application: Application): AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addOutfitWithClothingMap(outfitWithClothingTable)
         }
+    }
+
+    fun getAllOutfitsWithClothing(outfitId: Long): LiveData<List<OutfitsWithClothingList>>{
+           return repository.getOutfitWithClothingList(outfitId)
     }
 
 }

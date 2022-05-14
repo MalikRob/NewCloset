@@ -14,6 +14,9 @@
             android:id="@+id/action_outfitListFragment_to_addOutfitFragment"
             app:destination="@id/addOutfitFragment"
             app:enterAnim="@android:anim/fade_in" />
+        <action
+            android:id="@+id/action_outfitListFragment_to_outfitEditFragment"
+            app:destination="@id/outfitEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/addOutfitFragment"
@@ -187,6 +190,16 @@
             app:destination="@id/addClothingToOutfits"
             app:popUpTo="@id/addClothingToOutfits"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/outfitEditFragment"
+        android:name="com.example.allin.OutfitEditFragment"
+        android:label="Outfit Details"
+        tools:layout="@layout/fragment_outfit_edit">
+        <argument
+            android:name="selectedOutfit"
+            app:argType="com.example.allin.model.Outfit"
+            app:nullable="true" />
     </fragment>
 
 </navigation>
