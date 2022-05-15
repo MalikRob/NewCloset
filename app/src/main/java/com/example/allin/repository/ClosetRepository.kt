@@ -7,6 +7,7 @@ import com.example.allin.data.relations.OutfitsWithClothingList
 import com.example.allin.model.Clothing
 import com.example.allin.model.Outfit
 import com.example.allin.model.OutfitClothingTable
+import com.example.allin.model.Packing
 
 class ClosetRepository(private val closetDao: ClosetDao) {
 
@@ -78,4 +79,16 @@ class ClosetRepository(private val closetDao: ClosetDao) {
     fun getOutfitWithClothingList(outfitId: Long): LiveData<List<OutfitsWithClothingList>> {
         return closetDao.getAllOutfitsWithClothingList(outfitId)
     }
+
+    /**
+     * Packing Table calls here
+     */
+
+    val readAllPackingData: LiveData<List<Packing>> = closetDao.readAllPackingData()
+
+    suspend fun addNewPackingList(packing: Packing){
+        closetDao.addNewPackingList(packing)
+    }
+
+
 }

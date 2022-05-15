@@ -10,6 +10,7 @@ import com.example.allin.repository.ClosetRepository
 import com.example.allin.model.Clothing
 import com.example.allin.model.Outfit
 import com.example.allin.model.OutfitClothingTable
+import com.example.allin.model.Packing
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -18,6 +19,7 @@ class ClosetViewModel(application: Application): AndroidViewModel(application) {
     //Initialize any lists that the functions below init() can use
     val readAllClothingData: LiveData<List<Clothing>>
     val readAllOutfitData: LiveData<List<Outfit>>
+    val readAllPackingData: LiveData<List<Packing>>
     //val getAllOutfitWithClothingList: LiveData<List<OutfitsWithClothingList>>
     private val repository: ClosetRepository
 
@@ -26,7 +28,7 @@ class ClosetViewModel(application: Application): AndroidViewModel(application) {
         repository = ClosetRepository(clothingDao)
         readAllClothingData = repository.readAllClothingData
         readAllOutfitData = repository.readAllOutfitData
-        //getAllOutfitWithClothingList = repository.getAllOutfitWithClothingList
+        readAllPackingData = repository.readAllPackingData
     }
 
     fun addClothing(clothing: Clothing){
@@ -105,6 +107,16 @@ class ClosetViewModel(application: Application): AndroidViewModel(application) {
 
     fun getAllOutfitsWithClothing(outfitId: Long): LiveData<List<OutfitsWithClothingList>>{
            return repository.getOutfitWithClothingList(outfitId)
+    }
+
+    /**
+     * Packing List Queries
+     */
+
+    fun addNewPackingList(packing: Packing){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addNewPackingList(packing)
+        }
     }
 
 }

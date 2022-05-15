@@ -7,6 +7,7 @@ import com.example.allin.data.relations.OutfitsWithClothingList
 import com.example.allin.model.Clothing
 import com.example.allin.model.Outfit
 import com.example.allin.model.OutfitClothingTable
+import com.example.allin.model.Packing
 
 @Dao
 interface ClosetDao {
@@ -75,6 +76,16 @@ interface ClosetDao {
     @Transaction
     @Query("SELECT * FROM clothing")
     fun getAllClothingWithOutfitList(): LiveData<List<ClothingWithOutfitsList>>
+
+
+    /**
+     * Add items to the Packing List
+     */
+    @Query("SELECT * FROM Packing ORDER BY packingID ASC")
+    fun readAllPackingData(): LiveData<List<Packing>>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addNewPackingList(packing: Packing): Long
 
 }
 

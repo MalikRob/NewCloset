@@ -1,59 +1,93 @@
 package com.example.allin
 
+import android.net.Uri
 import android.os.Bundle
+import android.view.*
+import android.widget.CheckBox
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.allin.model.Clothing
+import com.example.allin.model.Packing
+import com.example.allin.viewmodel.ClosetViewModel
+import kotlinx.android.synthetic.main.fragment_travel_list.view.*
+import kotlinx.android.synthetic.main.grid_clothing_item.view.*
+import kotlinx.android.synthetic.main.packing_list_row.view.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [TravelListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TravelListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var mClosetViewModel: ClosetViewModel
+    private var adapter = TravelListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_travel_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_travel_list, container, false)
+
+        val recyclerView = view.findViewById<RecyclerView>(R.id.packing_list_recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = adapter
+
+        mClosetViewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
+        mClosetViewModel.readAllPackingData.observe(viewLifecycleOwner, Observer { data ->
+            adapter.setData(data)
+        })
+
+        view.packingList_floating_btn.setOnClickListener {
+            // Add new PackingList Items
+            findNavController().navigate(R.id.action_travelListFragment_to_addPackingListItemFragment)
+            Toast.makeText(
+                requireContext(),
+                "Adding New Packing List Item",
+                Toast.LENGTH_SHORT
+            ).show()
+
+        }
+
+        setHasOptionsMenu(true)
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TravelListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TravelListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+}
+
+class TravelListAdapter : RecyclerView.Adapter<TravelListAdapter.MyViewHolder>() {
+
+    private var packingList = emptyList<Packing>()
+
+    inner class MyViewHolder(item: View): RecyclerView.ViewHolder(item){
+
     }
+
+    //This inflates the EXACT SAME LAYOUT as ClothingList
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        return MyViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.packing_list_row, parent, false)
+        )
+    }
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val currentItem = packingList[position]
+
+        holder.itemView.packing_list_name.text = currentItem.packingListName
+
+    }
+
+    override fun getItemCount(): Int {
+        return packingList.size
+    }
+
+    fun setData(packingList: List<Packing>) {
+        this.packingList = packingList
+        notifyDataSetChanged()
+    }
+
 }

@@ -9,5 +9,20 @@
         android:id="@+id/travelListFragment"
         android:name="com.example.allin.TravelListFragment"
         android:label="Travel List"
-        tools:layout="@layout/fragment_travel_list" />
+        tools:layout="@layout/fragment_travel_list" >
+        <action
+            android:id="@+id/action_travelListFragment_to_addPackingListItemFragment"
+            app:destination="@id/addPackingListItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPackingListItemFragment"
+        android:name="com.example.allin.AddPackingListItemFragment"
+        android:label="Add New Packing List"
+        tools:layout="@layout/fragment_add_packing_list_item" >
+        <action
+            android:id="@+id/action_addPackingListItemFragment_to_travelListFragment"
+            app:destination="@id/travelListFragment"
+            app:popUpTo="@id/travelListFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>
