@@ -56,6 +56,9 @@ interface ClosetDao {
     @Query("SELECT * FROM OUTFIT WHERE outfitName = :name ORDER BY outfitId DESC LIMIT 1")
     fun getOutfit(name: String): Outfit
 
+    @Query("DELETE FROM Outfit WHERE outfitId = :outfitId ")
+    suspend fun deleteOutfit(outfitId: Long)
+
     /**
      * Insert Clothing into Outfits using New M-M relation table [OutfitClothingTable].
      */
