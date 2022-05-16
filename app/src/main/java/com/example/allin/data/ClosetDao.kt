@@ -60,6 +60,10 @@ interface ClosetDao {
     @Query("DELETE FROM Outfit WHERE outfitId = :outfitId ")
     suspend fun deleteOutfit(outfitId: Long)
 
+    //New Update Function
+    @Update
+    suspend fun updateOutfit(outfit: Outfit)
+
     /**
      * Insert Clothing into Outfits using New M-M relation table [OutfitClothingTable].
      */

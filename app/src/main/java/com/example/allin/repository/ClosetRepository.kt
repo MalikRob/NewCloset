@@ -68,6 +68,11 @@ class ClosetRepository(private val closetDao: ClosetDao) {
         closetDao.deleteOutfit(outfitId)
     }
 
+    //New Update
+    suspend fun updateOutfit(outfit: Outfit) {
+        closetDao.updateOutfit(outfit)
+    }
+
     /**
      * Outfit + Class Table calls here
      */

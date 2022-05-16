@@ -95,6 +95,13 @@ class ClosetViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
+    //New Update Function
+    fun updateOutfit(outfit: Outfit) {
+        viewModelScope.launch (Dispatchers.IO){
+            repository.updateOutfit(outfit)
+        }
+    }
+
     /**
      * Outfit With Clothing calls are here
      */

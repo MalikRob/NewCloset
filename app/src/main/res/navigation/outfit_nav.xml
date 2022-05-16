@@ -214,7 +214,12 @@
     <fragment
         android:id="@+id/editOutfitFragment"
         android:name="com.example.allin.fragments.update.EditOutfitFragment"
-        android:label="fragment_edit_outfit"
-        tools:layout="@layout/fragment_edit_outfit" />
+        android:label="Update Outfit"
+        tools:layout="@layout/fragment_edit_outfit" >
+        <argument
+            android:name="editingOutfit"
+            app:argType="com.example.allin.model.Outfit"
+            app:nullable="true" />
+    </fragment>
 
 </navigation>
