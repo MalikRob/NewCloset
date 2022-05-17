@@ -3,6 +3,8 @@ package com.example.allin.fragments.list
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
+import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -15,7 +17,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.allin.R
 import com.example.allin.model.Outfit
 import com.example.allin.viewmodel.ClosetViewModel
+import kotlinx.android.synthetic.main.fragment_add_outfit.view.*
+import kotlinx.android.synthetic.main.fragment_clothing_list.view.*
 import kotlinx.android.synthetic.main.fragment_outfit_list.view.*
+import kotlinx.android.synthetic.main.fragment_outfit_list.view.total_items
 import kotlinx.android.synthetic.main.outfit_custom_row.view.*
 
 class OutfitListFragment : Fragment() {
@@ -39,6 +44,7 @@ class OutfitListFragment : Fragment() {
         mClosetViewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
         mClosetViewModel.readAllOutfitData.observe(viewLifecycleOwner, Observer { outfit ->
             adapter.setData(outfit)
+            view.total_items.text = "Clothes Owned: ${adapter.itemCount}"
         })
 
         //Add button adds new Outfit Item.
@@ -86,6 +92,7 @@ class OutfitAdapter: RecyclerView.Adapter<OutfitAdapter.MyViewHolder>(){
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val outfitName: TextView = itemView.OutfitName
+        val outfitTheme: TextView = itemView.outfit_theme
     }
     //Inflates view where the objects will be stored. XML that displays items in the row inside the RecyclerView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -99,6 +106,7 @@ class OutfitAdapter: RecyclerView.Adapter<OutfitAdapter.MyViewHolder>(){
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = outfitList[position]
         holder.outfitName.text = currentItem.outfitName
+        holder.outfitTheme.text = currentItem.theme
         holder.itemView.setOnClickListener{
             val action = OutfitListFragmentDirections.actionOutfitListFragmentToOutfitEditFragment(currentItem)
             holder.itemView.findNavController().navigate(action)

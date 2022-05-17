@@ -1,6 +1,7 @@
 package com.example.allin
 
 import android.app.AlertDialog
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
@@ -83,8 +84,6 @@ class OutfitDisplayFragment : Fragment() {
     }
 }
 
-
-
 class OutfitEditAdapter: RecyclerView.Adapter<OutfitEditAdapter.MyViewHolder>() {
     private var clothingList = emptyList<Clothing>()
 
@@ -102,7 +101,12 @@ class OutfitEditAdapter: RecyclerView.Adapter<OutfitEditAdapter.MyViewHolder>() 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = clothingList[position]
         holder.itemView.gl_clothing_type.text = currentItem.type
-        holder.itemView.gl_clothing_item_photo.setImageURI( Uri.parse(currentItem.image))
+        holder.itemView.gl_clothing_style.text = currentItem.style
+        holder.itemView.gl_clothing_theme.text = currentItem.theme
+        holder.itemView.gl_clothing_type.setTextColor(Color.BLUE)
+        holder.itemView.gl_clothing_theme.setTextColor(Color.RED)
+        holder.itemView.gl_clothing_color.text = currentItem.color
+        holder.itemView.gl_clothing_brand.text = currentItem.brand
 
     }
 

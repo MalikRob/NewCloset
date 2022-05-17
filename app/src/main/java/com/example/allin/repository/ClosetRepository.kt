@@ -36,20 +36,20 @@ class ClosetRepository(private val closetDao: ClosetDao) {
         return closetDao.searchDatabase(searchQuery)
     }
 
-    fun selectAllTops(): LiveData<List<Clothing>>{
-        return closetDao.selectClothingTops()
+    fun selectAllTops(theme: String): LiveData<List<Clothing>>{
+        return closetDao.selectClothingTops(theme)
     }
 
-    fun selectAllBottoms(): LiveData<List<Clothing>>{
-        return closetDao.selectClothingBottoms()
+    fun selectAllBottoms(theme: String): LiveData<List<Clothing>>{
+        return closetDao.selectClothingBottoms(theme)
     }
 
-    fun selectAllShoes(): LiveData<List<Clothing>>{
-        return closetDao.selectClothingShoes()
+    fun selectAllShoes(theme: String): LiveData<List<Clothing>>{
+        return closetDao.selectClothingShoes(theme)
     }
 
-    fun selectAllOuterWear(): LiveData<List<Clothing>>{
-        return closetDao.selectClothingOuterWear()
+    fun selectAllOuterWear(theme: String): LiveData<List<Clothing>>{
+        return closetDao.selectClothingOuterWear(theme)
     }
 
     /**

@@ -29,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:scaleType="fitXY"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -48,6 +49,18 @@
             app:layout_constraintTop_toBottomOf="@+id/gl_clothing_item_photo" />
 
         <TextView
+            android:id="@+id/gl_clothing_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Style"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gl_clothing_type" />
+
+        <TextView
             android:id="@+id/gl_clothing_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,25 +70,37 @@
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gl_clothing_type" />
+            app:layout_constraintTop_toBottomOf="@+id/gl_clothing_style" />
 
         <TextView
             android:id="@+id/gl_clothing_theme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Clothing Theme"
+            android:text="Theme"
             android:textColor="@android:color/black"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/gl_clothing_color" />
 
+        <TextView
+            android:id="@+id/gl_clothing_brand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Brand"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gl_clothing_theme" />
+
         <CheckBox
             android:id="@+id/clothing_cb"
             android:layout_width="35dp"
             android:layout_height="36dp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

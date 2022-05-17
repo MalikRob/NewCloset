@@ -2,6 +2,8 @@ package com.example.allin
 
 
 import android.app.AlertDialog
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
@@ -46,7 +48,7 @@ class ClothingTopsList : Fragment() {
 
         //Assign the correct data of Tops to the adapter of the RecyclerView
         mClosetViewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
-        mClosetViewModel.selectAllTops().observe(viewLifecycleOwner, Observer { tops ->
+        mClosetViewModel.selectAllTops(args.currentOutfit.theme).observe(viewLifecycleOwner, Observer { tops ->
             adapter.setData(tops)
             }
         )
@@ -98,15 +100,20 @@ class ClothingTopsAdapter : RecyclerView.Adapter<ClothingTopsAdapter.MyViewHolde
     //This inflates the EXACT SAME LAYOUT as ClothingList
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.grid_clothing_top_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.grid_clothing_item, parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = clothingTopList[position]
-
         holder.itemView.gl_clothing_type.text = currentItem.type
-        holder.itemView.gl_clothing_item_photo.setImageURI( Uri.parse(currentItem.image))
+        holder.itemView.gl_clothing_style.text = currentItem.style
+        holder.itemView.gl_clothing_theme.text = currentItem.theme
+        holder.itemView.gl_clothing_type.setTextColor(Color.BLUE)
+        holder.itemView.gl_clothing_theme.setTextColor(Color.RED)
+        holder.itemView.gl_clothing_color.text = currentItem.color
+        holder.itemView.gl_clothing_brand.text = currentItem.brand
+        //holder.itemView.gl_clothing_item_photo.setImageURI( Uri.parse(currentItem.image))
 
         holder.itemView.grid_item.setOnClickListener {
             if (!holder.itemView.clothing_cb.isChecked){

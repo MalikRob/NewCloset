@@ -54,10 +54,10 @@
     </string-array>
 
     <string-array name="brands">
-        <item>Nike</item>
+        <item>Other</item>
         <item>Gucci</item>
         <item>Under Armour</item>
-        <item>Other</item>
+        <item>Nike</item>
     </string-array>
 
     <string-array name="themes">

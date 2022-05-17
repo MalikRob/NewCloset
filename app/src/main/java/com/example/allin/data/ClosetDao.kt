@@ -27,20 +27,20 @@ interface ClosetDao {
     @Query("DELETE FROM Clothing")
     suspend fun deleteAllClothing()
 
-    @Query("SELECT * FROM Clothing WHERE type='Top' ORDER BY clothingId ASC")
-    fun selectClothingTops(): LiveData<List<Clothing>>
+    @Query("SELECT * FROM Clothing WHERE type='Top' AND theme=:theme ORDER BY clothingId ASC")
+    fun selectClothingTops(theme: String): LiveData<List<Clothing>>
 
-    @Query("SELECT * FROM Clothing WHERE type='Bottom' ORDER BY clothingId ASC")
-    fun selectClothingBottoms(): LiveData<List<Clothing>>
+    @Query("SELECT * FROM Clothing WHERE type='Bottom' AND theme=:theme ORDER BY clothingId ASC")
+    fun selectClothingBottoms(theme: String): LiveData<List<Clothing>>
 
-    @Query("SELECT * FROM Clothing WHERE type='Shoes' ORDER BY clothingId ASC")
-    fun selectClothingShoes(): LiveData<List<Clothing>>
+    @Query("SELECT * FROM Clothing WHERE type='Shoes' AND theme=:theme ORDER BY clothingId ASC")
+    fun selectClothingShoes(theme: String): LiveData<List<Clothing>>
 
-    @Query("SELECT * FROM Clothing WHERE type='OuterWear' ORDER BY clothingId ASC")
-    fun selectClothingOuterWear(): LiveData<List<Clothing>>
+    @Query("SELECT * FROM Clothing WHERE type='OuterWear' AND theme=:theme ORDER BY clothingId ASC")
+    fun selectClothingOuterWear(theme: String): LiveData<List<Clothing>>
 
     //Called in ListFragment Searchbar. Queries Clothing Type or Clothing Color.
-    @Query("SELECT * FROM Clothing WHERE type LIKE :searchQuery OR color LIKE :searchQuery OR style LIKE :searchQuery OR brand LIKE :searchQuery")
+    @Query("SELECT * FROM Clothing WHERE type LIKE :searchQuery OR color LIKE :searchQuery OR style LIKE :searchQuery OR theme LIKE :searchQuery OR brand LIKE :searchQuery")
     fun searchDatabase(searchQuery: String): LiveData<List<Clothing>>
 
     /**

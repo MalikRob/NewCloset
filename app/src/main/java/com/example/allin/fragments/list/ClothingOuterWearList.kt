@@ -1,6 +1,7 @@
 package com.example.allin.fragments.list
 
 import android.app.AlertDialog
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
@@ -40,7 +41,7 @@ class ClothingOuterWearList : Fragment() {
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         mClosetViewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
-        mClosetViewModel.selectAllOuterWear().observe(viewLifecycleOwner, Observer { outerWear ->
+        mClosetViewModel.selectAllOuterWear(args.currentOutfit.theme).observe(viewLifecycleOwner, Observer { outerWear ->
             adapter.setData(outerWear)
         })
 
@@ -84,15 +85,20 @@ class ClothingOuterWearAdapter(): RecyclerView.Adapter<ClothingOuterWearAdapter.
     //This inflates the EXACT SAME LAYOUT as ClothingList
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.grid_clothing_outerwear_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.grid_clothing_item, parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = clothingOuterWearList[position]
-
         holder.itemView.gl_clothing_type.text = currentItem.type
-        holder.itemView.gl_clothing_item_photo.setImageURI( Uri.parse(currentItem.image))
+        holder.itemView.gl_clothing_style.text = currentItem.style
+        holder.itemView.gl_clothing_theme.text = currentItem.theme
+        holder.itemView.gl_clothing_type.setTextColor(Color.BLUE)
+        holder.itemView.gl_clothing_theme.setTextColor(Color.RED)
+        holder.itemView.gl_clothing_color.text = currentItem.color
+        holder.itemView.gl_clothing_brand.text = currentItem.brand
+        //holder.itemView.gl_clothing_item_photo.setImageURI( Uri.parse(currentItem.image))
 
         holder.itemView.grid_item.setOnClickListener {
             if (!holder.itemView.clothing_cb.isChecked){

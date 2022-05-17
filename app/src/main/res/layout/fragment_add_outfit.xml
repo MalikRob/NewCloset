@@ -36,16 +36,40 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.425" />
 
+    <TextView
+        android:id="@+id/outfit_theme_TV"
+        android:layout_width="232dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="4dp"
+        android:text="Theme"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/add_theme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/outfit_name_et" />
+
+    <Button
+        android:id="@+id/add_theme"
+        android:layout_width="110dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="31dp"
+        android:text="Choose"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="@id/outfit_theme_TV"
+        app:layout_constraintTop_toBottomOf="@+id/outfit_name_et" />
+
     <Button
         android:id="@+id/add_new_outfit_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="156dp"
         android:text="Submit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.899"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/outfit_name_et" />
+        app:layout_constraintTop_toBottomOf="@+id/add_theme" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

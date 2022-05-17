@@ -59,20 +59,20 @@ class ClosetViewModel(application: Application): AndroidViewModel(application) {
         return repository.searchDatabase(searchQuery)
     }
 
-    fun selectAllTops(): LiveData<List<Clothing>>{
-        return repository.selectAllTops()
+    fun selectAllTops(theme: String): LiveData<List<Clothing>>{
+        return repository.selectAllTops(theme)
     }
 
-    fun selecAllBottoms(): LiveData<List<Clothing>>{
-        return repository.selectAllBottoms()
+    fun selecAllBottoms(theme: String): LiveData<List<Clothing>>{
+        return repository.selectAllBottoms(theme)
     }
 
-    fun selectAllShoes(): LiveData<List<Clothing>>{
-        return repository.selectAllShoes()
+    fun selectAllShoes(theme: String): LiveData<List<Clothing>>{
+        return repository.selectAllShoes(theme)
     }
 
-    fun selectAllOuterWear(): LiveData<List<Clothing>>{
-        return repository.selectAllOuterWear()
+    fun selectAllOuterWear(theme: String): LiveData<List<Clothing>>{
+        return repository.selectAllOuterWear(theme)
     }
 
     /**

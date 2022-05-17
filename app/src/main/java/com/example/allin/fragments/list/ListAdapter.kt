@@ -4,6 +4,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.allin.R
@@ -27,10 +28,13 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = clothingList[position]
+        holder.itemView.clothing_cb.isVisible = false
         holder.itemView.gl_clothing_type.text = currentItem.type
         holder.itemView.gl_clothing_color.text = currentItem.color
         holder.itemView.gl_clothing_theme.text = currentItem.theme
-        holder.itemView.gl_clothing_item_photo.setImageURI( Uri.parse(currentItem.image))
+        holder.itemView.gl_clothing_style.text = currentItem.style
+        holder.itemView.gl_clothing_brand.text = currentItem.brand
+        //holder.itemView.gl_clothing_item_photo.setImageURI( Uri.parse(currentItem.image))
         holder.itemView.grid_item.setOnClickListener {
             val action = ListFragmentDirections.actionClothingListFragmentToUpdateClothingFragment(currentItem)
             holder.itemView.findNavController().navigate(action)

@@ -1,6 +1,7 @@
 package com.example.allin.fragments.list
 
 import android.app.AlertDialog
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
@@ -40,7 +41,7 @@ class ClothingShoesList : Fragment() {
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         mClosetViewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
-        mClosetViewModel.selectAllShoes().observe(viewLifecycleOwner, Observer { shoes ->
+        mClosetViewModel.selectAllShoes(args.currentOutfit.theme).observe(viewLifecycleOwner, Observer { shoes ->
             adapter.setData(shoes)
         })
 
@@ -93,7 +94,7 @@ class ClothingShoesAdapter: RecyclerView.Adapter<ClothingShoesAdapter.MyViewHold
     //This inflates the EXACT SAME LAYOUT as ClothingList
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.grid_clothing_bot_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.grid_clothing_item, parent, false)
         )
     }
 
@@ -101,6 +102,12 @@ class ClothingShoesAdapter: RecyclerView.Adapter<ClothingShoesAdapter.MyViewHold
         val currentItem = clothingShoesList[position]
 
         holder.itemView.gl_clothing_type.text = currentItem.type
+        holder.itemView.gl_clothing_style.text = currentItem.style
+        holder.itemView.gl_clothing_theme.text = currentItem.theme
+        holder.itemView.gl_clothing_type.setTextColor(Color.BLUE)
+        holder.itemView.gl_clothing_theme.setTextColor(Color.RED)
+        holder.itemView.gl_clothing_color.text = currentItem.color
+        holder.itemView.gl_clothing_brand.text = currentItem.brand
         holder.itemView.gl_clothing_item_photo.setImageURI( Uri.parse(currentItem.image))
 
         holder.itemView.grid_item.setOnClickListener {

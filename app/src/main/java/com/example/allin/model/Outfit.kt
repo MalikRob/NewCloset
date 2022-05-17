@@ -20,6 +20,7 @@ data class Outfit(
     @PrimaryKey
     @ColumnInfo(name = "outfitId")val id: Long?,
     var outfitName: String,
+    var theme: String
 
 ): Parcelable
 

@@ -6,14 +6,17 @@ import android.view.*
 import android.view.Menu
 import androidx.appcompat.widget.SearchView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.allin.R
 import com.example.allin.viewmodel.ClosetViewModel
 import kotlinx.android.synthetic.main.fragment_clothing_list.view.*
+import kotlinx.android.synthetic.main.grid_clothing_item.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -23,7 +26,6 @@ import kotlinx.android.synthetic.main.fragment_clothing_list.view.*
 class ListFragment : Fragment(), SearchView.OnQueryTextListener{
 
     private lateinit var mClosetViewModel: ClosetViewModel
-    var totalSize = 0
     var adapter = ListAdapter()
 
     override fun onCreateView(
@@ -34,8 +36,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener{
         val view = inflater.inflate(R.layout.fragment_clothing_list, container, false)
         //Clear Stack of Navigations
 
-        //RecyclerView
-        //val adapter = ListAdapter()
+
         val recyclerView = view.clothing_recyclerview
         recyclerView.adapter = adapter
         //recyclerView.layoutManager = LinearLayoutManager(requireContext())
