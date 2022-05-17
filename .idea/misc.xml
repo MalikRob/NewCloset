@@ -8,14 +8,18 @@
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/drawable/ic_add.xml" value="0.3285" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/font/spinner_text_settings.xml" value="0.41770833333333335" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/activity_main.xml" value="0.3734375" />
+        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/calendar_legend.xml" value="0.3875" />
+        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/calendar_month_header.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/custom_row.xml" value="0.13518518518518519" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_add.xml" value="0.2509057971014493" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_add0utfit.xml" value="0.379981884057971" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_add_clothing_to_outfit.xml" value="0.20574162679425836" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_add_clothing_to_outfits.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_add_outfit.xml" value="0.33" />
+        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_add_outfits_to_packing_list.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_add_packing_list_item.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_calendar.xml" value="0.39361702127659576" />
+        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_calendar_view.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_clothing_bot_list.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_clothing_list.xml" value="0.2253125" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_clothing_outer_wear_list.xml" value="0.3875" />
@@ -23,19 +27,21 @@
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_clothing_tops_list.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_list.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_login.xml" value="0.3875" />
+        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_outfit_display.xml" value="0.23777173913043478" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_outfit_edit.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_outfit_list.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_travel_list.xml" value="0.39361702127659576" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_update.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/grid_clothing_bot_item.xml" value="0.3875" />
-        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/grid_clothing_item.xml" value="0.2346014492753623" />
+        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/grid_clothing_item.xml" value="0.1" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/grid_clothing_jacket_item.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/grid_clothing_outerwear_item.xml" value="0.18020833333333333" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/grid_clothing_shoes_item.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/grid_clothing_top_item.xml" value="0.20208333333333334" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/outfit__add_clothing_item_1.xml" value="0.3875" />
-        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/outfit_custom_row.xml" value="0.36820652173913043" />
+        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/outfit_custom_row.xml" value="0.32997481108312343" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/packing_list_row.xml" value="0.3875" />
+        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/packing_list_selected_outfit_row.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/spinner_text_settings.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/spinner_text_setup.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/menu/add_clothing_menu.xml" value="0.3875" />

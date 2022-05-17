@@ -2,6 +2,7 @@
     <string name="app_name">AllIn</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="total_items">Total Items:</string>
 
     <string-array name="Clothing_type">
         <item>Top</item>

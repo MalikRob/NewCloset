@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="25dp">
+        android:padding="10dp">
 
         <!-- Image View Meant to Contain The Clothing Image -->
         <!-- Image View Meant to Contain The Clothing Image -->
@@ -41,11 +41,35 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Clothing Type"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/main_blue_dark"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/gl_clothing_item_photo" />
+
+        <TextView
+            android:id="@+id/gl_clothing_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Color"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gl_clothing_type" />
+
+        <TextView
+            android:id="@+id/gl_clothing_theme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Clothing Theme"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gl_clothing_color" />
 
         <CheckBox
             android:id="@+id/clothing_cb"

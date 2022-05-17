@@ -28,6 +28,8 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = clothingList[position]
         holder.itemView.gl_clothing_type.text = currentItem.type
+        holder.itemView.gl_clothing_color.text = currentItem.color
+        holder.itemView.gl_clothing_theme.text = currentItem.theme
         holder.itemView.gl_clothing_item_photo.setImageURI( Uri.parse(currentItem.image))
         holder.itemView.grid_item.setOnClickListener {
             val action = ListFragmentDirections.actionClothingListFragmentToUpdateClothingFragment(currentItem)

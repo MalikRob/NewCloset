@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_clothing_list.view.*
 class ListFragment : Fragment(), SearchView.OnQueryTextListener{
 
     private lateinit var mClosetViewModel: ClosetViewModel
+    var totalSize = 0
     var adapter = ListAdapter()
 
     override fun onCreateView(
@@ -44,7 +45,10 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener{
         mClosetViewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
         mClosetViewModel.readAllClothingData.observe(viewLifecycleOwner, Observer { clothing ->
             adapter.setData(clothing)
+            view.total_items.text = "Clothes Owned: ${adapter.itemCount}"
         })
+
+
 
         //Button now takes the user to the Edit Clothing Page
         view.floatingActionButton.setOnClickListener {
