@@ -57,9 +57,6 @@ class OutfitDisplayFragment : Fragment() {
 
     // When User selects the Delete Button it makes a call to the DB DELETE Query
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.edit_menu_btn) {
-            findNavController().navigate(R.id.action_outfitDisplayFragment_to_editOutfitFragment)
-        }
         if(item.itemId == R.id.delete_outfit) {
             deleteOutfit()
         }

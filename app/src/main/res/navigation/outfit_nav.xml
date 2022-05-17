@@ -203,23 +203,10 @@
             app:argType="com.example.allin.model.Outfit"
             app:nullable="true" />
         <action
-            android:id="@+id/action_outfitDisplayFragment_to_editOutfitFragment"
-            app:destination="@id/editOutfitFragment" />
-        <action
             android:id="@+id/action_outfitDetailsFragment_to_outfitListFragment"
             app:destination="@id/outfitListFragment"
             app:popUpTo="@id/outfitListFragment"
             app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
-        android:id="@+id/editOutfitFragment"
-        android:name="com.example.allin.fragments.update.EditOutfitFragment"
-        android:label="Update Outfit"
-        tools:layout="@layout/fragment_edit_outfit" >
-        <argument
-            android:name="editingOutfit"
-            app:argType="com.example.allin.model.Outfit"
-            app:nullable="true" />
     </fragment>
 
 </navigation>
