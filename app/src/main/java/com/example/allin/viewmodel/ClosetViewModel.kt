@@ -143,8 +143,8 @@ class ClosetViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-    fun getPackingListWithOutfits(): LiveData<List<PackingWithOutfitList>>{
-        return repository.getPackingListWithOutfits()
+    fun getPackingListWithOutfits(id: Long): LiveData<List<PackingWithOutfitList>>{
+        return repository.getPackingListWithOutfits(id)
     }
 
     fun getPackingList(name: String): Packing {

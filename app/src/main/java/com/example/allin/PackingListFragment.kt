@@ -10,6 +10,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -110,6 +111,12 @@ class PackingListAdapter(private val fragment: Fragment) : RecyclerView.Adapter<
         holder.itemView.packing_list_options_btn.setOnClickListener {
             val cardOptionsBtn = holder.itemView.packing_list_options_btn
             popUpMenuOptionsSelected(cardOptionsBtn, fragment, currentItem)
+        }
+
+        holder.itemView.packing_list_row.setOnClickListener {
+            val action = PackingListFragmentDirections.actionTravelListFragmentToPackingListDisplayFragment(currentItem)
+            holder.itemView.findNavController().navigate(action)
+
         }
 
     }

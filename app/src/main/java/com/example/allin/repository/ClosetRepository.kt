@@ -101,8 +101,8 @@ class ClosetRepository(private val closetDao: ClosetDao) {
         closetDao.addPackingWithOutfits(packingWithOutfitsTable)
     }
 
-    fun getPackingListWithOutfits(): LiveData<List<PackingWithOutfitList>>{
-        return closetDao.getPackingListWithOutfits()
+    fun getPackingListWithOutfits(id: Long): LiveData<List<PackingWithOutfitList>>{
+        return closetDao.getPackingListWithOutfits(id)
     }
 
     fun getPackingList(name: String): Packing {

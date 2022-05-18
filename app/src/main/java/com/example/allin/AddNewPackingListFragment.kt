@@ -10,7 +10,7 @@ import com.example.allin.viewmodel.ClosetViewModel
 import kotlinx.android.synthetic.main.fragment_add_packing_list_item.*
 
 
-class AddPackingListItemFragment : Fragment() {
+class AddNewPackingListFragment : Fragment() {
 
 
     private lateinit var mClosetViewModel: ClosetViewModel
@@ -37,7 +37,7 @@ class AddPackingListItemFragment : Fragment() {
 
             mClosetViewModel.addNewPackingList(packingItem)
 
-            val action = AddPackingListItemFragmentDirections.actionAddPackingListItemFragmentToPackingListChooseOutfits(packingListName)
+            val action = AddNewPackingListFragmentDirections.actionAddPackingListItemFragmentToPackingListChooseOutfits(packingListName)
             findNavController().navigate(action)
         }
         return super.onOptionsItemSelected(item)

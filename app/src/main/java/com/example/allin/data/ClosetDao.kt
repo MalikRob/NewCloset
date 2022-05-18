@@ -106,8 +106,8 @@ interface ClosetDao {
     suspend fun addPackingWithOutfits(packingWithOutfitsTable: PackingWithOutfitsTable): Long
 
     @Transaction
-    @Query("SELECT * FROM Packing")
-    fun getPackingListWithOutfits(): LiveData<List<PackingWithOutfitList>>
+    @Query("SELECT * FROM Packing WHERE packingID = :id")
+    fun getPackingListWithOutfits(id: Long): LiveData<List<PackingWithOutfitList>>
 
     /**
      * Favorites Class Queries

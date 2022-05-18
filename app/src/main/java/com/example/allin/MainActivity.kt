@@ -2,16 +2,12 @@ package com.example.allin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         //appBarConfiguration = AppBarConfiguration(navController.graph)
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.clothingListFragment, R.id.outfitListFragment, R.id.calendarFragment, R.id.travelListFragment)
+            setOf(R.id.clothingListFragment, R.id.outfitListFragment, R.id.calendarFragment, R.id.packingListFragment)
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)

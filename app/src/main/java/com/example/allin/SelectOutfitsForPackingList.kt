@@ -35,14 +35,19 @@ class SelectOutfitsForPackingList : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_packing_list_choose_outfits, container, false)
 
+        view.packing_list_title.text = args.newListName
+
         recyclerView = view.packing_outfits_rv
 
         adapter = SelectOutfitsForPackingAdapter(requireParentFragment(), args.newListName)
+
         recyclerView.adapter = adapter
+
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         //OutfitViewModel
         mClosetViewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
+
         mClosetViewModel.readAllOutfitData.observe(viewLifecycleOwner, Observer { outfit ->
             adapter.setData(outfit)
         })
@@ -51,8 +56,10 @@ class SelectOutfitsForPackingList : Fragment() {
     }
 }
 
-class SelectOutfitsForPackingAdapter(private val fragment: Fragment, private val listName: String): RecyclerView.Adapter<SelectOutfitsForPackingAdapter.MyViewHolder>(){
-
+class SelectOutfitsForPackingAdapter(
+    private val fragment: Fragment,
+    private val listName: String
+): RecyclerView.Adapter<SelectOutfitsForPackingAdapter.MyViewHolder>(){
     /**
      * Outfits will be stored into the Outfit Table in our DB.
      */
@@ -105,12 +112,13 @@ class SelectOutfitsForPackingAdapter(private val fragment: Fragment, private val
         listName: String
     ) {
         val popupMenu: PopupMenu = PopupMenu(fragment.requireContext(), cardOptionsBtn)
-        popupMenu.menuInflater.inflate(R.menu.grid_clothing_popup,popupMenu.menu)
+        popupMenu.menuInflater.inflate(R.menu.packing_list_popup_menu,popupMenu.menu)
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.add_outfit_to_list -> {
-
+                    //Initializes the new Packing List. from Packing List get query
                     val packingList = mClosetViewModel.getPackingList(listName)
+                    //Sets a conditional to handle to Null-Safe call
                     if(packingList.id != null  && currentItem.id != null){
                         mClosetViewModel.addPackingWithOutfits(PackingWithOutfitsTable(packingList.id, currentItem.id))
                     }
