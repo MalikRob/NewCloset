@@ -46,7 +46,7 @@ class OutfitListFragment : Fragment() {
         mClosetViewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
         mClosetViewModel.readAllOutfitData.observe(viewLifecycleOwner, Observer { outfit ->
             adapter.setData(outfit)
-            view.total_items.text = "Clothes Owned: ${adapter.itemCount}"
+            view.total_items.text = "Outfits Created: ${adapter.itemCount}"
         })
 
         //Add button adds new Outfit Item.

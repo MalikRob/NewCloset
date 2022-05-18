@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.CheckBox
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -106,6 +107,7 @@ class ClothingTopsAdapter : RecyclerView.Adapter<ClothingTopsAdapter.MyViewHolde
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = clothingTopList[position]
+        holder.itemView.gl_optionsBtn.isVisible = false
         holder.itemView.gl_clothing_type.text = currentItem.type
         holder.itemView.gl_clothing_style.text = currentItem.style
         holder.itemView.gl_clothing_theme.text = currentItem.theme

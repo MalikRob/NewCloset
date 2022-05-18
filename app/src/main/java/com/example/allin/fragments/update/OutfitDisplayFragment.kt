@@ -8,6 +8,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.CheckBox
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -42,6 +43,7 @@ class OutfitDisplayFragment : Fragment() {
         //Toast.makeText(requireContext(), "Outfit: $selectedOutfit, outfitName: ${selectedOutfit?.outfitName} and OutfitID: ${selectedOutfit?.id}", Toast.LENGTH_SHORT).show()
 
         view.selected_outfit_name.text = selectedOutfit?.outfitName
+        view.selected_outfit_Theme.text = selectedOutfit?.theme
 
         mClosetViewModel.getAllOutfitsWithClothing(selectedOutfit?.id!!).observe(viewLifecycleOwner, Observer { outfit ->
             adapter.setData(outfit.first().clothingList)
@@ -100,6 +102,8 @@ class OutfitEditAdapter: RecyclerView.Adapter<OutfitEditAdapter.MyViewHolder>() 
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = clothingList[position]
+        holder.itemView.gl_optionsBtn.isVisible = false
+        holder.itemView.clothing_cb.isVisible = false
         holder.itemView.gl_clothing_type.text = currentItem.type
         holder.itemView.gl_clothing_style.text = currentItem.style
         holder.itemView.gl_clothing_theme.text = currentItem.theme
