@@ -18,12 +18,7 @@ import com.example.allin.model.Outfit
 import com.example.allin.model.PackingWithOutfitsTable
 import com.example.allin.viewmodel.ClosetViewModel
 import kotlinx.android.synthetic.main.fragment_packing_list_choose_outfits.view.*
-import kotlinx.android.synthetic.main.grid_clothing_item.view.*
 import kotlinx.android.synthetic.main.outfit_custom_row.view.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
 class SelectOutfitsForPackingList : Fragment() {
 
@@ -83,8 +78,8 @@ class SelectOutfitsForPackingAdapter(private val fragment: Fragment, private val
         holder.outfitTheme.text = currentItem.theme
 
         //When user selects options button. Popup menu of items becomes visible.
-        holder.itemView.packing_options_btn.setOnClickListener{
-            val cardOptionsBtn = holder.itemView.packing_options_btn
+        holder.itemView.outfit_options_button.setOnClickListener{
+            val cardOptionsBtn = holder.itemView.outfit_options_button
             popUpMenuOptionsSelected(cardOptionsBtn, fragment, currentItem, listName,)
         }
         //When user selects the cardview the user can view the outfit and Clothes in the outfit.

@@ -62,10 +62,12 @@ class ClosetRepository(private val closetDao: ClosetDao) {
         return closetDao.getOutfit(name)
     }
 
-
-
     suspend fun deleteOutfit(outfitId: Long){
         closetDao.deleteOutfit(outfitId)
+    }
+
+    suspend fun deleteAllOutfits(){
+        closetDao.deleteAllOutfits()
     }
 
     //New Update

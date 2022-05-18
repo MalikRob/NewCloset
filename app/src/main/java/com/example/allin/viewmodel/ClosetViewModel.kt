@@ -94,10 +94,15 @@ class ClosetViewModel(application: Application): AndroidViewModel(application) {
     }
 
 
-
     fun deleteOutfit(outfitId: Long){
         viewModelScope.launch(Dispatchers.IO){
             repository.deleteOutfit(outfitId)
+        }
+    }
+
+    fun deleteAllOutfits(){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAllOutfits()
         }
     }
 

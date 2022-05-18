@@ -59,6 +59,9 @@ interface ClosetDao {
     @Query("DELETE FROM Outfit WHERE outfitId = :outfitId ")
     suspend fun deleteOutfit(outfitId: Long)
 
+    @Query("DELETE FROM Outfit")
+    suspend fun deleteAllOutfits()
+
     //New Update Function
     @Update
     suspend fun updateOutfit(outfit: Outfit)
