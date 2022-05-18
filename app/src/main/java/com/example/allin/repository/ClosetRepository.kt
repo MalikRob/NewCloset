@@ -5,6 +5,7 @@ import com.example.allin.data.ClosetDao
 import com.example.allin.data.relations.ClothingWithOutfitsList
 import com.example.allin.data.relations.FavoritesClothingItemsList
 import com.example.allin.data.relations.OutfitsWithClothingList
+import com.example.allin.data.relations.PackingWithOutfitList
 import com.example.allin.model.*
 
 class ClosetRepository(private val closetDao: ClosetDao) {
@@ -92,6 +93,14 @@ class ClosetRepository(private val closetDao: ClosetDao) {
         closetDao.addNewPackingList(packing)
     }
 
+    suspend fun addPackingWithOutfits(packingWithOutfitsTable: PackingWithOutfitsTable) {
+        closetDao.addPackingWithOutfits(packingWithOutfitsTable)
+    }
+
+    fun getPackingListWithOutfits(): LiveData<List<PackingWithOutfitList>>{
+        return closetDao.getPackingListWithOutfits()
+    }
+
     /**
      * Favorite Table Calls
      */
@@ -107,7 +116,4 @@ class ClosetRepository(private val closetDao: ClosetDao) {
     fun getFavoritesClothingItemsList(): LiveData<List<FavoritesClothingItemsList>> {
         return closetDao.getFavClothingList()
     }
-
-
-
 }

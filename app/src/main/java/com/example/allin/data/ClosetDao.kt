@@ -5,6 +5,7 @@ import androidx.room.*
 import com.example.allin.data.relations.ClothingWithOutfitsList
 import com.example.allin.data.relations.FavoritesClothingItemsList
 import com.example.allin.data.relations.OutfitsWithClothingList
+import com.example.allin.data.relations.PackingWithOutfitList
 import com.example.allin.model.*
 
 @Dao
@@ -88,6 +89,13 @@ interface ClosetDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addNewPackingList(packing: Packing): Long
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addPackingWithOutfits(packingWithOutfitsTable: PackingWithOutfitsTable): Long
+
+    @Transaction
+    @Query("SELECT * FROM Packing")
+    fun getPackingListWithOutfits(): LiveData<List<PackingWithOutfitList>>
 
     /**
      * Favorites Class Queries

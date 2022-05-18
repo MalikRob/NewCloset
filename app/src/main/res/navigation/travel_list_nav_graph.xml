@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/packingListChooseOutfits"
-        android:name="com.example.allin.PackingListChooseOutfits"
+        android:name="com.example.allin.SelectOutfitsForPackingList"
         android:label="Select Outfits for List"
         tools:layout="@layout/fragment_packing_list_choose_outfits" />
 </navigation>

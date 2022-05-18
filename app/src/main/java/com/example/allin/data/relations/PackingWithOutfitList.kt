@@ -21,5 +21,5 @@ data class PackingWithOutfitList(
             entityColumn = "outfitRefID"
         )
     )
-    val packedOutfitList: List<Outfit>
+    val packedOutfitList: List<OutfitsWithClothingList>
 )

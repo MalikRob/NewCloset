@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.allin.data.ClothingDatabase
 import com.example.allin.data.relations.FavoritesClothingItemsList
 import com.example.allin.data.relations.OutfitsWithClothingList
+import com.example.allin.data.relations.PackingWithOutfitList
 import com.example.allin.model.*
 import com.example.allin.repository.ClosetRepository
 import kotlinx.coroutines.Dispatchers
@@ -129,6 +130,16 @@ class ClosetViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
+    fun addPackingWithOutfits(packingWithOutfitsTable: PackingWithOutfitsTable){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addPackingWithOutfits(packingWithOutfitsTable)
+        }
+    }
+
+    fun getPackingListWithOutfits(): LiveData<List<PackingWithOutfitList>>{
+        return repository.getPackingListWithOutfits()
+    }
+
     /**
      * Favorite Clothing Calls Here
      */
@@ -148,5 +159,4 @@ class ClosetViewModel(application: Application): AndroidViewModel(application) {
             repository.addFavClothingToList(favoriteClothingCrossRef)
         }
     }
-
 }
