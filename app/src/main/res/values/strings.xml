@@ -23,6 +23,7 @@
         <item>Shorts</item>
         <item>Dress Pants</item>
         <item>Skirt</item>
+        <item>Sweat Pants</item>
     </string-array>
 
     <string-array name="shoes_style">
