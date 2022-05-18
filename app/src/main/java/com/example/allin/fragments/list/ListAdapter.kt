@@ -61,7 +61,6 @@ class ListAdapter(
         }
     }
 
-
     override fun getItemCount(): Int {
         return clothingList.size
     }
@@ -87,10 +86,13 @@ class ListAdapter(
                     }
                     Toast.makeText(fragment.requireContext(), "You added ${currentItem.type}: to the Favorites List ", Toast.LENGTH_SHORT).show()
                 }
+                R.id.deleteClothingItem -> {
+                    mClosetViewModel.deleteClothing(currentItem)
+                    Toast.makeText(fragment.requireContext(), "You Deleted ${currentItem.type}: from your closet List ", Toast.LENGTH_SHORT).show()
+                }
             }
             true
         }
         popupMenu.show()
     }
-
 }

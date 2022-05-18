@@ -37,7 +37,6 @@ class CalendarFragment : Fragment() {
             dateSelected = GregorianCalendar(year, month, day).time
             view.current_date.text = toSimpleString(dateSelected)
         }
-
         return view
     }
 

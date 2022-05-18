@@ -11,5 +11,9 @@
         android:title="Add To Favorites"
         app:showAsAction="always"
         />
+    <item
+        android:id="@+id/deleteClothingItem"
+        android:title="Delete Clothing Item"
+        app:showAsAction="never"/>
 
 </menu>

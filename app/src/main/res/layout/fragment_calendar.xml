@@ -47,6 +47,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:id="@+id/add_daily_outfit"
             android:layout_width="140dp"
             android:layout_height="50dp"
             android:background="@color/white"
@@ -67,23 +68,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
-        <TextView
-            android:id="@+id/daily_outfit_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Outfit Name"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="17sp"
-            android:textStyle="bold|italic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/daily_outfit_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

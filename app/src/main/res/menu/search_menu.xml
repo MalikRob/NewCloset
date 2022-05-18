@@ -12,7 +12,7 @@
         tools:targetApi="o" />
 
     <item android:id="@+id/menu_delete"
-        android:title="Delete"
+        android:title="Delete All"
         android:icon="@drawable/ic_baseline_delete_24"
         android:iconTint="@android:color/white"
         app:showAsAction="never"/>
