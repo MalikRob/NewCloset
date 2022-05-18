@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/light_gray"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".TravelListFragment">
+    tools:context=".PackingListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/packing_list_recyclerView"

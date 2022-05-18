@@ -36,8 +36,7 @@ class AddPackingListItemFragment : Fragment() {
             val packingItem = Packing(null, packingListName)
             mClosetViewModel.addNewPackingList(packingItem)
 
-
-            findNavController().navigate(R.id.action_addPackingListItemFragment_to_travelListFragment)
+            findNavController().navigate(R.id.action_addPackingListItemFragment_to_packingListChooseOutfits)
         }
         return super.onOptionsItemSelected(item)
     }

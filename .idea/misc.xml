@@ -21,7 +21,7 @@
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_calendar.xml" value="0.39361702127659576" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_calendar_view.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_clothing_bot_list.xml" value="0.3875" />
-        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_clothing_list.xml" value="0.2253125" />
+        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_clothing_list.xml" value="0.5" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_clothing_outer_wear_list.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_clothing_shoes_list.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_clothing_tops_list.xml" value="0.3875" />
@@ -31,6 +31,7 @@
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_outfit_display.xml" value="0.23777173913043478" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_outfit_edit.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_outfit_list.xml" value="0.3588516746411483" />
+        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_packing_list_choose_outfits.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_travel_list.xml" value="0.39361702127659576" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_update.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/grid_clothing_bot_item.xml" value="0.3875" />

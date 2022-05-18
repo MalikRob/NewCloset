@@ -1,27 +1,21 @@
 package com.example.allin
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.*
-import android.widget.CheckBox
-import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.allin.model.Clothing
 import com.example.allin.model.Packing
 import com.example.allin.viewmodel.ClosetViewModel
-import kotlinx.android.synthetic.main.fragment_travel_list.view.*
+import kotlinx.android.synthetic.main.fragment_packing_list.view.*
 import kotlinx.android.synthetic.main.grid_clothing_item.view.*
 import kotlinx.android.synthetic.main.packing_list_row.view.*
 
-class TravelListFragment : Fragment() {
+class PackingListFragment : Fragment() {
 
     private lateinit var mClosetViewModel: ClosetViewModel
     private var adapter = TravelListAdapter()
@@ -31,7 +25,7 @@ class TravelListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_travel_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_packing_list, container, false)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.packing_list_recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())

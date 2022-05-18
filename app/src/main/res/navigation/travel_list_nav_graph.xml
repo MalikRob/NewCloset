@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/travelListFragment"
-        android:name="com.example.allin.TravelListFragment"
+        android:name="com.example.allin.PackingListFragment"
         android:label="Travel List"
-        tools:layout="@layout/fragment_travel_list" >
+        tools:layout="@layout/fragment_packing_list" >
         <action
             android:id="@+id/action_travelListFragment_to_addPackingListItemFragment"
             app:destination="@id/addPackingListItemFragment" />
@@ -24,5 +24,13 @@
             app:destination="@id/travelListFragment"
             app:popUpTo="@id/travelListFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_addPackingListItemFragment_to_packingListChooseOutfits"
+            app:destination="@id/packingListChooseOutfits" />
     </fragment>
+    <fragment
+        android:id="@+id/packingListChooseOutfits"
+        android:name="com.example.allin.PackingListChooseOutfits"
+        android:label="Select Outfits for List"
+        tools:layout="@layout/fragment_packing_list_choose_outfits" />
 </navigation>
