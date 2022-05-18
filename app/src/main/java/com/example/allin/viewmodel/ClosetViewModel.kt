@@ -5,12 +5,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.allin.data.ClothingDatabase
+import com.example.allin.data.relations.FavoritesClothingItemsList
 import com.example.allin.data.relations.OutfitsWithClothingList
+import com.example.allin.model.*
 import com.example.allin.repository.ClosetRepository
-import com.example.allin.model.Clothing
-import com.example.allin.model.Outfit
-import com.example.allin.model.OutfitClothingTable
-import com.example.allin.model.Packing
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -20,6 +18,8 @@ class ClosetViewModel(application: Application): AndroidViewModel(application) {
     val readAllClothingData: LiveData<List<Clothing>>
     val readAllOutfitData: LiveData<List<Outfit>>
     val readAllPackingData: LiveData<List<Packing>>
+    val favList: Favorites
+
     //val getAllOutfitWithClothingList: LiveData<List<OutfitsWithClothingList>>
     private val repository: ClosetRepository
 
@@ -29,6 +29,9 @@ class ClosetViewModel(application: Application): AndroidViewModel(application) {
         readAllClothingData = repository.readAllClothingData
         readAllOutfitData = repository.readAllOutfitData
         readAllPackingData = repository.readAllPackingData
+
+        favList = Favorites(1)
+        addToFavorites(favList)
     }
 
     fun addClothing(clothing: Clothing){
@@ -123,6 +126,26 @@ class ClosetViewModel(application: Application): AndroidViewModel(application) {
     fun addNewPackingList(packing: Packing){
         viewModelScope.launch(Dispatchers.IO) {
             repository.addNewPackingList(packing)
+        }
+    }
+
+    /**
+     * Favorite Clothing Calls Here
+     */
+
+    fun addToFavorites(favorites: Favorites){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addFavoriteList(favorites)
+        }
+    }
+
+    fun getFavoritesClothingItemsList(): LiveData<List<FavoritesClothingItemsList>>{
+        return repository.getFavoritesClothingItemsList()
+    }
+
+    fun addFavClothingToList(favoriteClothingCrossRef: FavoriteClothingCrossRef){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addFavClothingToList(favoriteClothingCrossRef)
         }
     }
 

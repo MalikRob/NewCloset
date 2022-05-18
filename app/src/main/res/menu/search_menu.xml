@@ -15,6 +15,10 @@
         android:title="Delete"
         android:icon="@drawable/ic_baseline_delete_24"
         android:iconTint="@android:color/white"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/menu_favorite"
+        android:title="Favorites"
+        app:showAsAction="never"/>
 
 </menu>

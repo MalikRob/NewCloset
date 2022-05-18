@@ -3,17 +3,14 @@ package com.example.allin.repository
 import androidx.lifecycle.LiveData
 import com.example.allin.data.ClosetDao
 import com.example.allin.data.relations.ClothingWithOutfitsList
+import com.example.allin.data.relations.FavoritesClothingItemsList
 import com.example.allin.data.relations.OutfitsWithClothingList
-import com.example.allin.model.Clothing
-import com.example.allin.model.Outfit
-import com.example.allin.model.OutfitClothingTable
-import com.example.allin.model.Packing
+import com.example.allin.model.*
 
 class ClosetRepository(private val closetDao: ClosetDao) {
 
     val readAllClothingData: LiveData<List<Clothing>> = closetDao.readAllClothingData()
     val readAllOutfitData: LiveData<List<Outfit>> = closetDao.readAllOutfitData()
-    //val getAllOutfitWithClothingList: LiveData<List<OutfitsWithClothingList>> = closetDao.getAllOutfitsWithClothingList()
     val getAllClothingWitOutfitList: LiveData<List<ClothingWithOutfitsList>> = closetDao.getAllClothingWithOutfitList()
 
     suspend fun addClothing(clothing: Clothing){
@@ -94,6 +91,23 @@ class ClosetRepository(private val closetDao: ClosetDao) {
     suspend fun addNewPackingList(packing: Packing){
         closetDao.addNewPackingList(packing)
     }
+
+    /**
+     * Favorite Table Calls
+     */
+
+    suspend fun addFavoriteList(favorites: Favorites){
+        closetDao.addFavoriteList(favorites)
+    }
+
+    suspend fun addFavClothingToList(favoriteClothingCrossRef: FavoriteClothingCrossRef){
+        closetDao.addFavClothingToList(favoriteClothingCrossRef)
+    }
+
+    fun getFavoritesClothingItemsList(): LiveData<List<FavoritesClothingItemsList>> {
+        return closetDao.getFavClothingList()
+    }
+
 
 
 }

@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_clothingListFragment_to_updateClothingFragment"
             app:destination="@id/updateClothingFragment" />
+        <action
+            android:id="@+id/action_clothingListFragment_to_favoriteListFragment"
+            app:destination="@id/favoriteListFragment" />
     </fragment>
 
     <!-- Adding new Clothing from Floating Action Button brings to new screen -->
@@ -50,6 +53,17 @@
         <argument
             android:name="currentClothing"
             app:argType="com.example.allin.model.Clothing" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteListFragment"
+        android:name="com.example.allin.FavoriteListFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorite_list" >
+        <action
+            android:id="@+id/action_favoriteListFragment_to_clothingListFragment"
+            app:destination="@id/clothingListFragment"
+            app:popUpTo="@id/clothingListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

@@ -3,11 +3,9 @@ package com.example.allin.data
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.allin.data.relations.ClothingWithOutfitsList
+import com.example.allin.data.relations.FavoritesClothingItemsList
 import com.example.allin.data.relations.OutfitsWithClothingList
-import com.example.allin.model.Clothing
-import com.example.allin.model.Outfit
-import com.example.allin.model.OutfitClothingTable
-import com.example.allin.model.Packing
+import com.example.allin.model.*
 
 @Dao
 interface ClosetDao {
@@ -91,5 +89,18 @@ interface ClosetDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addNewPackingList(packing: Packing): Long
 
+    /**
+     * Favorites Class Queries
+     */
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addFavoriteList(favorites: Favorites): Long
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addFavClothingToList(favoriteClothingCrossRef: FavoriteClothingCrossRef): Long
+
+    @Transaction
+    @Query("SELECT * FROM Favorites")
+    fun getFavClothingList(): LiveData<List<FavoritesClothingItemsList>>
 }
 

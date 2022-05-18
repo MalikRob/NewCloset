@@ -4,15 +4,15 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.view.Menu
+import android.widget.ImageButton
+import android.widget.PopupMenu
 import androidx.appcompat.widget.SearchView
 import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.allin.R
 import com.example.allin.viewmodel.ClosetViewModel
 import kotlinx.android.synthetic.main.fragment_clothing_list.view.*
@@ -26,30 +26,31 @@ import kotlinx.android.synthetic.main.grid_clothing_item.view.*
 class ListFragment : Fragment(), SearchView.OnQueryTextListener{
 
     private lateinit var mClosetViewModel: ClosetViewModel
-    var adapter = ListAdapter()
-
+    private lateinit var listAdapter: ListAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_clothing_list, container, false)
-        //Clear Stack of Navigations
 
-
+        //Initialize the recyclerView
         val recyclerView = view.clothing_recyclerview
-        recyclerView.adapter = adapter
-        //recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        //Declaring the List Adapter and calling the Class
+        listAdapter = ListAdapter(requireParentFragment())
+        //Declaring the recyclerView layout
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        //Assigning the adapter to the RecyclerView
+        recyclerView.adapter = listAdapter
 
-        //ClothingViewModel
+        //ClothingViewModel declaration of the ModelClass its using
         mClosetViewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
+        //Observing the data of the ModelClass.
+        //Unwrapping the LiveData thread and assigning the clothing Data model to the listAdapter and Observing the changes
         mClosetViewModel.readAllClothingData.observe(viewLifecycleOwner, Observer { clothing ->
-            adapter.setData(clothing)
-            view.total_items.text = "Clothes Owned: ${adapter.itemCount}"
+            listAdapter.setData(clothing)
+            view.total_items.text = "Clothes Owned: ${listAdapter.itemCount}"
         })
-
-
 
         //Button now takes the user to the Edit Clothing Page
         view.floatingActionButton.setOnClickListener {
@@ -83,8 +84,10 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener{
 
     // When User selects the Delete Button it makes a call to the DB DELETE Query
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_delete) {
-            deleteAllUsers()
+        when (item.itemId) {
+            R.id.menu_delete -> deleteAllUsers()
+            //Navigates to Favorite Clothing List Items
+            R.id.menu_favorite -> findNavController().navigate(R.id.action_clothingListFragment_to_favoriteListFragment)
         }
         return super.onOptionsItemSelected(item)
     }
@@ -111,7 +114,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener{
         mClosetViewModel.searchDatabase(searchQuery).observe(this
         ) { list ->
             list.let {
-                adapter.setData(it)
+                listAdapter.setData(it)
             }
         }
     }
@@ -133,6 +136,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener{
         builder.create().show()
     }
 }
+
 
 
 
