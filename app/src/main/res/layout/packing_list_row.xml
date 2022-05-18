@@ -55,6 +55,20 @@
                 app:layout_constraintStart_toEndOf="@+id/materialDivider"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageButton
+                android:id="@+id/packing_list_options_btn"
+                android:layout_width="26dp"
+                android:layout_height="28dp"
+                android:layout_alignParentTop="true"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:gravity="center"
+                android:src="@drawable/options_btn"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textStyle="bold"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/packing_list_attributes"
                 android:layout_width="wrap_content"

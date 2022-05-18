@@ -40,7 +40,9 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, nd: NavDestination, _ ->
             if (nd.id == R.id.addClothingFragment || nd.id == R.id.updateClothingFragment || nd.id == R.id.addOutfitFragment
                 || nd.id == R.id.addClothingToOutfits || nd.id == R.id.clothingTopsList || nd.id == R.id.clothingBotList
-                || nd.id == R.id.clothingShoesList || nd.id == R.id.clothingOuterWearList) {
+                || nd.id == R.id.clothingShoesList || nd.id == R.id.clothingOuterWearList || nd.id == R.id.favoriteListFragment ||
+                nd.id == R.id.outfitDetailsFragment || nd.id == R.id.addPackingListItemFragment || nd.id == R.id.packingListChooseOutfits)
+            {
                 bottomNavigationView.visibility = View.GONE
             } else {
                 bottomNavigationView.visibility = View.VISIBLE

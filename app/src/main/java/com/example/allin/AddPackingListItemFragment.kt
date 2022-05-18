@@ -31,12 +31,14 @@ class AddPackingListItemFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.add_packing_item){
-
             val packingListName: String = new_packing_list_name.text.toString()
+
             val packingItem = Packing(null, packingListName)
+
             mClosetViewModel.addNewPackingList(packingItem)
 
-            findNavController().navigate(R.id.action_addPackingListItemFragment_to_packingListChooseOutfits)
+            val action = AddPackingListItemFragmentDirections.actionAddPackingListItemFragmentToPackingListChooseOutfits(packingListName)
+            findNavController().navigate(action)
         }
         return super.onOptionsItemSelected(item)
     }

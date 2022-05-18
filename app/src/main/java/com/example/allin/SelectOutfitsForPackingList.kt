@@ -10,17 +10,24 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.allin.model.Clothing
-import com.example.allin.model.FavoriteClothingCrossRef
 import com.example.allin.model.Outfit
+import com.example.allin.model.PackingWithOutfitsTable
 import com.example.allin.viewmodel.ClosetViewModel
 import kotlinx.android.synthetic.main.fragment_packing_list_choose_outfits.view.*
 import kotlinx.android.synthetic.main.grid_clothing_item.view.*
 import kotlinx.android.synthetic.main.outfit_custom_row.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 class SelectOutfitsForPackingList : Fragment() {
+
+    private val args: SelectOutfitsForPackingListArgs by navArgs()
 
     private lateinit var mClosetViewModel: ClosetViewModel
     private lateinit var adapter: SelectOutfitsForPackingAdapter
@@ -35,8 +42,7 @@ class SelectOutfitsForPackingList : Fragment() {
 
         recyclerView = view.packing_outfits_rv
 
-        adapter = SelectOutfitsForPackingAdapter(requireParentFragment())
-
+        adapter = SelectOutfitsForPackingAdapter(requireParentFragment(), args.newListName)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -50,7 +56,7 @@ class SelectOutfitsForPackingList : Fragment() {
     }
 }
 
-class SelectOutfitsForPackingAdapter(private val fragment: Fragment): RecyclerView.Adapter<SelectOutfitsForPackingAdapter.MyViewHolder>(){
+class SelectOutfitsForPackingAdapter(private val fragment: Fragment, private val listName: String): RecyclerView.Adapter<SelectOutfitsForPackingAdapter.MyViewHolder>(){
 
     /**
      * Outfits will be stored into the Outfit Table in our DB.
@@ -79,11 +85,12 @@ class SelectOutfitsForPackingAdapter(private val fragment: Fragment): RecyclerVi
         //When user selects options button. Popup menu of items becomes visible.
         holder.itemView.packing_options_btn.setOnClickListener{
             val cardOptionsBtn = holder.itemView.packing_options_btn
-            popUpMenuOptionsSelected(cardOptionsBtn, fragment, currentItem)
+            popUpMenuOptionsSelected(cardOptionsBtn, fragment, currentItem, listName,)
         }
         //When user selects the cardview the user can view the outfit and Clothes in the outfit.
         holder.itemView.outfit_row_card.setOnClickListener {
-            Toast.makeText(fragment.requireContext(), "User selected Outfit to view clothing items ", Toast.LENGTH_SHORT).show()
+            val action = SelectOutfitsForPackingListDirections.actionPackingListChooseOutfitsToPreviewOutfitWithClothing(currentItem)
+            holder.itemView.findNavController().navigate(action)
         }
     }
 
@@ -99,13 +106,19 @@ class SelectOutfitsForPackingAdapter(private val fragment: Fragment): RecyclerVi
     private fun popUpMenuOptionsSelected(
         cardOptionsBtn: ImageButton,
         fragment: Fragment,
-        currentItem: Outfit
+        currentItem: Outfit,
+        listName: String
     ) {
         val popupMenu: PopupMenu = PopupMenu(fragment.requireContext(), cardOptionsBtn)
         popupMenu.menuInflater.inflate(R.menu.grid_clothing_popup,popupMenu.menu)
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.addToFavMenuItem -> {
+                R.id.add_outfit_to_list -> {
+
+                    val packingList = mClosetViewModel.getPackingList(listName)
+                    if(packingList.id != null  && currentItem.id != null){
+                        mClosetViewModel.addPackingWithOutfits(PackingWithOutfitsTable(packingList.id, currentItem.id))
+                    }
                     Toast.makeText(fragment.requireContext(), "You added ${currentItem.outfitName}: to the Favorites List ", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -113,4 +126,5 @@ class SelectOutfitsForPackingAdapter(private val fragment: Fragment): RecyclerVi
         }
         popupMenu.show()
     }
+
 }

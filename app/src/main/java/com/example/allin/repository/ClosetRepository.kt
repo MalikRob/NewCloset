@@ -62,6 +62,8 @@ class ClosetRepository(private val closetDao: ClosetDao) {
         return closetDao.getOutfit(name)
     }
 
+
+
     suspend fun deleteOutfit(outfitId: Long){
         closetDao.deleteOutfit(outfitId)
     }
@@ -99,6 +101,18 @@ class ClosetRepository(private val closetDao: ClosetDao) {
 
     fun getPackingListWithOutfits(): LiveData<List<PackingWithOutfitList>>{
         return closetDao.getPackingListWithOutfits()
+    }
+
+    fun getPackingList(name: String): Packing {
+        return closetDao.getPackingList(name)
+    }
+
+    suspend fun deletePackingList(packing: Packing){
+        closetDao.deletePackingList(packing)
+    }
+
+    suspend fun deleteAllPacking(){
+        closetDao.deleteAllPacking()
     }
 
     /**

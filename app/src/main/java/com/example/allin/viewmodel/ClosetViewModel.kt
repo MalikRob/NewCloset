@@ -93,6 +93,8 @@ class ClosetViewModel(application: Application): AndroidViewModel(application) {
         return repository.getOutfit(name)
     }
 
+
+
     fun deleteOutfit(outfitId: Long){
         viewModelScope.launch(Dispatchers.IO){
             repository.deleteOutfit(outfitId)
@@ -138,6 +140,22 @@ class ClosetViewModel(application: Application): AndroidViewModel(application) {
 
     fun getPackingListWithOutfits(): LiveData<List<PackingWithOutfitList>>{
         return repository.getPackingListWithOutfits()
+    }
+
+    fun getPackingList(name: String): Packing {
+        return repository.getPackingList(name)
+    }
+
+    fun deletePackingList(packing: Packing){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deletePackingList(packing)
+        }
+    }
+
+    fun deleteAllPackingList(){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAllPacking()
+        }
     }
 
     /**

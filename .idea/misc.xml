@@ -32,6 +32,8 @@
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_outfit_edit.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_outfit_list.xml" value="0.1" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_packing_list_choose_outfits.xml" value="0.3875" />
+        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_preview_outfit_clothing.xml" value="0.3875" />
+        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_preview_outfit_with_clothing.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_travel_list.xml" value="0.39361702127659576" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/fragment_update.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/layout/grid_clothing_bot_item.xml" value="0.3875" />
@@ -53,6 +55,10 @@
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/menu/delete_menu.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/menu/edit_outfit.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/menu/grid_clothing_popup.xml" value="0.3875" />
+        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/menu/outerwear_popup_menu.xml" value="0.3875" />
+        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/menu/packing_list_popup_menu.xml" value="0.3875" />
+        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/menu/packinglist_menu.xml" value="0.3875" />
+        <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/menu/pl_delete_menu.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/menu/search_menu.xml" value="0.3875" />
         <entry key="..\:/Users/gerke/AndroidStudioProjects/NewCloset/app/src/main/res/menu/theme_popup_menu.xml" value="0.3875" />
         <entry key="..\:/Users/malik/AndroidStudioProjects/AllIn/app/src/main/res/layout/activity_main.xml" value="0.1" />

@@ -1,8 +1,12 @@
 package com.example.allin
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageButton
+import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -18,7 +22,7 @@ import kotlinx.android.synthetic.main.packing_list_row.view.*
 class PackingListFragment : Fragment() {
 
     private lateinit var mClosetViewModel: ClosetViewModel
-    private var adapter = TravelListAdapter()
+    private lateinit var adapter: PackingListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +33,7 @@ class PackingListFragment : Fragment() {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.packing_list_recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        adapter = PackingListAdapter(requireParentFragment())
         recyclerView.adapter = adapter
 
         mClosetViewModel = ViewModelProvider(this).get(ClosetViewModel::class.java)
@@ -51,11 +56,42 @@ class PackingListFragment : Fragment() {
         return view
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.delete_menu, menu)
+    }
+
+    // When User selects the Delete Button it makes a call to the DB DELETE Query
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_delete -> deleteAllUsers()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteAllUsers() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setPositiveButton("Yes") { _, _ ->
+            mClosetViewModel.deleteAllPackingList()
+            Toast.makeText(
+                requireContext(),
+                "Successfully removed everything.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        builder.setNegativeButton("No") { _, _ -> }
+        builder.setTitle("Delete everything?")
+        builder.setMessage("Are you sure you want to delete everything?")
+        builder.create().show()
+    }
+
+
+
 }
 
-class TravelListAdapter : RecyclerView.Adapter<TravelListAdapter.MyViewHolder>() {
+class PackingListAdapter(private val fragment: Fragment) : RecyclerView.Adapter<PackingListAdapter.MyViewHolder>() {
 
     private var packingList = emptyList<Packing>()
+    private val mClosetViewModel: ClosetViewModel = ViewModelProvider(fragment).get(ClosetViewModel::class.java)
 
     inner class MyViewHolder(item: View): RecyclerView.ViewHolder(item){
 
@@ -70,8 +106,11 @@ class TravelListAdapter : RecyclerView.Adapter<TravelListAdapter.MyViewHolder>()
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = packingList[position]
-
         holder.itemView.packing_list_name.text = currentItem.packingListName
+        holder.itemView.packing_list_options_btn.setOnClickListener {
+            val cardOptionsBtn = holder.itemView.packing_list_options_btn
+            popUpMenuOptionsSelected(cardOptionsBtn, fragment, currentItem)
+        }
 
     }
 
@@ -82,6 +121,25 @@ class TravelListAdapter : RecyclerView.Adapter<TravelListAdapter.MyViewHolder>()
     fun setData(packingList: List<Packing>) {
         this.packingList = packingList
         notifyDataSetChanged()
+    }
+
+    private fun popUpMenuOptionsSelected(
+        cardOptionsBtn: ImageButton,
+        fragment: Fragment,
+        currentItem: Packing
+    ) {
+        val popupMenu: PopupMenu = PopupMenu(fragment.requireContext(), cardOptionsBtn)
+        popupMenu.menuInflater.inflate(R.menu.pl_delete_menu,popupMenu.menu)
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.packing_list_delete -> {
+                    mClosetViewModel.deletePackingList(currentItem)
+                    Toast.makeText(fragment.requireContext(), "You deleted ${currentItem.packingListName}: from the list ", Toast.LENGTH_SHORT).show()
+                    }
+            }
+            true
+        }
+        popupMenu.show()
     }
 
 }

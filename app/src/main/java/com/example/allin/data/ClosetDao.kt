@@ -90,6 +90,15 @@ interface ClosetDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addNewPackingList(packing: Packing): Long
 
+    @Delete
+    suspend fun deletePackingList(packing: Packing)
+
+    @Query("DELETE FROM Packing")
+    suspend fun deleteAllPacking()
+
+    @Query("SELECT * FROM Packing WHERE packingListName = :name")
+    fun getPackingList(name: String): Packing
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addPackingWithOutfits(packingWithOutfitsTable: PackingWithOutfitsTable): Long
 
