@@ -11,15 +11,13 @@ import java.util.*
 class DBTypeConverters {
 
     @TypeConverter
-    fun fromDate(date: Date?): Long? {
-        return date?.time
+    fun fromDateToLong(date: Date): Long {
+        return date.time
     }
 
     @TypeConverter
-    fun toDate(millisSinceEpoch: Long): Date? {
-        return millisSinceEpoch?.let{
-            Date(it)
-        }
+    fun toDate(date: Long): Date {
+        return Date(date)
         //If this returns a null value, try removing the safe call and use below.
         // return Date(millisSinceEpoch)
     }
