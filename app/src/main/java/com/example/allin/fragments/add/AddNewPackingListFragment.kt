@@ -1,10 +1,11 @@
-package com.example.allin
+package com.example.allin.fragments.add
 
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.allin.R
 import com.example.allin.model.Packing
 import com.example.allin.viewmodel.ClosetViewModel
 import kotlinx.android.synthetic.main.fragment_add_packing_list_item.*

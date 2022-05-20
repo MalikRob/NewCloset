@@ -18,6 +18,7 @@ import com.example.allin.data.relations.OutfitsWithClothingList
 import com.example.allin.model.Clothing
 import com.example.allin.viewmodel.ClosetViewModel
 import kotlinx.android.synthetic.main.fragment_add_clothing_to_outfits.view.*
+import kotlinx.android.synthetic.main.fragment_packing_list_display.view.*
 import kotlinx.android.synthetic.main.grid_clothing_item.view.*
 import kotlinx.android.synthetic.main.outfit_clothing_list_row.view.*
 
@@ -42,6 +43,8 @@ class PackingListDisplayFragment : Fragment() {
 
         val packingList = args.selectedPackingList?.id
         //Toast.makeText(requireContext(), "Outfit: $selectedOutfit, outfitName: ${selectedOutfit?.outfitName} and OutfitID: ${selectedOutfit?.id}", Toast.LENGTH_SHORT).show()
+
+        view.packing_list_display_title.text = args.selectedPackingList?.packingListName
 
         mClosetViewModel.getPackingListWithOutfits(packingList!!).observe(viewLifecycleOwner, Observer { list ->
             adapter.setData(list.first().packedOutfitList)

@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/addPackingListItemFragment"
-        android:name="com.example.allin.AddNewPackingListFragment"
+        android:name="com.example.allin.fragments.add.AddNewPackingListFragment"
         android:label="Add New Packing List"
         tools:layout="@layout/fragment_add_packing_list_item">
         <action

@@ -6,7 +6,6 @@ import android.view.*
 import android.widget.ImageButton
 import android.widget.PopupMenu
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.allin.model.Packing
 import com.example.allin.viewmodel.ClosetViewModel
 import kotlinx.android.synthetic.main.fragment_packing_list.view.*
-import kotlinx.android.synthetic.main.grid_clothing_item.view.*
 import kotlinx.android.synthetic.main.packing_list_row.view.*
 
 class PackingListFragment : Fragment() {

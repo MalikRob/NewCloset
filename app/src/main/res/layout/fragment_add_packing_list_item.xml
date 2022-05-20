@@ -6,7 +6,7 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddNewPackingListFragment" >
+    tools:context=".fragments.add.AddNewPackingListFragment" >
 
     <EditText
         android:id="@+id/new_packing_list_name"
